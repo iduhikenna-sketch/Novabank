@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Account Details | NovaBank</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #123b6d;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #123b6d;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1050px;
+            margin: 40px auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            color: #123b6d;
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            color: #6b7280;
+        }
+
+        .demo-notice {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            padding: 15px 18px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .account-card {
+            background: linear-gradient(135deg, #123b6d, #1e5aa8);
+            color: white;
+            padding: 32px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .account-card h2 {
+            margin-bottom: 8px;
+        }
+
+        .account-card p {
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .account-number {
+            font-size: 25px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 18px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .section {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+        }
+
+        .section h2 {
+            color: #123b6d;
+            margin-bottom: 20px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .detail {
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .detail-label {
+            display: block;
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .preference {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 17px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .preference:last-child {
+            border-bottom: none;
+        }
+
+        .preference h3 {
+            color: #123b6d;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .preference p {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .toggle {
+            width: 48px;
+            height: 26px;
+            background: #1e5aa8;
+            border-radius: 20px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .toggle::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            right: 3px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .primary {
+            background: #123b6d;
+            color: white;
+        }
+
+        .secondary {
+            background: #eef6ff;
+            color: #123b6d;
+        }
+
+        .demo-info {
+            background: #eef6ff;
+            border-left: 4px solid #1e5aa8;
+            padding: 15px;
+            border-radius: 8px;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        footer {
+            background: #123b6d;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 13px;
+            opacity: 0.9;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 16px 5%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .account-card {
+                padding: 25px;
+            }
+
+            .account-number {
+                font-size: 20px;
+            }
+
+            .section {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        NovaBank
+    </div>
+
+    <a href="dashboard.html" class="back-link">
+        ← Back to Dashboard
+    </a>
+
+</header>
+
+
+<div class="container">
+
+    <div class="page-header">
+
+        <h1>🏦 Account Details</h1>
+
+        <p>
+            View information about your NovaBank demo account.
+        </p>
+
+    </div>
+
+
+    <div class="demo-notice">
+
+        ⚠️ DEMO ONLY — All account information on this page is fictional.
+        Do not enter or use real banking information.
+
+    </div>
+
+
+    <div class="account-card">
+
+        <h2>
+            Alex Johnson
+        </h2>
+
+        <p>
+            Personal Demo Account
+        </p>
+
+        <div class="account-number">
+            •••• •••• •••• 4821
+        </div>
+
+        <div class="status">
+            ✓ Active Demo Account
+        </div>
+
+    </div>
+
+
+    <section class="section">
+
+        <h2>Account Information</h2>
+
+        <div class="details-grid">
+
+            <div class="detail">
+
+                <span class="detail-label">
+                    Account Holder
+                </span>
+
+                <span class="detail-value">
+                    Alex Johnson
+                </span>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span class="detail-label">
+                    Account Type
+                </span>
+
+                <span class="detail-value">
+                    Personal Account
+                </span>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span class="detail-label">
+                    Account Number
+                </span>
+
+                <span class="detail-value">
+                    •••• 4821
+                </span>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span class="detail-label">
+                    Account Status
+                </span>
+
+                <span class="detail-value">
+                    Active Demo
+                </span>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span class="detail-label">
+                    Currency
+                </span>
+
+                <span class="detail-value">
+                    Nigerian Naira (₦)
+                </span>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span class="detail-label">
+                    Date Opened
+                </span>
+
+                <span class="detail-value">
+                    January 15, 2026
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <h2>Contact Information</h2>
+
+        <div class="details-grid">
+
+            <div class="detail">
+
+                <span class="detail-label">
+                    Demo Email
+                </span>
+
+                <span class="detail-value">
+                    alex@example.test
+                </span>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span class="detail-label">
+                    Demo Phone
+                </span>
+
+                <span class="detail-value">
+                    0800 000 0000
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <h2>Account Preferences</h2>
+
+
+        <div class="preference">
+
+            <div>
+
+                <h3>Transaction Notifications</h3>
+
+                <p>
+                    Receive fictional alerts about demo transactions.
+                </p>
+
+            </div>
+
+            <div class="toggle"></div>
+
+        </div>
+
+
+        <div class="preference">
+
+            <div>
+
+                <h3>Security Alerts</h3>
+
+                <p>
+                    Receive fictional demo security notifications.
+                </p>
+
+            </div>
+
+            <div class="toggle"></div>
+
+        </div>
+
+
+        <div class="preference">
+
+            <div>
+
+                <h3>Marketing Updates</h3>
+
+                <p>
+                    Receive fictional NovaBank demonstration updates.
+                </p>
+
+            </div>
+
+            <div class="toggle"></div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <h2>Account Actions</h2>
+
+        <div class="demo-info">
+
+            These buttons are demonstration links only.
+            They do not change a real account or perform real banking actions.
+
+        </div>
+
+
+        <div class="action-buttons">
+
+            <a href="profile.html" class="button primary">
+                👤 View Profile
+            </a>
+
+            <a href="security.html" class="button secondary">
+                🔐 Security Center
+            </a>
+
+            <a href="support.html" class="button secondary">
+                💬 Help & Support
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 NovaBank — Fictional Banking Demonstration
+    </p>
+
+    <p>
+        This website does not provide real banking services or process real transactions.
+    </p>
+
+</footer>
+
+</body>
+</html>

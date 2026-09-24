@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Offers & Promotions | NovaBank</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0b5ed7;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #0b5ed7;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #667085;
+            line-height: 1.6;
+        }
+
+        .demo-notice {
+            background: #fff8e1;
+            border-left: 5px solid #f0ad00;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 25px 0;
+            line-height: 1.6;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .summary-card .icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .summary-card span {
+            display: block;
+            color: #667085;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .summary-card strong {
+            font-size: 22px;
+        }
+
+        .offers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+        }
+
+        .offer {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .offer-top {
+            padding: 25px;
+            background: #0b5ed7;
+            color: white;
+        }
+
+        .offer-top .emoji {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .offer-top h2 {
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .offer-top p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .offer-body {
+            padding: 22px;
+        }
+
+        .offer-body p {
+            color: #667085;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .offer-details {
+            background: #f7f9fc;
+            padding: 14px;
+            border-radius: 9px;
+            margin-bottom: 18px;
+        }
+
+        .offer-details div {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 6px 0;
+            font-size: 13px;
+        }
+
+        .offer-details span {
+            color: #667085;
+        }
+
+        .offer-details strong {
+            text-align: right;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            padding: 13px;
+            border-radius: 8px;
+            background: #0b5ed7;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .dismiss {
+            margin-top: 9px;
+            background: #eef3fb;
+            color: #0b5ed7;
+        }
+
+        .section {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 14px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .section h2 {
+            margin-bottom: 18px;
+        }
+
+        .activity {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eaecf0;
+        }
+
+        .activity:last-child {
+            border-bottom: none;
+        }
+
+        .activity-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .activity-date {
+            color: #667085;
+            font-size: 12px;
+        }
+
+        .status {
+            background: #e8f5e9;
+            color: #24743a;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .message {
+            display: none;
+            margin-top: 25px;
+            padding: 15px;
+            background: #e8f5e9;
+            color: #246b36;
+            border-radius: 8px;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            color: #667085;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 16px 5%;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .activity {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        NovaBank
+    </div>
+
+    <a href="dashboard.html" class="back">
+        ← Dashboard
+    </a>
+
+</header>
+
+<div class="container">
+
+    <div class="hero">
+
+        <h1>🏷️ Offers & Promotions</h1>
+
+        <p>
+            Explore fictional NovaBank offers and promotional opportunities.
+        </p>
+
+    </div>
+
+    <div class="demo-notice">
+
+        <strong>⚠️ Demo Only:</strong>
+
+        All offers, discounts, rewards and promotional information on this
+        page are fictional. They are not real financial products or commercial
+        offers and cannot be redeemed for real money or services.
+
+    </div>
+
+    <div class="summary">
+
+        <div class="summary-card">
+
+            <div class="icon">🎁</div>
+
+            <span>Available Offers</span>
+
+            <strong>4</strong>
+
+        </div>
+
+        <div class="summary-card">
+
+            <div class="icon">⭐</div>
+
+            <span>Demo Rewards</span>
+
+            <strong>2,500</strong>
+
+        </div>
+
+        <div class="summary-card">
+
+            <div class="icon">🏆</div>
+
+            <span>Offers Viewed</span>
+
+            <strong>8</strong>
+
+        </div>
+
+        <div class="summary-card">
+
+            <div class="icon">📅</div>
+
+            <span>Next Expiry</span>
+
+            <strong>Sep 30</strong>
+
+        </div>
+
+    </div>
+
+    <div class="offers">
+
+        <div class="offer">
+
+            <div class="offer-top">
+
+                <div class="emoji">💰</div>
+
+                <h2>Demo Savings Boost</h2>
+
+                <p>
+                    Explore a fictional savings promotion.
+                </p>
+
+            </div>
+
+            <div class="offer-body">
+
+                <p>
+                    Create a demo savings goal and explore how a savings
+                    promotion could appear inside an online banking platform.
+                </p>
+
+                <div class="offer-details">
+
+                    <div>
+                        <span>Demo Reward</span>
+                        <strong>500 Points</strong>
+                    </div>
+
+                    <div>
+                        <span>Valid Until</span>
+                        <strong>Sep 30, 2026</strong>
+                    </div>
+
+                </div>
+
+                <button onclick="showMessage('Demo Savings Boost selected. No real promotion was activated.')">
+                    View Offer
+                </button>
+
+                <button class="dismiss"
+                        onclick="dismissOffer(this)">
+                    Dismiss
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="offer">
+
+            <div class="offer-top">
+
+                <div class="emoji">📱</div>
+
+                <h2>Digital Banking Bonus</h2>
+
+                <p>
+                    A fictional reward for exploring digital services.
+                </p>
+
+            </div>
+
+            <div class="offer-body">
+
+                <p>
+                    Explore transfers, payments, notifications and other
+                    demo banking features from one dashboard.
+                </p>
+
+                <div class="offer-details">
+
+                    <div>
+                        <span>Demo Reward</span>
+                        <strong>750 Points</strong>
+                    </div>
+
+                    <div>
+                        <span>Valid Until</span>
+                        <strong>Oct 5, 2026</strong>
+                    </div>
+
+                </div>
+
+                <button onclick="showMessage('Digital Banking Bonus selected. No real reward was issued.')">
+                    View Offer
+                </button>
+
+                <button class="dismiss"
+                        onclick="dismissOffer(this)">
+                    Dismiss
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="offer">
+
+            <div class="offer-top">
+
+                <div class="emoji">💳</div>
+
+                <h2>Demo Card Promotion</h2>
+
+                <p>
+                    Explore a fictional virtual card promotion.
+                </p>
+
+            </div>
+
+            <div class="offer-body">
+
+                <p>
+                    Visit the Demo Cards section and explore fictional card
+                    controls without using real payment credentials.
+                </p>
+
+                <div class="offer-details">
+
+                    <div>
+                        <span>Demo Reward</span>
+                        <strong>1,000 Points</strong>
+                    </div>
+
+                    <div>
+                        <span>Valid Until</span>
+                        <strong>Oct 10, 2026</strong>
+                    </div>
+
+                </div>
+
+                <button onclick="showMessage('Demo Card Promotion selected. No real card promotion was activated.')">
+                    View Offer
+                </button>
+
+                <button class="dismiss"
+                        onclick="dismissOffer(this)">
+                    Dismiss
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="offer">
+
+            <div class="offer-top">
+
+                <div class="emoji">🎯</div>
+
+                <h2>Financial Goals Challenge</h2>
+
+                <p>
+                    A fictional challenge for demo savings goals.
+                </p>
+
+            </div>
+
+            <div class="offer-body">
+
+                <p>
+                    Explore your fictional savings targets and track progress
+                    through the NovaBank demo interface.
+                </p>
+
+                <div class="offer-details">
+
+                    <div>
+                        <span>Demo Reward</span>
+                        <strong>250 Points</strong>
+                    </div>
+
+                    <div>
+                        <span>Valid Until</span>
+                        <strong>Oct 15, 2026</strong>
+                    </div>
+
+                </div>
+
+                <button onclick="showMessage('Financial Goals Challenge selected. No real reward was issued.')">
+                    View Offer
+                </button>
+
+                <button class="dismiss"
+                        onclick="dismissOffer(this)">
+                    Dismiss
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="message" class="message"></div>
+
+
+    <div class="section">
+
+        <h2>Recent Offer Activity</h2>
+
+        <div class="activity">
+
+            <div>
+
+                <div class="activity-title">
+                    Demo Savings Boost Viewed
+                </div>
+
+                <div class="activity-date">
+                    September 24, 2026
+                </div>
+
+            </div>
+
+            <span class="status">
+                Viewed
+            </span>
+
+        </div>
+
+        <div class="activity">
+
+            <div>
+
+                <div class="activity-title">
+                    Demo Card Promotion Viewed
+                </div>
+
+                <div class="activity-date">
+                    September 23, 2026
+                </div>
+
+            </div>
+
+            <span class="status">
+                Viewed
+            </span>
+
+        </div>
+
+        <div class="activity">
+
+            <div>
+
+                <div class="activity-title">
+                    Digital Banking Bonus
+                </div>
+
+                <div class="activity-date">
+                    September 21, 2026
+                </div>
+
+            </div>
+
+            <span class="status">
+                Available
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <p>
+        © 2026 NovaBank — Fictional demonstration project.
+        No real financial offers or transactions are processed.
+    </p>
+
+</footer>
+
+<script>
+
+    function showMessage(message) {
+
+        const box = document.getElementById("message");
+
+        box.textContent = message;
+
+        box.style.display = "block";
+
+        window.scrollTo({
+            top: box.offsetTop - 100,
+            behavior: "smooth"
+        });
+    }
+
+
+    function dismissOffer(button) {
+
+        const offer = button.closest(".offer");
+
+        offer.style.display = "none";
+
+        showMessage(
+            "Demo offer dismissed. No real promotional preference was changed."
+        );
+    }
+
+</script>
+
+</body>
+</html>

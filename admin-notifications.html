@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Notifications | NovaBank</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        .topbar {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e9f0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #155eef;
+        }
+
+        .top-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .top-links a {
+            text-decoration: none;
+            color: #155eef;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #667085;
+        }
+
+        .demo-banner {
+            background: #fff4e5;
+            border: 1px solid #ffd28a;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            color: #8a5300;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+        }
+
+        .stat-card h3 {
+            color: #667085;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card strong {
+            font-size: 27px;
+            color: #155eef;
+        }
+
+        .section {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            margin-bottom: 18px;
+            font-size: 22px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d7dce5;
+            border-radius: 9px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #155eef;
+        }
+
+        .notification {
+            border: 1px solid #e5e9f0;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #fbfcfe;
+        }
+
+        .notification:last-child {
+            margin-bottom: 0;
+        }
+
+        .notification-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .notification h3 {
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        .notification p {
+            color: #667085;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #e8f1ff;
+            color: #155eef;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .customer {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #475467;
+        }
+
+        .actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            background: #155eef;
+            color: #ffffff;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .danger {
+            background: #d92d20;
+        }
+
+        .secondary {
+            background: #667085;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .empty-message {
+            display: none;
+            text-align: center;
+            padding: 25px;
+            color: #667085;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 15px;
+            color: #667085;
+            font-size: 13px;
+        }
+
+        @media (max-width: 850px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .topbar {
+                align-items: flex-start;
+                gap: 12px;
+                flex-direction: column;
+            }
+
+            .container {
+                width: 94%;
+                margin-top: 25px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .notification-top {
+                flex-direction: column;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="logo">NovaBank</div>
+
+        <div class="top-links">
+            <a href="admin.html">← Admin Dashboard</a>
+            <a href="dashboard.html">Customer Dashboard</a>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="page-header">
+            <h1>🔔 Admin Notifications</h1>
+            <p>Manage fictional notifications for NovaBank demo customers.</p>
+        </div>
+
+        <div class="demo-banner">
+            ⚠️ ADMIN DEMO — FICTIONAL DATA ONLY. No real emails, SMS messages,
+            push notifications, or customer messages will be sent.
+        </div>
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <h3>Total Demo Notifications</h3>
+                <strong id="totalNotifications">6</strong>
+            </div>
+
+            <div class="stat-card">
+                <h3>Unread Demo Notifications</h3>
+                <strong>3</strong>
+            </div>
+
+            <div class="stat-card">
+                <h3>Customers Notified</h3>
+                <strong>4</strong>
+            </div>
+
+            <div class="stat-card">
+                <h3>Created Today</h3>
+                <strong>2</strong>
+            </div>
+
+        </section>
+
+        <!-- SEARCH AND FILTER -->
+
+        <section class="section">
+
+            <h2>🔎 Search Notifications</h2>
+
+            <div class="filters">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search notification, customer, or message..."
+                    onkeyup="filterNotifications()"
+                >
+
+                <select id="typeFilter" onchange="filterNotifications()">
+                    <option value="all">All Notification Types</option>
+                    <option value="account">Account</option>
+                    <option value="transaction">Transaction</option>
+                    <option value="security">Security</option>
+                    <option value="payment">Payment</option>
+                    <option value="system">System</option>
+                </select>
+
+            </div>
+
+            <div id="notificationList">
+
+                <div class="notification"
+                     data-type="transaction"
+                     data-search="salary payment received alex johnson transaction">
+
+                    <div class="notification-top">
+                        <div>
+                            <h3>💰 Salary Payment Received</h3>
+                            <p>
+                                A fictional salary payment of ₦450,000 has been
+                                recorded on the demo account.
+                            </p>
+                        </div>
+
+                        <span class="badge">Transaction</span>
+                    </div>
+
+                    <div class="customer">
+                        👤 Customer: <strong>Alex Johnson</strong>
+                        &nbsp; | &nbsp;
+                        📅 Sep 23, 2026
+                    </div>
+
+                    <div class="actions">
+                        <button onclick="viewNotification('Salary Payment Received', 'Alex Johnson', 'Sep 23, 2026')">
+                            👁️ View
+                        </button>
+
+                        <button class="danger" onclick="dismissNotification(this)">
+                            🗑️ Dismiss
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <div class="notification"
+                     data-type="payment"
+                     data-search="electricity payment reminder sarah williams payment">
+
+                    <div class="notification-top">
+                        <div>
+                            <h3>💡 Electricity Payment Reminder</h3>
+                            <p>
+                                Fictional reminder for the upcoming electricity
+                                payment on the demo account.
+                            </p>
+                        </div>
+
+                        <span class="badge">Payment</span>
+                    </div>
+
+                    <div class="customer">
+                        👤 Customer: <strong>Sarah Williams</strong>
+                        &nbsp; | &nbsp;
+                        📅 Sep 24, 2026
+                    </div>
+
+                    <div class="actions">
+                        <button onclick="viewNotification('Electricity Payment Reminder', 'Sarah Williams', 'Sep 24, 2026')">
+                            👁️ View
+                        </button>
+
+                        <button class="danger" onclick="dismissNotification(this)">
+                            🗑️ Dismiss
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <div class="notification"
+                     data-type="security"
+                     data-search="security alert michael brown security">
+
+                    <div class="notification-top">
+                        <div>
+                            <h3>🔐 Security Alert</h3>
+                            <p>
+                                A fictional security notification was generated
+                                for the demo customer account.
+                            </p>
+                        </div>
+
+                        <span class="badge">Security</span>
+                    </div>
+
+                    <div class="customer">
+                        👤 Customer: <strong>Michael Brown</strong>
+                        &nbsp; | &nbsp;
+                        📅 Sep 24, 2026
+                    </div>
+
+                    <div class="actions">
+                        <button onclick="viewNotification('Security Alert', 'Michael Brown', 'Sep 24, 2026')">
+                            👁️ View
+                        </button>
+
+                        <button class="danger" onclick="dismissNotification(this)">
+                            🗑️ Dismiss
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <div class="notification"
+                     data-type="account"
+                     data-search="account update emma davis account">
+
+                    <div class="notification-top">
+                        <div>
+                            <h3>👤 Account Information Updated</h3>
+                            <p>
+                                Fictional account information was updated in
+                                the NovaBank demo system.
+                            </p>
+                        </div>
+
+                        <span class="badge">Account</span>
+                    </div>
+
+                    <div class="customer">
+                        👤 Customer: <strong>Emma Davis</strong>
+                        &nbsp; | &nbsp;
+                        📅 Sep 23, 2026
+                    </div>
+
+                    <div class="actions">
+                        <button onclick="viewNotification('Account Information Updated', 'Emma Davis', 'Sep 23, 2026')">
+                            👁️ View
+                        </button>
+
+                        <button class="danger" onclick="dismissNotification(this)">
+                            🗑️ Dismiss
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <div class="notification"
+                     data-type="system"
+                     data-search="novabank demo update alex johnson system">
+
+                    <div class="notification-top">
+                        <div>
+                            <h3>📢 NovaBank Demo Update</h3>
+                            <p>
+                                A fictional system update notification was
+                                created for the demo environment.
+                            </p>
+                        </div>
+
+                        <span class="badge">System</span>
+                    </div>
+
+                    <div class="customer">
+                        👤 Customer: <strong>Alex Johnson</strong>
+                        &nbsp; | &nbsp;
+                        📅 Sep 24, 2026
+                    </div>
+
+                    <div class="actions">
+                        <button onclick="viewNotification('NovaBank Demo Update', 'Alex Johnson', 'Sep 24, 2026')">
+                            👁️ View
+                        </button>
+
+                        <button class="danger" onclick="dismissNotification(this)">
+                            🗑️ Dismiss
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <div class="notification"
+                     data-type="transaction"
+                     data-search="demo transfer completed emma davis transaction">
+
+                    <div class="notification-top">
+                        <div>
+                            <h3>🔄 Demo Transfer Completed</h3>
+                            <p>
+                                A fictional transfer simulation was completed
+                                successfully in the demo environment.
+                            </p>
+                        </div>
+
+                        <span class="badge">Transaction</span>
+                    </div>
+
+                    <div class="customer">
+                        👤 Customer: <strong>Emma Davis</strong>
+                        &nbsp; | &nbsp;
+                        📅 Sep 24, 2026
+                    </div>
+
+                    <div class="actions">
+                        <button onclick="viewNotification('Demo Transfer Completed', 'Emma Davis', 'Sep 24, 2026')">
+                            👁️ View
+                        </button>
+
+                        <button class="danger" onclick="dismissNotification(this)">
+                            🗑️ Dismiss
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="emptyMessage" class="empty-message">
+                No matching demo notifications found.
+            </div>
+
+        </section>
+
+
+        <!-- CREATE NOTIFICATION -->
+
+        <section class="section">
+
+            <h2>➕ Create Demo Notification</h2>
+
+            <p style="color:#667085; margin-bottom:20px;">
+                Create a fictional notification for a demo customer.
+                Nothing will actually be sent.
+            </p>
+
+            <form id="notificationForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Customer</label>
+
+                        <select id="customer" required>
+                            <option value="">Select Demo Customer</option>
+                            <option>Alex Johnson</option>
+                            <option>Sarah Williams</option>
+                            <option>Michael Brown</option>
+                            <option>Emma Davis</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Notification Type</label>
+
+                        <select id="notificationType" required>
+                            <option value="">Select Type</option>
+                            <option>Account</option>
+                            <option>Transaction</option>
+                            <option>Security</option>
+                            <option>Payment</option>
+                            <option>System</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group full">
+                        <label>Notification Title</label>
+
+                        <input
+                            type="text"
+                            id="notificationTitle"
+                            placeholder="Example: Demo Account Update"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group full">
+                        <label>Notification Message</label>
+
+                        <textarea
+                            id="notificationMessage"
+                            placeholder="Write a fictional demo notification..."
+                            required
+                        ></textarea>
+                    </div>
+
+                </div>
+
+                <button type="submit">
+                    📢 Create Demo Notification
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- RECENT ACTIVITY -->
+
+        <section class="section">
+
+            <h2>🕒 Recent Notification Administration</h2>
+
+            <div class="notification">
+
+                <h3>📢 Demo Notification Created</h3>
+
+                <p>
+                    Admin created a fictional notification for Alex Johnson.
+                </p>
+
+                <div class="customer">
+                    📅 Sep 24, 2026 &nbsp; | &nbsp;
+                    Status: Demo Only
+                </div>
+
+            </div>
+
+
+            <div class="notification">
+
+                <h3>🗑️ Demo Notification Dismissed</h3>
+
+                <p>
+                    A fictional notification was dismissed from the admin list.
+                </p>
+
+                <div class="customer">
+                    📅 Sep 24, 2026 &nbsp; | &nbsp;
+                    Status: Demo Only
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        © 2026 NovaBank — Fictional Demonstration Project.
+        No real banking services or transactions are provided.
+    </footer>
+
+
+    <script>
+
+        function filterNotifications() {
+
+            const search =
+                document.getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+            const type =
+                document.getElementById("typeFilter")
+                .value;
+
+            const notifications =
+                document.querySelectorAll(".notification[data-type]");
+
+            let visible = 0;
+
+            notifications.forEach(function(notification) {
+
+                const notificationType =
+                    notification.getAttribute("data-type");
+
+                const searchableText =
+                    notification.getAttribute("data-search");
+
+                const searchMatch =
+                    searchableText.includes(search);
+
+                const typeMatch =
+                    type === "all" ||
+                    notificationType === type;
+
+                if (searchMatch && typeMatch) {
+
+                    notification.style.display = "block";
+                    visible++;
+
+                } else {
+
+                    notification.style.display = "none";
+
+                }
+
+            });
+
+            document.getElementById("emptyMessage").style.display =
+                visible === 0 ? "block" : "none";
+        }
+
+
+        function viewNotification(title, customer, date) {
+
+            alert(
+                "DEMO NOTIFICATION DETAILS\n\n" +
+                "Title: " + title + "\n" +
+                "Customer: " + customer + "\n" +
+                "Date: " + date + "\n\n" +
+                "This is fictional demo information only."
+            );
+
+        }
+
+
+        function dismissNotification(button) {
+
+            const notification =
+                button.closest(".notification");
+
+            notification.remove();
+
+            const total =
+                document.querySelectorAll(".notification[data-type]").length;
+
+            document.getElementById("totalNotifications").textContent = total;
+
+            alert(
+                "Demo notification dismissed successfully.\n\n" +
+                "No real customer notification was deleted."
+            );
+
+        }
+
+
+        document.getElementById("notificationForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const customer =
+                document.getElementById("customer").value;
+
+            const title =
+                document.getElementById("notificationTitle").value;
+
+            alert(
+                "Demo notification created successfully.\n\n" +
+                "Customer: " + customer + "\n" +
+                "Title: " + title + "\n\n" +
+                "No real email, SMS, push notification, or customer message was sent."
+            );
+
+            this.reset();
+
+        });
+
+    </script>
+
+</body>
+</html>

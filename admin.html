@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Demo | NovaBank</title>
+
+    <title>Admin Dashboard | NovaBank</title>
 
     <style>
         * {
@@ -15,75 +16,68 @@
         body {
             font-family: Arial, sans-serif;
             background: #f4f7fb;
-            color: #1f2937;
+            color: #172033;
         }
 
-        header {
-            background: #0b1f3a;
-            color: white;
+        .topbar {
+            background: #ffffff;
             padding: 18px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #e5e9f0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 10;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 25px;
             font-weight: bold;
+            color: #155eef;
         }
 
-        .logo span {
-            color: #38bdf8;
+        .top-links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
-        .back-btn {
-            color: white;
+        .top-links a {
             text-decoration: none;
-            background: #1e3a5f;
-            padding: 10px 16px;
-            border-radius: 8px;
+            color: #155eef;
+            font-weight: bold;
             font-size: 14px;
-        }
-
-        .back-btn:hover {
-            background: #294d78;
         }
 
         .container {
             width: 90%;
-            max-width: 1250px;
-            margin: 30px auto;
+            max-width: 1200px;
+            margin: 35px auto;
         }
 
-        .admin-banner {
-            background: #fff3cd;
-            border: 1px solid #ffe69c;
-            color: #664d03;
-            padding: 18px;
-            border-radius: 12px;
+        .page-header {
             margin-bottom: 25px;
         }
 
-        .admin-banner strong {
-            display: block;
-            font-size: 18px;
-            margin-bottom: 6px;
-        }
-
-        .page-title {
-            margin-bottom: 25px;
-        }
-
-        .page-title h1 {
+        .page-header h1 {
             font-size: 32px;
             margin-bottom: 8px;
         }
 
-        .page-title p {
-            color: #64748b;
+        .page-header p {
+            color: #667085;
+        }
+
+        .demo-banner {
+            background: #fff4e5;
+            border: 1px solid #ffd28a;
+            color: #8a5300;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            line-height: 1.5;
         }
 
         .stats {
@@ -94,47 +88,84 @@
         }
 
         .stat-card {
-            background: white;
+            background: #ffffff;
             padding: 22px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        }
-
-        .stat-icon {
-            font-size: 28px;
-            margin-bottom: 12px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
         }
 
         .stat-card h3 {
-            font-size: 27px;
-            margin-bottom: 5px;
+            color: #667085;
+            font-size: 14px;
+            margin-bottom: 10px;
         }
 
-        .stat-card p {
-            color: #64748b;
-            font-size: 14px;
+        .stat-card strong {
+            font-size: 27px;
+            color: #155eef;
         }
 
         .section {
-            background: white;
+            background: #ffffff;
             padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
             margin-bottom: 25px;
         }
 
         .section h2 {
-            margin-bottom: 18px;
             font-size: 22px;
+            margin-bottom: 18px;
         }
 
-        .search-box {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #d1d5db;
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .tool-card {
+            border: 1px solid #e5e9f0;
+            border-radius: 14px;
+            padding: 22px;
+            background: #fbfcfe;
+            transition: 0.2s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+
+        .tool-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .tool-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .tool-card p {
+            color: #667085;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .tool-card a {
+            display: inline-block;
+            text-decoration: none;
+            background: #155eef;
+            color: white;
+            padding: 10px 15px;
             border-radius: 8px;
-            font-size: 15px;
-            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .tool-card a:hover {
+            opacity: 0.9;
         }
 
         .table-wrapper {
@@ -149,90 +180,90 @@
 
         th,
         td {
-            padding: 14px 12px;
+            padding: 14px;
             text-align: left;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e9f0;
+            font-size: 14px;
         }
 
         th {
             background: #f8fafc;
-            color: #475569;
-            font-size: 14px;
-        }
-
-        td {
-            font-size: 14px;
+            color: #475467;
         }
 
         .status {
             display: inline-block;
             padding: 6px 10px;
             border-radius: 20px;
+            background: #e7f6ec;
+            color: #087443;
             font-size: 12px;
             font-weight: bold;
         }
 
-        .active {
-            background: #dcfce7;
-            color: #166534;
-        }
-
         .review {
-            background: #fef3c7;
-            color: #92400e;
+            background: #fff4e5;
+            color: #8a5300;
         }
 
-        .demo {
-            background: #dbeafe;
-            color: #1d4ed8;
+        .actions {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
         }
 
-        .action-btn {
+        button {
             border: none;
-            padding: 8px 11px;
+            padding: 8px 12px;
             border-radius: 7px;
             cursor: pointer;
-            margin: 2px;
-            font-size: 12px;
-            background: #0b1f3a;
+            font-weight: bold;
+            background: #155eef;
             color: white;
         }
 
-        .action-btn:hover {
-            opacity: 0.85;
+        button:hover {
+            opacity: 0.9;
         }
 
-        .activity-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .secondary {
+            background: #667085;
         }
 
-        .activity-item {
-            padding: 15px;
-            border-bottom: 1px solid #e5e7eb;
+        .danger {
+            background: #d92d20;
         }
 
-        .activity-item:last-child {
+        .activity {
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e9f0;
+        }
+
+        .activity:last-child {
             border-bottom: none;
         }
 
-        .activity-item strong {
-            display: block;
+        .activity h3 {
+            font-size: 15px;
             margin-bottom: 5px;
         }
 
-        .activity-item span {
-            color: #64748b;
+        .activity p {
+            color: #667085;
             font-size: 13px;
+            line-height: 1.5;
         }
 
         .alert {
             padding: 15px;
             border-radius: 10px;
-            background: #fff7ed;
-            border: 1px solid #fed7aa;
             margin-bottom: 12px;
+            background: #fff4e5;
+            border: 1px solid #ffd28a;
+        }
+
+        .alert:last-child {
+            margin-bottom: 0;
         }
 
         .alert strong {
@@ -241,78 +272,45 @@
         }
 
         .alert p {
+            color: #667085;
             font-size: 13px;
-            color: #64748b;
-        }
-
-        .settings {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .setting-card {
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .setting-card h3 {
-            margin-bottom: 8px;
-        }
-
-        .setting-card p {
-            color: #64748b;
-            font-size: 14px;
-            margin-bottom: 15px;
         }
 
         footer {
-            background: #0b1f3a;
-            color: #cbd5e1;
             text-align: center;
-            padding: 25px;
-            margin-top: 40px;
+            padding: 30px 15px;
+            color: #667085;
             font-size: 13px;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 850px) {
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .settings {
-                grid-template-columns: 1fr;
-            }
-
-            .activity-grid {
+            .tools-grid {
                 grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 600px) {
-            header {
-                padding: 15px 5%;
-            }
-
-            .logo {
-                font-size: 20px;
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
             }
 
             .container {
-                width: 92%;
-            }
-
-            .page-title h1 {
-                font-size: 26px;
+                width: 94%;
+                margin-top: 25px;
             }
 
             .stats {
                 grid-template-columns: 1fr;
             }
 
-            .section {
-                padding: 18px;
+            .page-header h1 {
+                font-size: 27px;
             }
         }
     </style>
@@ -320,75 +318,190 @@
 
 <body>
 
-<header>
-    <div class="logo">Nova<span>Bank</span></div>
-    <a href="dashboard.html" class="back-btn">← Back to Dashboard</a>
+<header class="topbar">
+
+    <div class="logo">
+        NovaBank
+    </div>
+
+    <div class="top-links">
+        <a href="dashboard.html">← Customer Dashboard</a>
+        <a href="login.html">Logout</a>
+    </div>
+
 </header>
 
-<div class="container">
 
-    <div class="admin-banner">
-        <strong>⚠️ ADMIN DEMO — FICTIONAL DATA ONLY</strong>
-        This is a demonstration administration dashboard. All customers,
-        accounts, transactions and security events shown here are fictional.
-        No real banking operations are performed.
-    </div>
+<main class="container">
 
-    <div class="page-title">
+    <div class="page-header">
+
         <h1>👨‍💼 Admin Dashboard</h1>
-        <p>Manage and monitor the fictional NovaBank demonstration environment.</p>
+
+        <p>
+            Manage the NovaBank fictional demonstration environment.
+        </p>
+
     </div>
+
+
+    <div class="demo-banner">
+
+        ⚠️ ADMIN DEMO — FICTIONAL DATA ONLY.
+        This dashboard does not connect to real customers,
+        real accounts, real banking systems, or real transactions.
+
+    </div>
+
 
     <!-- STATISTICS -->
 
-    <div class="stats">
+    <section class="stats">
 
         <div class="stat-card">
-            <div class="stat-icon">👥</div>
-            <h3>1,248</h3>
-            <p>Demo Customers</p>
+
+            <h3>Demo Customers</h3>
+
+            <strong>1,248</strong>
+
         </div>
+
 
         <div class="stat-card">
-            <div class="stat-icon">🏦</div>
-            <h3>1,185</h3>
-            <p>Active Demo Accounts</p>
+
+            <h3>Active Demo Accounts</h3>
+
+            <strong>1,185</strong>
+
         </div>
+
 
         <div class="stat-card">
-            <div class="stat-icon">💳</div>
-            <h3>8,642</h3>
-            <p>Demo Transactions</p>
+
+            <h3>Demo Transactions</h3>
+
+            <strong>8,642</strong>
+
         </div>
+
 
         <div class="stat-card">
-            <div class="stat-icon">🚨</div>
-            <h3>7</h3>
-            <p>Security Alerts</p>
+
+            <h3>Security Alerts</h3>
+
+            <strong>7</strong>
+
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- CUSTOMER MANAGEMENT -->
+    <!-- MANAGEMENT TOOLS -->
 
-    <div class="section">
+    <section class="section">
+
+        <h2>🛠️ Management Tools</h2>
+
+        <div class="tools-grid">
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">
+                    👥
+                </div>
+
+                <h3>Customer Management</h3>
+
+                <p>
+                    View and manage fictional demo customers,
+                    account statuses, and customer information.
+                </p>
+
+                <a href="admin-customers.html">
+                    Open Customer Management
+                </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">
+                    💳
+                </div>
+
+                <h3>Transaction Management</h3>
+
+                <p>
+                    Review fictional demo transactions,
+                    transaction types, statuses, and activity.
+                </p>
+
+                <a href="admin-transactions.html">
+                    Open Transaction Management
+                </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">
+                    🔔
+                </div>
+
+                <h3>Admin Notifications</h3>
+
+                <p>
+                    View, search, filter, and create fictional
+                    customer notifications.
+                </p>
+
+                <a href="admin-notifications.html">
+                    Open Notifications
+                </a>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">
+                    🛡️
+                </div>
+
+                <h3>Admin Security Center</h3>
+
+                <p>
+                    Review fictional security alerts,
+                    demo sessions, and customer security status.
+                </p>
+
+                <a href="admin-security.html">
+                    Open Security Center
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- CUSTOMER MANAGEMENT PREVIEW -->
+
+    <section class="section">
 
         <h2>👥 Demo Customer Management</h2>
 
-        <input
-            type="text"
-            id="customerSearch"
-            class="search-box"
-            placeholder="Search fictional customers..."
-            onkeyup="searchCustomers()"
-        >
-
         <div class="table-wrapper">
 
-            <table id="customerTable">
+            <table>
 
                 <thead>
+
                     <tr>
                         <th>Customer</th>
                         <th>Account</th>
@@ -397,84 +510,169 @@
                         <th>Last Activity</th>
                         <th>Actions</th>
                     </tr>
+
                 </thead>
+
 
                 <tbody>
 
                     <tr>
+
                         <td>Alex Johnson</td>
+
                         <td>•••• 4821</td>
+
                         <td>Personal</td>
+
                         <td>
-                            <span class="status active">Active Demo</span>
+                            <span class="status">
+                                Active Demo
+                            </span>
                         </td>
+
                         <td>Sep 24, 2026</td>
-                        <td>
-                            <button class="action-btn" onclick="demoAction('View Customer')">
-                                View
-                            </button>
 
-                            <button class="action-btn" onclick="demoAction('Send Demo Notification')">
-                                Notify
-                            </button>
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    onclick="viewCustomer('Alex Johnson')"
+                                >
+                                    View
+                                </button>
+
+                                <button
+                                    class="secondary"
+                                    onclick="notifyCustomer('Alex Johnson')"
+                                >
+                                    Notify
+                                </button>
+
+                            </div>
+
                         </td>
+
                     </tr>
 
+
                     <tr>
+
                         <td>Sarah Williams</td>
+
                         <td>•••• 2846</td>
+
                         <td>Personal</td>
+
                         <td>
-                            <span class="status active">Active Demo</span>
+                            <span class="status">
+                                Active Demo
+                            </span>
                         </td>
+
                         <td>Sep 23, 2026</td>
-                        <td>
-                            <button class="action-btn" onclick="demoAction('View Customer')">
-                                View
-                            </button>
 
-                            <button class="action-btn" onclick="demoAction('Send Demo Notification')">
-                                Notify
-                            </button>
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    onclick="viewCustomer('Sarah Williams')"
+                                >
+                                    View
+                                </button>
+
+                                <button
+                                    class="secondary"
+                                    onclick="notifyCustomer('Sarah Williams')"
+                                >
+                                    Notify
+                                </button>
+
+                            </div>
+
                         </td>
+
                     </tr>
 
+
                     <tr>
+
                         <td>Michael Brown</td>
-                        <td>•••• 6158</td>
-                        <td>Business</td>
-                        <td>
-                            <span class="status review">Review Demo</span>
-                        </td>
-                        <td>Sep 22, 2026</td>
-                        <td>
-                            <button class="action-btn" onclick="demoAction('Review Demo Account')">
-                                Review
-                            </button>
 
-                            <button class="action-btn" onclick="demoAction('View Customer')">
-                                View
-                            </button>
+                        <td>•••• 6158</td>
+
+                        <td>Business</td>
+
+                        <td>
+                            <span class="status review">
+                                Review Demo
+                            </span>
                         </td>
+
+                        <td>Sep 22, 2026</td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    onclick="viewCustomer('Michael Brown')"
+                                >
+                                    View
+                                </button>
+
+                                <button
+                                    class="secondary"
+                                    onclick="reviewCustomer('Michael Brown')"
+                                >
+                                    Review
+                                </button>
+
+                            </div>
+
+                        </td>
+
                     </tr>
 
-                    <tr>
-                        <td>Emma Davis</td>
-                        <td>•••• 9417</td>
-                        <td>Personal</td>
-                        <td>
-                            <span class="status active">Active Demo</span>
-                        </td>
-                        <td>Sep 21, 2026</td>
-                        <td>
-                            <button class="action-btn" onclick="demoAction('View Customer')">
-                                View
-                            </button>
 
-                            <button class="action-btn" onclick="demoAction('Lock Demo Account')">
-                                Lock
-                            </button>
+                    <tr>
+
+                        <td>Emma Davis</td>
+
+                        <td>•••• 9417</td>
+
+                        <td>Personal</td>
+
+                        <td>
+                            <span class="status">
+                                Active Demo
+                            </span>
                         </td>
+
+                        <td>Sep 21, 2026</td>
+
+                        <td>
+
+                            <div class="actions">
+
+                                <button
+                                    onclick="viewCustomer('Emma Davis')"
+                                >
+                                    View
+                                </button>
+
+                                <button
+                                    class="secondary"
+                                    onclick="notifyCustomer('Emma Davis')"
+                                >
+                                    Notify
+                                </button>
+
+                            </div>
+
+                        </td>
+
                     </tr>
 
                 </tbody>
@@ -483,146 +681,237 @@
 
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- ACTIVITY AND SECURITY -->
+    <!-- RECENT ACTIVITY -->
 
-    <div class="activity-grid">
+    <section class="section">
 
-        <div class="section">
+        <h2>🕒 Recent Demo Activity</h2>
 
-            <h2>📋 Recent Demo Activity</h2>
 
-            <div class="activity-item">
-                <strong>Alex Johnson logged in</strong>
-                <span>Successful demo login • Sep 24, 2026</span>
-            </div>
+        <div class="activity">
 
-            <div class="activity-item">
-                <strong>Demo transfer created</strong>
-                <span>Fictional transfer • Sep 24, 2026</span>
-            </div>
+            <h3>👤 Customer Profile Viewed</h3>
 
-            <div class="activity-item">
-                <strong>Sarah Williams viewed profile</strong>
-                <span>Demo profile activity • Sep 23, 2026</span>
-            </div>
-
-            <div class="activity-item">
-                <strong>Michael Brown account reviewed</strong>
-                <span>Demo account review • Sep 22, 2026</span>
-            </div>
+            <p>
+                Admin viewed the fictional Alex Johnson demo profile.
+                · Sep 24, 2026
+            </p>
 
         </div>
 
 
-        <div class="section">
+        <div class="activity">
 
-            <h2>🚨 Security Alerts</h2>
+            <h3>💳 Transaction Reviewed</h3>
 
-            <div class="alert">
-                <strong>Demo Login Alert</strong>
-                <p>Fictional login activity detected for Alex Johnson.</p>
-            </div>
-
-            <div class="alert">
-                <strong>Demo Device Alert</strong>
-                <p>A fictional mobile device session was created.</p>
-            </div>
-
-            <div class="alert">
-                <strong>Demo Security Review</strong>
-                <p>Fictional security settings were recently reviewed.</p>
-            </div>
+            <p>
+                A fictional demo transaction was reviewed by an admin.
+                · Sep 24, 2026
+            </p>
 
         </div>
 
-    </div>
+
+        <div class="activity">
+
+            <h3>🔔 Notification Created</h3>
+
+            <p>
+                A fictional customer notification was created.
+                · Sep 24, 2026
+            </p>
+
+        </div>
 
 
-    <!-- SYSTEM SETTINGS -->
+        <div class="activity">
 
-    <div class="section">
+            <h3>🛡️ Security Alert Reviewed</h3>
+
+            <p>
+                A fictional security alert was reviewed.
+                · Sep 23, 2026
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SECURITY ALERTS -->
+
+    <section class="section">
+
+        <h2>🚨 Security Alerts</h2>
+
+
+        <div class="alert">
+
+            <strong>
+                High Priority — Suspicious Demo Login
+            </strong>
+
+            <p>
+                Fictional security alert for Alex Johnson.
+                Sep 24, 2026.
+            </p>
+
+        </div>
+
+
+        <div class="alert">
+
+            <strong>
+                Medium Priority — Security Settings Review
+            </strong>
+
+            <p>
+                Fictional security review for Sarah Williams.
+                Sep 24, 2026.
+            </p>
+
+        </div>
+
+
+        <div class="alert">
+
+            <strong>
+                High Priority — New Demo Device
+            </strong>
+
+            <p>
+                Fictional device activity for Michael Brown.
+                Sep 23, 2026.
+            </p>
+
+        </div>
+
+
+        <div class="actions">
+
+            <a
+                href="admin-security.html"
+                style="
+                    display:inline-block;
+                    text-decoration:none;
+                    background:#155eef;
+                    color:white;
+                    padding:10px 15px;
+                    border-radius:8px;
+                    font-weight:bold;
+                    font-size:14px;
+                "
+            >
+                Open Security Center
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- SYSTEM SETTINGS PREVIEW -->
+
+    <section class="section">
 
         <h2>⚙️ Demo System Settings</h2>
 
-        <div class="settings">
+        <p style="color:#667085; margin-bottom:18px; line-height:1.6;">
 
-            <div class="setting-card">
-                <h3>🔐 Security Settings</h3>
-                <p>Review fictional authentication and security preferences.</p>
-                <button class="action-btn" onclick="demoAction('Security Settings')">
-                    Manage Demo
-                </button>
-            </div>
+            These controls are visual demonstrations only.
+            They do not modify a real banking system.
 
-            <div class="setting-card">
-                <h3>🔔 Notifications</h3>
-                <p>Manage fictional customer notification preferences.</p>
-                <button class="action-btn" onclick="demoAction('Notification Settings')">
-                    Manage Demo
-                </button>
-            </div>
+        </p>
 
-            <div class="setting-card">
-                <h3>🏦 Account Settings</h3>
-                <p>Review fictional account configuration options.</p>
-                <button class="action-btn" onclick="demoAction('Account Settings')">
-                    Manage Demo
-                </button>
-            </div>
+
+        <div class="actions">
+
+            <button
+                onclick="demoSetting('Notification Settings')"
+            >
+                🔔 Manage Notifications
+            </button>
+
+
+            <button
+                onclick="demoSetting('Security Settings')"
+            >
+                🛡️ Manage Security
+            </button>
+
+
+            <button
+                onclick="demoSetting('Demo System Settings')"
+            >
+                ⚙️ System Settings
+            </button>
 
         </div>
 
-    </div>
+    </section>
 
-</div>
+</main>
 
 
 <footer>
-    © 2026 NovaBank — Fictional Banking Demonstration Project.
-    No real banking services, customer data, payments or transactions are provided.
+
+    © 2026 NovaBank — Fictional Demonstration Project.
+    No real banking services or transactions are provided.
+
 </footer>
 
 
 <script>
 
-function demoAction(action) {
+    function viewCustomer(name) {
 
-    alert(
-        action +
-        " opened successfully.\n\n" +
-        "This is a NovaBank demo feature. " +
-        "No real banking action was performed."
-    );
+        alert(
+            "DEMO CUSTOMER PROFILE\n\n" +
+            "Customer: " + name + "\n\n" +
+            "This is fictional customer information only."
+        );
 
-}
+    }
 
 
-function searchCustomers() {
+    function notifyCustomer(name) {
 
-    const input = document
-        .getElementById("customerSearch")
-        .value
-        .toLowerCase();
+        alert(
+            "DEMO NOTIFICATION\n\n" +
+            "A fictional notification would be prepared for " +
+            name +
+            ".\n\n" +
+            "No real notification was sent."
+        );
 
-    const rows = document
-        .querySelectorAll("#customerTable tbody tr");
+    }
 
-    rows.forEach(function(row) {
 
-        const text = row.textContent.toLowerCase();
+    function reviewCustomer(name) {
 
-        if (text.includes(input)) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
+        alert(
+            "DEMO CUSTOMER REVIEW\n\n" +
+            name +
+            " has been opened for fictional admin review.\n\n" +
+            "No real customer account was affected."
+        );
 
-    });
+    }
 
-}
+
+    function demoSetting(setting) {
+
+        alert(
+            setting +
+            " opened successfully.\n\n" +
+            "This is a fictional demo setting. " +
+            "No real banking configuration was changed."
+        );
+
+    }
 
 </script>
 

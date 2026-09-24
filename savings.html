@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings & Goals | NovaBank</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .topbar {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #123c69;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #123c69;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 88%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #667085;
+        }
+
+        .demo-notice {
+            background: #fff8e6;
+            border: 1px solid #f2d28b;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            color: #765800;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .summary-card span {
+            display: block;
+            color: #667085;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .summary-card h2 {
+            color: #123c69;
+            font-size: 25px;
+        }
+
+        .section-title {
+            font-size: 23px;
+            margin-bottom: 18px;
+        }
+
+        .goals {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .goal-card {
+            background: #ffffff;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .goal-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .goal-icon {
+            font-size: 32px;
+        }
+
+        .goal-card h3 {
+            margin-bottom: 5px;
+        }
+
+        .goal-card p {
+            color: #667085;
+            font-size: 14px;
+        }
+
+        .amounts {
+            display: flex;
+            justify-content: space-between;
+            margin: 18px 0 8px;
+            font-size: 14px;
+        }
+
+        .amounts strong {
+            color: #123c69;
+        }
+
+        .progress-container {
+            background: #e6e9ef;
+            height: 12px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: #123c69;
+            border-radius: 20px;
+        }
+
+        .percentage {
+            text-align: right;
+            margin-top: 7px;
+            font-size: 13px;
+            color: #667085;
+        }
+
+        .target-date {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555f70;
+        }
+
+        .actions {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .actions h2 {
+            margin-bottom: 15px;
+        }
+
+        button {
+            border: none;
+            padding: 13px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .primary {
+            background: #123c69;
+            color: white;
+        }
+
+        .secondary {
+            background: #e9eef5;
+            color: #123c69;
+        }
+
+        #message {
+            margin-top: 15px;
+            padding: 12px;
+            display: none;
+            background: #edf8f0;
+            color: #1c6b35;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            color: #667085;
+            font-size: 13px;
+        }
+
+        @media (max-width: 750px) {
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .goals {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .topbar {
+                padding: 16px 5%;
+            }
+
+            .container {
+                width: 92%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="logo">NovaBank</div>
+        <a href="dashboard.html" class="back-link">← Dashboard</a>
+    </header>
+
+    <main class="container">
+
+        <section class="page-header">
+            <h1>💰 Savings & Goals</h1>
+            <p>Track your fictional savings and work toward your demo financial goals.</p>
+        </section>
+
+        <div class="demo-notice">
+            <strong>⚠️ Demo Only:</strong>
+            This savings section is part of the NovaBank demonstration website.
+            All balances, goals and amounts are fictional. No real money is stored or transferred.
+        </div>
+
+        <section class="summary">
+
+            <div class="summary-card">
+                <span>Total Demo Savings</span>
+                <h2>₦850,000.00</h2>
+            </div>
+
+            <div class="summary-card">
+                <span>Active Goals</span>
+                <h2>3</h2>
+            </div>
+
+            <div class="summary-card">
+                <span>Goals Completed</span>
+                <h2>1</h2>
+            </div>
+
+        </section>
+
+        <h2 class="section-title">🎯 Your Savings Goals</h2>
+
+        <section class="goals">
+
+            <div class="goal-card">
+
+                <div class="goal-top">
+                    <div>
+                        <h3>🚗 New Car</h3>
+                        <p>Demo savings goal</p>
+                    </div>
+
+                    <div class="goal-icon">🚗</div>
+                </div>
+
+                <div class="amounts">
+                    <span>Saved: <strong>₦600,000</strong></span>
+                    <span>Target: <strong>₦2,000,000</strong></span>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress" style="width: 30%;"></div>
+                </div>
+
+                <div class="percentage">30% completed</div>
+
+                <div class="target-date">
+                    📅 Target date: December 31, 2026
+                </div>
+
+            </div>
+
+
+            <div class="goal-card">
+
+                <div class="goal-top">
+                    <div>
+                        <h3>🏠 Home Project</h3>
+                        <p>Demo savings goal</p>
+                    </div>
+
+                    <div class="goal-icon">🏠</div>
+                </div>
+
+                <div class="amounts">
+                    <span>Saved: <strong>₦150,000</strong></span>
+                    <span>Target: <strong>₦500,000</strong></span>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress" style="width: 30%;"></div>
+                </div>
+
+                <div class="percentage">30% completed</div>
+
+                <div class="target-date">
+                    📅 Target date: November 30, 2026
+                </div>
+
+            </div>
+
+
+            <div class="goal-card">
+
+                <div class="goal-top">
+                    <div>
+                        <h3>✈️ Vacation</h3>
+                        <p>Demo savings goal</p>
+                    </div>
+
+                    <div class="goal-icon">✈️</div>
+                </div>
+
+                <div class="amounts">
+                    <span>Saved: <strong>₦100,000</strong></span>
+                    <span>Target: <strong>₦250,000</strong></span>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress" style="width: 40%;"></div>
+                </div>
+
+                <div class="percentage">40% completed</div>
+
+                <div class="target-date">
+                    📅 Target date: October 15, 2026
+                </div>
+
+            </div>
+
+
+            <div class="goal-card">
+
+                <div class="goal-top">
+                    <div>
+                        <h3>🎓 Education</h3>
+                        <p>Completed demo goal</p>
+                    </div>
+
+                    <div class="goal-icon">🎓</div>
+                </div>
+
+                <div class="amounts">
+                    <span>Saved: <strong>₦100,000</strong></span>
+                    <span>Target: <strong>₦100,000</strong></span>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress" style="width: 100%;"></div>
+                </div>
+
+                <div class="percentage">100% completed ✓</div>
+
+                <div class="target-date">
+                    📅 Completed: September 20, 2026
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="actions">
+
+            <h2>⚡ Savings Actions</h2>
+
+            <button class="primary" onclick="createGoal()">
+                ➕ Create New Goal
+            </button>
+
+            <button class="secondary" onclick="addSavings()">
+                💵 Add Demo Savings
+            </button>
+
+            <div id="message"></div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        © 2026 NovaBank Demo — Fictional demonstration project.
+        No real banking services or financial transactions are provided.
+    </footer>
+
+
+    <script>
+
+        function showMessage(message) {
+            const box = document.getElementById("message");
+
+            box.textContent = message;
+            box.style.display = "block";
+
+            setTimeout(function() {
+                box.style.display = "none";
+            }, 4000);
+        }
+
+        function createGoal() {
+            showMessage(
+                "Demo goal creator opened. No real savings goal was created."
+            );
+        }
+
+        function addSavings() {
+            showMessage(
+                "Demo savings action completed. No real money was added."
+            );
+        }
+
+    </script>
+
+</body>
+</html>

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaBank | Modern Digital Banking</title>
+
+    <title>NovaBank | Modern Digital Banking Demo</title>
 
     <style>
         * {
@@ -24,7 +25,7 @@
         }
 
         header {
-            background: white;
+            background: rgba(255, 255, 255, 0.97);
             border-bottom: 1px solid #e7eaf0;
             position: sticky;
             top: 0;
@@ -34,15 +35,15 @@
         .navbar {
             max-width: 1200px;
             margin: auto;
-            padding: 18px 25px;
+            padding: 17px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 25px;
-            font-weight: bold;
+            font-size: 26px;
+            font-weight: 800;
             color: #123c78;
         }
 
@@ -60,6 +61,7 @@
             text-decoration: none;
             color: #273247;
             font-weight: 600;
+            transition: 0.3s;
         }
 
         nav a:hover {
@@ -73,19 +75,36 @@
             border-radius: 8px;
         }
 
+        .login-btn:hover {
+            background: #0d2d5c;
+        }
+
+        /* HERO */
+
         .hero {
             max-width: 1200px;
             margin: auto;
-            padding: 90px 25px;
+            padding: 85px 25px 75px;
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
             gap: 60px;
             align-items: center;
         }
 
+        .demo-badge {
+            display: inline-block;
+            background: #e9f7f1;
+            color: #08794f;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
         .hero h1 {
-            font-size: 52px;
-            line-height: 1.1;
+            font-size: 54px;
+            line-height: 1.08;
             margin-bottom: 22px;
             color: #102a52;
         }
@@ -97,7 +116,7 @@
         .hero p {
             font-size: 18px;
             color: #626d80;
-            max-width: 600px;
+            max-width: 620px;
             margin-bottom: 30px;
         }
 
@@ -114,11 +133,17 @@
             border-radius: 9px;
             text-decoration: none;
             font-weight: bold;
+            transition: 0.3s;
         }
 
         .primary-btn {
             background: #123c78;
             color: white;
+        }
+
+        .primary-btn:hover {
+            background: #0d2d5c;
+            transform: translateY(-2px);
         }
 
         .secondary-btn {
@@ -127,19 +152,43 @@
             border: 1px solid #d8dee8;
         }
 
+        .secondary-btn:hover {
+            border-color: #123c78;
+            transform: translateY(-2px);
+        }
+
+        /* BANK CARD */
+
         .bank-card {
             background: linear-gradient(145deg, #123c78, #1c5aa6);
             color: white;
-            border-radius: 22px;
+            border-radius: 24px;
             padding: 30px;
-            min-height: 270px;
-            box-shadow: 0 20px 45px rgba(18, 60, 120, 0.22);
+            min-height: 285px;
+            box-shadow: 0 25px 55px rgba(18, 60, 120, 0.24);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bank-card::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            right: -80px;
+            bottom: -100px;
         }
 
         .card-top {
             display: flex;
             justify-content: space-between;
             margin-bottom: 55px;
+        }
+
+        .card-top strong {
+            font-size: 20px;
         }
 
         .chip {
@@ -165,8 +214,47 @@
             font-size: 15px;
         }
 
+        .card-demo-label {
+            margin-top: 18px;
+            font-size: 11px;
+            opacity: 0.75;
+            letter-spacing: 1px;
+        }
+
+        /* TRUST STRIP */
+
+        .trust-strip {
+            background: white;
+            border-top: 1px solid #e7eaf0;
+            border-bottom: 1px solid #e7eaf0;
+        }
+
+        .trust-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 22px 25px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .trust-item strong {
+            display: block;
+            color: #123c78;
+            font-size: 17px;
+            margin-bottom: 3px;
+        }
+
+        .trust-item span {
+            color: #6b7484;
+            font-size: 13px;
+        }
+
+        /* GENERAL SECTIONS */
+
         .section {
-            padding: 75px 25px;
+            padding: 80px 25px;
             background: white;
         }
 
@@ -189,6 +277,8 @@
         .section-title p {
             color: #6b7484;
         }
+
+        /* SERVICES */
 
         .services {
             display: grid;
@@ -230,47 +320,156 @@
             color: #687386;
         }
 
+        /* SECURITY */
+
         .security {
             background: #f5f7fb;
         }
 
         .security-box {
-            max-width: 850px;
+            max-width: 900px;
             margin: auto;
             text-align: center;
             background: white;
-            padding: 45px 30px;
-            border-radius: 18px;
+            padding: 50px 30px;
+            border-radius: 20px;
             border: 1px solid #e4e8ef;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        .security-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
         }
 
         .security-box h2 {
             color: #102a52;
             margin-bottom: 15px;
+            font-size: 30px;
         }
 
         .security-box p {
             color: #667085;
+            max-width: 700px;
+            margin: auto;
         }
+
+        .security-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .security-feature {
+            padding: 18px;
+            background: #f5f7fb;
+            border-radius: 12px;
+            font-weight: bold;
+            color: #24385b;
+        }
+
+        /* CTA */
+
+        .cta {
+            background: #123c78;
+            color: white;
+            padding: 75px 25px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            max-width: 650px;
+            margin: 0 auto 28px;
+            opacity: 0.88;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #123c78;
+            padding: 14px 25px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
 
         footer {
-            background: #102a52;
+            background: #0d2345;
             color: white;
-            text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
         }
 
-        footer p {
-            opacity: 0.85;
+        .footer-inner {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-brand h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand h3 span {
+            color: #18a673;
+        }
+
+        .footer-brand p {
+            opacity: 0.75;
+            max-width: 400px;
+            font-size: 14px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #d7e2f2;
+            text-decoration: none;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .footer-column a:hover {
+            color: #18a673;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            text-align: center;
+            font-size: 13px;
+            opacity: 0.8;
         }
 
         .demo-note {
-            margin-top: 12px;
-            font-size: 13px;
-            color: #d7e2f2;
+            margin-top: 8px;
+            color: #b9c9df;
         }
 
+        /* MOBILE */
+
         @media (max-width: 850px) {
+
             nav {
                 gap: 12px;
             }
@@ -285,15 +484,32 @@
             }
 
             .hero h1 {
-                font-size: 40px;
+                font-size: 42px;
             }
 
             .services {
                 grid-template-columns: 1fr;
             }
+
+            .security-features {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .trust-inner {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
         }
 
         @media (max-width: 500px) {
+
             .navbar {
                 padding: 15px;
             }
@@ -304,7 +520,11 @@
             }
 
             .hero h1 {
-                font-size: 34px;
+                font-size: 35px;
+            }
+
+            .hero p {
+                font-size: 16px;
             }
 
             .section {
@@ -314,12 +534,27 @@
 
             .bank-card {
                 padding: 24px;
+                min-height: 260px;
+            }
+
+            .balance {
+                font-size: 29px;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .cta h2 {
+                font-size: 30px;
             }
         }
     </style>
 </head>
 
 <body>
+
+<!-- HEADER -->
 
 <header>
     <div class="navbar">
@@ -339,27 +574,38 @@
 </header>
 
 
+<!-- HERO -->
+
 <section class="hero" id="home">
 
     <div>
+
+        <div class="demo-badge">
+            ✦ NOVABANK DIGITAL BANKING DEMO
+        </div>
+
         <h1>
             Banking made <span>simple.</span>
         </h1>
 
         <p>
-            Manage your money, make transfers, track transactions,
-            and access your account from one modern digital banking platform.
+            Experience a modern digital banking interface designed
+            for convenient account management, payments, transfers,
+            financial insights, and secure customer experiences.
         </p>
 
         <div class="buttons">
+
             <a href="login.html" class="primary-btn">
-                Access Your Account
+                Access Demo Account
             </a>
 
             <a href="#services" class="secondary-btn">
                 Explore Services
             </a>
+
         </div>
+
     </div>
 
 
@@ -371,7 +617,7 @@
         </div>
 
         <div class="balance-label">
-            Available Balance
+            Available Demo Balance
         </div>
 
         <div class="balance">
@@ -382,20 +628,55 @@
             •••• •••• •••• 4821
         </div>
 
+        <div class="card-demo-label">
+            FICTIONAL DEMO ACCOUNT
+        </div>
+
     </div>
 
 </section>
 
+
+<!-- TRUST STRIP -->
+
+<div class="trust-strip">
+
+    <div class="trust-inner">
+
+        <div class="trust-item">
+            <strong>💻 Digital First</strong>
+            <span>Modern online banking experience</span>
+        </div>
+
+        <div class="trust-item">
+            <strong>📱 Mobile Friendly</strong>
+            <span>Designed for phones and computers</span>
+        </div>
+
+        <div class="trust-item">
+            <strong>🔐 Security Focused</strong>
+            <span>Security-focused interface design</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SERVICES -->
 
 <section class="section" id="services">
 
     <div class="section-inner">
 
         <div class="section-title">
+
             <h2>Banking Services</h2>
+
             <p>
-                Everything you need to manage your finances.
+                Explore the major features available in the NovaBank demo.
             </p>
+
         </div>
 
 
@@ -405,8 +686,8 @@
                 <div class="icon">💸</div>
                 <h3>Money Transfer</h3>
                 <p>
-                    Send money quickly and conveniently through
-                    your digital banking dashboard.
+                    Explore a modern transfer interface for sending
+                    fictional demo funds between saved recipients.
                 </p>
             </div>
 
@@ -415,8 +696,8 @@
                 <div class="icon">📊</div>
                 <h3>Transaction History</h3>
                 <p>
-                    Keep track of deposits, transfers, withdrawals,
-                    and other account activity.
+                    Review fictional account activity with transaction
+                    search and filtering features.
                 </p>
             </div>
 
@@ -425,8 +706,8 @@
                 <div class="icon">💳</div>
                 <h3>Payments</h3>
                 <p>
-                    Manage bills and payments from one convenient
-                    digital banking platform.
+                    Explore demo bill payments including electricity,
+                    internet, airtime, data, and TV subscriptions.
                 </p>
             </div>
 
@@ -435,28 +716,28 @@
                 <div class="icon">👤</div>
                 <h3>Personal Account</h3>
                 <p>
-                    Manage your profile and account information
-                    from your personal dashboard.
+                    Manage a fictional customer profile and explore
+                    account preferences.
                 </p>
             </div>
 
 
             <div class="service-card">
-                <div class="icon">🔔</div>
-                <h3>Notifications</h3>
+                <div class="icon">🎯</div>
+                <h3>Savings & Goals</h3>
                 <p>
-                    Stay informed about important account activity
-                    and transactions.
+                    Track fictional savings goals and monitor progress
+                    toward financial targets.
                 </p>
             </div>
 
 
             <div class="service-card">
-                <div class="icon">📱</div>
-                <h3>Mobile Friendly</h3>
+                <div class="icon">📈</div>
+                <h3>Financial Overview</h3>
                 <p>
-                    Access your banking experience comfortably on
-                    smartphones, tablets, and computers.
+                    View demo financial activity, spending categories,
+                    savings, and account summaries.
                 </p>
             </div>
 
@@ -467,33 +748,128 @@
 </section>
 
 
+<!-- SECURITY -->
+
 <section class="section security" id="security">
 
     <div class="security-box">
 
-        <h2>Security Comes First 🔐</h2>
+        <div class="security-icon">
+            🔐
+        </div>
+
+        <h2>
+            Security Comes First
+        </h2>
 
         <p>
-            NovaBank is designed with modern security-focused
-            interfaces to provide a safe and convenient digital
-            banking experience.
+            NovaBank is designed with security-focused interfaces
+            that demonstrate how modern digital banking platforms
+            can organize account protection, security alerts,
+            device management, and authentication features.
         </p>
+
+
+        <div class="security-features">
+
+            <div class="security-feature">
+                🔑 Password Security
+            </div>
+
+            <div class="security-feature">
+                📱 Two-Factor Authentication
+            </div>
+
+            <div class="security-feature">
+                🚨 Security Alerts
+            </div>
+
+        </div>
 
     </div>
 
 </section>
 
 
-<footer>
+<!-- CALL TO ACTION -->
+
+<section class="cta">
+
+    <h2>
+        Explore the NovaBank Demo
+    </h2>
 
     <p>
-        © 2026 NovaBank. All rights reserved.
+        Enter the fictional customer environment and explore
+        the dashboard, transactions, payments, savings,
+        security tools, and other banking features.
     </p>
 
-    <p class="demo-note">
-        This website is a fictional demonstration project.
-        It does not process real banking transactions.
-    </p>
+    <a href="login.html" class="cta-btn">
+        Enter Demo Banking
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="footer-brand">
+
+            <h3>
+                Nova<span>Bank</span>
+            </h3>
+
+            <p>
+                A modern digital banking demonstration project
+                showcasing customer and administrative banking
+                interfaces.
+            </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Customer</h4>
+
+            <a href="login.html">Login</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="support.html">Help & Support</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>Explore</h4>
+
+            <a href="#services">Services</a>
+            <a href="#security">Security</a>
+            <a href="admin.html">Admin Demo</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 NovaBank. All rights reserved.
+        </p>
+
+        <p class="demo-note">
+            This website is a fictional demonstration project.
+            It does not process real banking transactions or
+            collect real banking credentials.
+        </p>
+
+    </div>
 
 </footer>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaBank | Login</title>
+    <title>Login | NovaBank</title>
 
     <style>
         * {
@@ -13,103 +13,90 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f7fb;
-            color: #172033;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
         }
 
         header {
             background: white;
-            border-bottom: 1px solid #e5e9f0;
-        }
-
-        .navbar {
-            max-width: 1100px;
-            margin: auto;
-            padding: 18px 25px;
+            padding: 18px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
 
         .logo {
-            font-size: 25px;
+            font-size: 24px;
             font-weight: bold;
-            color: #123c78;
+            color: #123c69;
         }
 
-        .logo span {
-            color: #18a673;
-        }
-
-        .back-link {
+        .home-link {
             text-decoration: none;
-            color: #123c78;
+            color: #123c69;
             font-weight: bold;
         }
 
         .login-section {
-            flex: 1;
+            min-height: calc(100vh - 80px);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
         }
 
         .login-box {
+            background: white;
             width: 100%;
             max-width: 430px;
-            background: white;
-            padding: 40px;
-            border-radius: 18px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e5e9f0;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.10);
         }
 
         .login-box h1 {
             text-align: center;
-            color: #102a52;
+            color: #123c69;
             margin-bottom: 10px;
         }
 
-        .subtitle {
+        .login-box p {
             text-align: center;
-            color: #697386;
-            margin-bottom: 30px;
+            color: #6b7280;
+            margin-bottom: 25px;
         }
 
         .demo-notice {
-            background: #eef5ff;
-            color: #31547f;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
             padding: 12px;
             border-radius: 8px;
-            font-size: 13px;
-            margin-bottom: 22px;
+            font-size: 14px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
             font-weight: bold;
-            color: #26354d;
         }
 
         input {
             width: 100%;
-            padding: 14px;
-            border: 1px solid #d7dce5;
+            padding: 13px;
+            border: 1px solid #d1d5db;
             border-radius: 8px;
-            outline: none;
-            font-size: 15px;
             margin-bottom: 18px;
+            font-size: 15px;
         }
 
         input:focus {
-            border-color: #123c78;
+            outline: none;
+            border-color: #123c69;
         }
 
         .password-wrapper {
@@ -117,16 +104,16 @@
         }
 
         .password-wrapper input {
-            padding-right: 70px;
+            padding-right: 75px;
         }
 
         .show-password {
             position: absolute;
             right: 12px;
-            top: 13px;
+            top: 12px;
             border: none;
-            background: transparent;
-            color: #123c78;
+            background: none;
+            color: #123c69;
             font-weight: bold;
             cursor: pointer;
         }
@@ -134,8 +121,9 @@
         .forgot {
             display: block;
             text-align: right;
-            margin: 5px 0 20px;
-            color: #123c78;
+            margin-top: -8px;
+            margin-bottom: 20px;
+            color: #123c69;
             text-decoration: none;
             font-size: 14px;
         }
@@ -143,7 +131,7 @@
         .login-button {
             width: 100%;
             padding: 14px;
-            background: #123c78;
+            background: #123c69;
             color: white;
             border: none;
             border-radius: 8px;
@@ -153,195 +141,138 @@
         }
 
         .login-button:hover {
-            background: #0d315f;
+            background: #0d2f52;
         }
 
-        .message {
-            display: none;
+        .demo-message {
             margin-top: 18px;
-            padding: 12px;
-            background: #eaf8f1;
-            color: #176b4b;
-            border-radius: 8px;
             text-align: center;
-            font-size: 14px;
-        }
-
-        .create-account {
-            text-align: center;
-            margin-top: 25px;
-            color: #697386;
-            font-size: 14px;
-        }
-
-        .create-account a {
-            color: #123c78;
+            color: #15803d;
             font-weight: bold;
-            text-decoration: none;
         }
 
         footer {
-            background: #102a52;
-            color: white;
             text-align: center;
-            padding: 25px 15px;
-        }
-
-        footer p {
+            padding: 20px;
+            background: #123c69;
+            color: white;
             font-size: 13px;
-            opacity: 0.85;
-        }
-
-        @media (max-width: 500px) {
-            .navbar {
-                padding: 15px;
-            }
-
-            .login-box {
-                padding: 28px 22px;
-            }
-
-            .back-link {
-                font-size: 14px;
-            }
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <div class="navbar">
+    <header>
+        <div class="logo">NovaBank</div>
+        <a href="index.html" class="home-link">← Back Home</a>
+    </header>
 
-        <div class="logo">
-            Nova<span>Bank</span>
-        </div>
+    <section class="login-section">
 
-        <a href="index.html" class="back-link">
-            ← Back Home
-        </a>
+        <div class="login-box">
 
-    </div>
-</header>
+            <h1>Welcome Back</h1>
+            <p>Sign in to your NovaBank demo account</p>
 
+            <div class="demo-notice">
+                ⚠️ Demo banking interface — do not enter real banking credentials.
+            </div>
 
-<section class="login-section">
+            <form id="loginForm">
 
-    <div class="login-box">
-
-        <h1>Welcome Back</h1>
-
-        <p class="subtitle">
-            Sign in to your NovaBank account
-        </p>
-
-        <div class="demo-notice">
-            Demo banking interface — do not enter real banking credentials.
-        </div>
-
-        <form id="loginForm">
-
-            <label for="username">Username</label>
-
-            <input
-                type="text"
-                id="username"
-                placeholder="Enter demo username"
-                required
-            >
-
-            <label for="password">Password</label>
-
-            <div class="password-wrapper">
-
+                <label for="username">Username</label>
                 <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter demo password"
+                    type="text"
+                    id="username"
+                    placeholder="Enter demo username"
                     required
                 >
 
-                <button
-                    type="button"
-                    class="show-password"
-                    onclick="togglePassword()"
-                >
-                    Show
+                <label for="password">Password</label>
+
+                <div class="password-wrapper">
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter demo password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword()"
+                    >
+                        Show
+                    </button>
+                </div>
+
+                <a href="#" class="forgot" onclick="forgotPassword(event)">
+                    Forgot password?
+                </a>
+
+                <button type="submit" class="login-button">
+                    Sign In
                 </button>
 
-            </div>
+            </form>
 
-            <a href="#" class="forgot">
-                Forgot password?
-            </a>
+            <div id="message" class="demo-message"></div>
 
-            <button
-                type="submit"
-                class="login-button"
-            >
-                Sign In
-            </button>
-
-        </form>
-
-        <div id="message" class="message">
-            Demo login successful. Dashboard coming next.
         </div>
 
-        <p class="create-account">
-            Don't have an account?
-            <a href="#">Create Demo Account</a>
-        </p>
+    </section>
 
-    </div>
+    <footer>
+        © 2026 NovaBank — Fictional Banking Demonstration Project.
+        No real banking transactions are processed.
+    </footer>
 
-</section>
+    <script>
 
+        function togglePassword() {
 
-<footer>
+            const password = document.getElementById("password");
+            const button = document.querySelector(".show-password");
 
-    <p>
-        © 2026 NovaBank. All rights reserved.
-    </p>
-
-    <p>
-        Fictional demonstration project — no real banking transactions are processed.
-    </p>
-
-</footer>
-
-
-<script>
-
-    function togglePassword() {
-
-        const password = document.getElementById("password");
-        const button = document.querySelector(".show-password");
-
-        if (password.type === "password") {
-
-            password.type = "text";
-            button.textContent = "Hide";
-
-        } else {
-
-            password.type = "password";
-            button.textContent = "Show";
+            if (password.type === "password") {
+                password.type = "text";
+                button.textContent = "Hide";
+            } else {
+                password.type = "password";
+                button.textContent = "Show";
+            }
 
         }
 
-    }
+
+        function forgotPassword(event) {
+
+            event.preventDefault();
+
+            document.getElementById("message").textContent =
+                "Password recovery is not available in this demo.";
+
+        }
 
 
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        document.getElementById("message").style.display = "block";
+            document.getElementById("message").textContent =
+                "Demo login successful. Opening dashboard...";
 
-    });
+            setTimeout(function() {
 
-</script>
+                window.location.href = "dashboard.html";
+
+            }, 500);
+
+        });
+
+    </script>
 
 </body>
 </html>

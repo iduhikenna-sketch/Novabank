@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Center | NovaBank</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #123c69;
+        }
+
+        .dashboard-link {
+            text-decoration: none;
+            color: #123c69;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            color: #123c69;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #6b7280;
+        }
+
+        .demo-notice {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .security-status {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .status-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .status-icon {
+            font-size: 30px;
+        }
+
+        .status-title h2 {
+            color: #123c69;
+        }
+
+        .status-text {
+            color: #15803d;
+            font-weight: bold;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .security-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .security-card h3 {
+            color: #123c69;
+            margin-bottom: 9px;
+        }
+
+        .security-card p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .security-button {
+            border: none;
+            background: #123c69;
+            color: white;
+            padding: 11px 16px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .security-button:hover {
+            background: #0d2f52;
+        }
+
+        .activity {
+            background: white;
+            margin-top: 25px;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .activity h2 {
+            color: #123c69;
+            margin-bottom: 18px;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .activity-item span {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .demo-message {
+            margin-top: 15px;
+            color: #15803d;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 18px;
+            background: #123c69;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #123c69;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 16px 5%;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .activity-item {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            NovaBank
+        </div>
+
+        <a href="dashboard.html" class="dashboard-link">
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+    <main class="container">
+
+        <section class="page-title">
+
+            <h1>🔐 Security Center</h1>
+
+            <p>
+                Manage security features for your NovaBank demo account.
+            </p>
+
+        </section>
+
+
+        <div class="demo-notice">
+
+            ⚠️ <strong>Demo Only:</strong>
+            This Security Center is a fictional demonstration.
+            The security controls shown here do not protect or modify any real
+            banking account.
+
+        </div>
+
+
+        <section class="security-status">
+
+            <div class="status-title">
+
+                <div class="status-icon">
+                    🛡️
+                </div>
+
+                <h2>Demo Security Status</h2>
+
+            </div>
+
+            <p class="status-text">
+                ✓ Your fictional demo account is protected.
+            </p>
+
+        </section>
+
+
+        <section class="security-grid">
+
+
+            <div class="security-card">
+
+                <h3>🔑 Password Settings</h3>
+
+                <p>
+                    Manage your fictional demo account password settings.
+                </p>
+
+                <button
+                    class="security-button"
+                    onclick="showMessage('Password settings are simulated in this demo.')">
+                    Manage Password
+                </button>
+
+            </div>
+
+
+            <div class="security-card">
+
+                <h3>📱 Two-Factor Authentication</h3>
+
+                <p>
+                    Add an extra fictional security step to your demo account.
+                </p>
+
+                <button
+                    class="security-button"
+                    onclick="showMessage('Two-factor authentication is simulated in this demo.')">
+                    Configure 2FA
+                </button>
+
+            </div>
+
+
+            <div class="security-card">
+
+                <h3>💻 Device Management</h3>
+
+                <p>
+                    Review devices that have accessed your fictional account.
+                </p>
+
+                <button
+                    class="security-button"
+                    onclick="showMessage('Device management is simulated in this demo.')">
+                    View Devices
+                </button>
+
+            </div>
+
+
+            <div class="security-card">
+
+                <h3>🚨 Security Alerts</h3>
+
+                <p>
+                    Review fictional security alerts and account activity.
+                </p>
+
+                <button
+                    class="security-button"
+                    onclick="showMessage('No new fictional security alerts.')">
+                    View Alerts
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+        <div id="demoMessage" class="demo-message"></div>
+
+
+        <section class="activity">
+
+            <h2>Recent Security Activity</h2>
+
+
+            <div class="activity-item">
+
+                <div>
+                    <strong>🔐 Demo Login</strong>
+                    <span>Successful demo login</span>
+                </div>
+
+                <span>
+                    September 24, 2026
+                </span>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div>
+                    <strong>📱 Demo Device</strong>
+                    <span>Mobile device session</span>
+                </div>
+
+                <span>
+                    September 24, 2026
+                </span>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div>
+                    <strong>🛡️ Security Settings</strong>
+                    <span>Demo security preferences reviewed</span>
+                </div>
+
+                <span>
+                    September 23, 2026
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <a href="dashboard.html" class="back-button">
+            ← Return to Dashboard
+        </a>
+
+    </main>
+
+
+    <footer>
+        © 2026 NovaBank — Fictional Banking Demonstration Project.
+        No real banking transactions are processed.
+    </footer>
+
+
+    <script>
+
+        function showMessage(message) {
+
+            const messageBox = document.getElementById("demoMessage");
+
+            messageBox.textContent = "✓ " + message;
+
+        }
+
+    </script>
+
+</body>
+</html>

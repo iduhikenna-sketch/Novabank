@@ -15,10 +15,10 @@
         body {
             font-family: Arial, sans-serif;
             background: #f4f7fb;
-            color: #1f2937;
+            color: #172033;
         }
 
-        .topbar {
+        header {
             background: #0b1f3a;
             color: white;
             padding: 18px 6%;
@@ -38,33 +38,32 @@
             color: #38bdf8;
         }
 
-        .top-links {
+        nav {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
         }
 
-        .top-links a {
+        nav a {
             color: white;
             text-decoration: none;
-            background: #1e3a5f;
-            padding: 9px 13px;
+            padding: 9px 12px;
             border-radius: 7px;
-            font-size: 13px;
+            font-size: 14px;
         }
 
-        .top-links a:hover {
-            background: #294d78;
+        nav a:hover {
+            background: rgba(255,255,255,0.12);
         }
 
         .container {
             width: 90%;
             max-width: 1200px;
-            margin: 30px auto;
+            margin: 35px auto;
         }
 
         .welcome {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .welcome h1 {
@@ -73,121 +72,116 @@
         }
 
         .welcome p {
-            color: #64748b;
+            color: #667085;
         }
 
         .demo-banner {
-            background: #fff3cd;
-            border: 1px solid #ffe69c;
-            color: #664d03;
-            padding: 16px;
-            border-radius: 10px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            padding: 15px;
+            border-radius: 12px;
             margin-bottom: 25px;
+            line-height: 1.6;
         }
 
         .balance-card {
-            background: #0b1f3a;
+            background: linear-gradient(135deg, #0b1f3a, #123d6b);
             color: white;
+            border-radius: 20px;
             padding: 30px;
-            border-radius: 18px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            box-shadow: 0 15px 35px rgba(11,31,58,0.18);
         }
 
-        .balance-card p {
-            color: #cbd5e1;
+        .balance-label {
+            font-size: 14px;
+            opacity: 0.8;
             margin-bottom: 8px;
         }
 
         .balance {
             font-size: 38px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .account-number {
-            color: #cbd5e1;
+            font-size: 14px;
+            opacity: 0.85;
         }
 
         .section-title {
-            margin-bottom: 18px;
-            font-size: 23px;
+            font-size: 22px;
+            margin-bottom: 16px;
         }
 
-        .quick-actions {
+        .actions {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
             margin-bottom: 35px;
         }
 
         .action-card {
             background: white;
-            padding: 20px 15px;
-            border-radius: 12px;
-            text-align: center;
+            border-radius: 14px;
+            padding: 22px;
             text-decoration: none;
-            color: #1f2937;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            color: #172033;
+            border: 1px solid #e6eaf0;
             transition: 0.2s;
         }
 
         .action-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         }
 
         .action-icon {
             font-size: 28px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .action-card h3 {
-            font-size: 14px;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .action-card p {
+            color: #667085;
+            font-size: 13px;
+            line-height: 1.5;
         }
 
         .admin-section {
-            background: #fff;
-            border: 2px dashed #cbd5e1;
-            padding: 22px;
-            border-radius: 15px;
             margin-bottom: 35px;
         }
 
-        .admin-section h2 {
-            margin-bottom: 7px;
-        }
-
-        .admin-section p {
-            color: #64748b;
-            font-size: 14px;
-            margin-bottom: 18px;
-        }
-
         .admin-card {
-            display: inline-block;
-            background: #0b1f3a;
+            display: block;
+            background: #111827;
             color: white;
+            padding: 22px;
+            border-radius: 14px;
             text-decoration: none;
-            padding: 18px 22px;
-            border-radius: 10px;
-            transition: 0.2s;
         }
 
-        .admin-card:hover {
-            background: #1e3a5f;
-        }
-
-        .admin-card .admin-icon {
-            font-size: 26px;
+        .admin-card h3 {
             margin-bottom: 7px;
+        }
+
+        .admin-card p {
+            color: #d1d5db;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
         .transactions {
             background: white;
+            border-radius: 16px;
             padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #e6eaf0;
             margin-bottom: 35px;
         }
 
@@ -195,9 +189,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 17px 0;
-            border-bottom: 1px solid #e5e7eb;
             gap: 15px;
+            padding: 16px 0;
+            border-bottom: 1px solid #edf0f4;
         }
 
         .transaction:last-child {
@@ -210,62 +204,65 @@
         }
 
         .transaction-date {
-            color: #64748b;
+            color: #667085;
             font-size: 13px;
+        }
+
+        .amount {
+            font-weight: bold;
+            white-space: nowrap;
         }
 
         .received {
             color: #15803d;
-            font-weight: bold;
-            white-space: nowrap;
         }
 
-        .spent {
+        .sent {
             color: #dc2626;
-            font-weight: bold;
-            white-space: nowrap;
         }
 
         footer {
             background: #0b1f3a;
             color: #cbd5e1;
             text-align: center;
-            padding: 25px;
+            padding: 25px 15px;
             font-size: 13px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        @media (max-width: 1000px) {
-            .quick-actions {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        footer a {
+            color: #7dd3fc;
+            text-decoration: none;
         }
 
         @media (max-width: 650px) {
-            .topbar {
-                align-items: flex-start;
+            header {
+                padding: 15px 5%;
             }
 
-            .top-links {
-                width: 100%;
+            .container {
+                width: 92%;
+                margin: 25px auto;
             }
 
-            .quick-actions {
-                grid-template-columns: repeat(2, 1fr);
+            .welcome h1 {
+                font-size: 25px;
             }
 
             .balance {
                 font-size: 30px;
             }
 
+            .balance-card {
+                padding: 23px;
+            }
+
             .transaction {
                 align-items: flex-start;
             }
-        }
 
-        @media (max-width: 400px) {
-            .quick-actions {
-                grid-template-columns: 1fr;
+            .amount {
+                font-size: 14px;
             }
         }
     </style>
@@ -273,260 +270,348 @@
 
 <body>
 
-<header class="topbar">
+<header>
+    <div class="logo">Nova<span>Bank</span></div>
 
-    <div class="logo">
-        Nova<span>Bank</span>
-    </div>
-
-    <div class="top-links">
+    <nav>
         <a href="notifications.html">🔔 Notifications</a>
         <a href="security.html">🔐 Security Center</a>
         <a href="support.html">💬 Support</a>
         <a href="login.html">Logout</a>
-    </div>
-
+    </nav>
 </header>
-
 
 <div class="container">
 
     <div class="welcome">
         <h1>Welcome, Alex 👋</h1>
-        <p>Here's your NovaBank demo account overview.</p>
+        <p>Welcome to your NovaBank demo dashboard.</p>
     </div>
-
 
     <div class="demo-banner">
-        <strong>⚠️ DEMO ACCOUNT</strong>
-        This is a fictional banking demonstration. No real money,
-        banking credentials, payments, or transactions are processed.
+        <strong>⚠️ DEMO ACCOUNT</strong><br>
+        This is a fictional banking demonstration. Balances and transfers are simulated in your browser.
+        No real money is transferred and no real bank account is connected.
     </div>
 
-
-    <!-- BALANCE -->
-
     <div class="balance-card">
+        <div class="balance-label">Available Demo Balance</div>
 
-        <p>Available Demo Balance</p>
-
-        <div class="balance">
+        <div class="balance" id="balance">
             ₦2,450,000.00
         </div>
 
         <div class="account-number">
-            Account •••• 4821
+            Personal Demo Account •••• 4821
         </div>
-
     </div>
-
-
-    <!-- QUICK ACTIONS -->
 
     <h2 class="section-title">Quick Actions</h2>
 
-    <div class="quick-actions">
+    <div class="actions">
 
-        <a href="transfer.html" class="action-card">
+        <a class="action-card" href="transfer.html">
             <div class="action-icon">💸</div>
             <h3>Transfer</h3>
+            <p>Send money in the fictional demo environment.</p>
         </a>
 
-        <a href="payments.html" class="action-card">
+        <a class="action-card" href="payments.html">
             <div class="action-icon">💳</div>
             <h3>Payments</h3>
+            <p>Explore demo bill payment features.</p>
         </a>
 
-        <a href="transactions.html" class="action-card">
-            <div class="action-icon">📋</div>
+        <a class="action-card" href="transactions.html">
+            <div class="action-icon">📊</div>
             <h3>Transactions</h3>
+            <p>View your fictional transaction history.</p>
         </a>
 
-        <a href="profile.html" class="action-card">
+        <a class="action-card" href="profile.html">
             <div class="action-icon">👤</div>
             <h3>Profile</h3>
+            <p>Manage your fictional profile settings.</p>
         </a>
 
-        <a href="notifications.html" class="action-card">
+        <a class="action-card" href="notifications.html">
             <div class="action-icon">🔔</div>
             <h3>Notifications</h3>
+            <p>View fictional account notifications.</p>
         </a>
 
-        <a href="security.html" class="action-card">
+        <a class="action-card" href="security.html">
             <div class="action-icon">🔐</div>
             <h3>Security Center</h3>
+            <p>Explore demo security settings.</p>
         </a>
 
-        <a href="support.html" class="action-card">
+        <a class="action-card" href="support.html">
             <div class="action-icon">💬</div>
             <h3>Help & Support</h3>
+            <p>Get help navigating the demo.</p>
         </a>
 
-        <a href="account.html" class="action-card">
+        <a class="action-card" href="account.html">
             <div class="action-icon">🏦</div>
             <h3>Account Details</h3>
+            <p>View your fictional account information.</p>
         </a>
 
-        <a href="savings.html" class="action-card">
-            <div class="action-icon">💰</div>
+        <a class="action-card" href="savings.html">
+            <div class="action-icon">🎯</div>
             <h3>Savings & Goals</h3>
+            <p>Explore fictional savings goals.</p>
         </a>
 
-        <a href="financial-overview.html" class="action-card">
-            <div class="action-icon">📊</div>
+        <a class="action-card" href="financial-overview.html">
+            <div class="action-icon">📈</div>
             <h3>Financial Overview</h3>
+            <p>Review your fictional financial activity.</p>
         </a>
 
-        <a href="recurring-payments.html" class="action-card">
-            <div class="action-icon">🔁</div>
+        <a class="action-card" href="recurring-payments.html">
+            <div class="action-icon">🔄</div>
             <h3>Recurring Payments</h3>
+            <p>View scheduled demo payments.</p>
         </a>
 
-        <a href="beneficiaries.html" class="action-card">
+        <a class="action-card" href="beneficiaries.html">
             <div class="action-icon">👥</div>
             <h3>Beneficiaries</h3>
+            <p>Manage fictional transfer recipients.</p>
         </a>
 
-        <a href="cards.html" class="action-card">
+        <a class="action-card" href="cards.html">
             <div class="action-icon">💳</div>
             <h3>Demo Cards</h3>
+            <p>View your fictional virtual card.</p>
         </a>
 
-        <a href="statements.html" class="action-card">
+        <a class="action-card" href="statements.html">
             <div class="action-icon">📄</div>
             <h3>Statements</h3>
+            <p>View your fictional account statement.</p>
         </a>
 
-        <a href="offers.html" class="action-card">
-            <div class="action-icon">🏷️</div>
+        <a class="action-card" href="offers.html">
+            <div class="action-icon">🎁</div>
             <h3>Offers & Promotions</h3>
+            <p>Explore fictional NovaBank offers.</p>
         </a>
 
     </div>
-
-
-    <!-- ADMIN DEMO -->
 
     <div class="admin-section">
 
-        <h2>👨‍💼 Demo Administration</h2>
-
-        <p>
-            This area is for the fictional NovaBank staff/admin demonstration.
-            It does not provide access to real customer accounts or banking systems.
-        </p>
+        <h2 class="section-title">Demo Administration</h2>
 
         <a href="admin.html" class="admin-card">
-
-            <div class="admin-icon">👨‍💼</div>
-
-            <strong>Admin Demo</strong>
-
-            <div style="font-size: 13px; margin-top: 5px;">
-                Open Staff Dashboard →
-            </div>
-
+            <h3>👨‍💼 Admin Demo</h3>
+            <p>
+                Open the fictional NovaBank administration dashboard.
+                This area is for demonstration purposes only and does not manage real customers,
+                accounts, or banking systems.
+            </p>
         </a>
 
     </div>
 
-
-    <!-- RECENT TRANSACTIONS -->
-
-    <h2 class="section-title">Recent Demo Transactions</h2>
-
     <div class="transactions">
 
-        <div class="transaction">
+        <h2 class="section-title">Recent Demo Transactions</h2>
 
-            <div>
-                <div class="transaction-name">
-                    Salary Payment
-                </div>
-
-                <div class="transaction-date">
-                    Sep 23, 2026
-                </div>
-            </div>
-
-            <div class="received">
-                +₦450,000
-            </div>
-
-        </div>
-
-
-        <div class="transaction">
-
-            <div>
-                <div class="transaction-name">
-                    Grocery Store
-                </div>
-
-                <div class="transaction-date">
-                    Sep 22, 2026
-                </div>
-            </div>
-
-            <div class="spent">
-                -₦28,500
-            </div>
-
-        </div>
-
-
-        <div class="transaction">
-
-            <div>
-                <div class="transaction-name">
-                    Electricity Bill
-                </div>
-
-                <div class="transaction-date">
-                    Sep 20, 2026
-                </div>
-            </div>
-
-            <div class="spent">
-                -₦15,000
-            </div>
-
-        </div>
-
-
-        <div class="transaction">
-
-            <div>
-                <div class="transaction-name">
-                    Transfer Received
-                </div>
-
-                <div class="transaction-date">
-                    Sep 18, 2026
-                </div>
-            </div>
-
-            <div class="received">
-                +₦75,000
-            </div>
-
-        </div>
+        <div id="transactionList"></div>
 
     </div>
 
 </div>
 
-
 <footer>
+    <p>
+        NovaBank is a fictional digital banking demonstration project.
+        No real banking transactions, accounts, credentials, or financial services are provided.
+    </p>
 
-    © 2026 NovaBank — Fictional Banking Demonstration Project.
-
-    <br>
-
-    No real banking services, transactions, payments,
-    customer data, or financial operations are provided.
-
+    <p>
+        <a href="index.html">Home</a> |
+        <a href="login.html">Login</a> |
+        <a href="support.html">Support</a>
+    </p>
 </footer>
+
+<script>
+
+    const DEFAULT_BALANCE = 2450000;
+
+    const DEFAULT_TRANSACTIONS = [
+        {
+            name: "Salary Payment",
+            amount: 450000,
+            type: "received",
+            date: "Sep 23, 2026"
+        },
+        {
+            name: "Grocery Store",
+            amount: -28500,
+            type: "sent",
+            date: "Sep 22, 2026"
+        },
+        {
+            name: "Electricity Bill",
+            amount: -15000,
+            type: "sent",
+            date: "Sep 20, 2026"
+        },
+        {
+            name: "Transfer Received",
+            amount: 75000,
+            type: "received",
+            date: "Sep 18, 2026"
+        }
+    ];
+
+    function getBalance() {
+
+        const savedBalance = localStorage.getItem("novaBankBalance");
+
+        if (savedBalance === null) {
+            localStorage.setItem(
+                "novaBankBalance",
+                DEFAULT_BALANCE
+            );
+
+            return DEFAULT_BALANCE;
+        }
+
+        const balance = Number(savedBalance);
+
+        return Number.isFinite(balance)
+            ? balance
+            : DEFAULT_BALANCE;
+    }
+
+    function getTransactions() {
+
+        const savedTransactions =
+            localStorage.getItem("novaBankTransactions");
+
+        if (!savedTransactions) {
+            return DEFAULT_TRANSACTIONS;
+        }
+
+        try {
+
+            const transactions =
+                JSON.parse(savedTransactions);
+
+            if (Array.isArray(transactions)) {
+                return transactions;
+            }
+
+        } catch (error) {
+
+            console.log("Demo transaction data could not be read.");
+
+        }
+
+        return DEFAULT_TRANSACTIONS;
+    }
+
+    function formatMoney(amount) {
+
+        return new Intl.NumberFormat("en-NG", {
+            style: "currency",
+            currency: "NGN",
+            minimumFractionDigits: 2
+        }).format(amount);
+
+    }
+
+    function escapeHTML(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+    function displayBalance() {
+
+        const balance =
+            getBalance();
+
+        document.getElementById("balance").textContent =
+            formatMoney(balance);
+
+    }
+
+    function displayTransactions() {
+
+        const transactions =
+            getTransactions();
+
+        const list =
+            document.getElementById("transactionList");
+
+        if (!transactions.length) {
+
+            list.innerHTML =
+                "<p>No demo transactions yet.</p>";
+
+            return;
+        }
+
+        list.innerHTML =
+            transactions
+                .slice(0, 6)
+                .map(transaction => {
+
+                    const amount =
+                        Number(transaction.amount) || 0;
+
+                    const type =
+                        amount >= 0
+                            ? "received"
+                            : "sent";
+
+                    const sign =
+                        amount >= 0
+                            ? "+"
+                            : "";
+
+                    return `
+                        <div class="transaction">
+
+                            <div>
+                                <div class="transaction-name">
+                                    ${escapeHTML(transaction.name)}
+                                </div>
+
+                                <div class="transaction-date">
+                                    ${escapeHTML(transaction.date)}
+                                </div>
+                            </div>
+
+                            <div class="amount ${type}">
+                                ${sign}${formatMoney(amount)}
+                            </div>
+
+                        </div>
+                    `;
+
+                })
+                .join("");
+
+    }
+
+    displayBalance();
+    displayTransactions();
+
+</script>
 
 </body>
 </html>

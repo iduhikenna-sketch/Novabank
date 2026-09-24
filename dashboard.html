@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Dashboard | NovaBank</title>
 
     <style>
@@ -14,60 +15,58 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #f4f7fb;
+            background: #f5f7fb;
             color: #1f2937;
         }
 
-        .topbar {
-            background: white;
-            padding: 18px 8%;
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 7%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 25px;
             font-weight: bold;
-            color: #123c69;
+            color: #123b6d;
         }
 
         .top-links {
             display: flex;
-            align-items: center;
             gap: 18px;
+            align-items: center;
         }
 
-        .notification-link {
+        .top-links a {
             text-decoration: none;
-            font-size: 22px;
-        }
-
-        .security-link {
-            text-decoration: none;
-            font-size: 22px;
-        }
-
-        .logout {
-            text-decoration: none;
-            color: #c0392b;
+            color: #123b6d;
+            font-size: 14px;
             font-weight: bold;
         }
 
+        .logout {
+            color: #dc2626 !important;
+        }
+
         .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
+            width: 90%;
+            max-width: 1150px;
+            margin: 35px auto;
         }
 
         .welcome {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .welcome h1 {
-            color: #123c69;
-            margin-bottom: 8px;
+            color: #123b6d;
+            margin-bottom: 5px;
         }
 
         .welcome p {
@@ -78,200 +77,183 @@
             background: #fff7ed;
             border: 1px solid #fed7aa;
             color: #9a3412;
-            padding: 14px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 12px;
             margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
         }
 
         .balance-card {
-            background: linear-gradient(135deg, #123c69, #1d5d91);
+            background: linear-gradient(135deg, #123b6d, #1e5aa8);
             color: white;
             padding: 30px;
             border-radius: 18px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(18,60,105,0.20);
+            margin-bottom: 35px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
 
-        .balance-label {
-            font-size: 14px;
+        .balance-card p {
             opacity: 0.9;
             margin-bottom: 8px;
         }
 
         .balance {
-            font-size: 34px;
+            font-size: 38px;
             font-weight: bold;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .account-number {
+            font-size: 14px;
             opacity: 0.9;
         }
 
         .section-title {
-            color: #123c69;
+            color: #123b6d;
             margin-bottom: 18px;
         }
 
-        .actions {
+        .quick-actions {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 35px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 40px;
         }
 
         .action-card {
             background: white;
             padding: 22px 15px;
-            border-radius: 12px;
+            border-radius: 15px;
+            text-align: center;
             text-decoration: none;
             color: #1f2937;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
             transition: 0.2s;
         }
 
         .action-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(0,0,0,0.10);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.10);
         }
 
         .action-icon {
-            font-size: 30px;
+            font-size: 32px;
             margin-bottom: 10px;
         }
 
         .action-card h3 {
-            color: #123c69;
-            font-size: 17px;
-            margin-bottom: 7px;
+            color: #123b6d;
+            font-size: 16px;
+            margin-bottom: 5px;
         }
 
         .action-card p {
-            color: #777;
-            font-size: 13px;
-            line-height: 1.4;
+            color: #6b7280;
+            font-size: 12px;
         }
 
         .transactions {
             background: white;
-            border-radius: 14px;
+            border-radius: 16px;
             padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        }
-
-        .transactions-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .view-all {
-            text-decoration: none;
-            color: #123c69;
-            font-weight: bold;
-            font-size: 14px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+            margin-bottom: 40px;
         }
 
         .transaction {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 17px 0;
-            border-bottom: 1px solid #eee;
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e7eb;
         }
 
         .transaction:last-child {
             border-bottom: none;
         }
 
-        .transaction-left {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-        }
-
-        .transaction-icon {
-            font-size: 25px;
-        }
-
-        .transaction h3 {
-            font-size: 16px;
-            margin-bottom: 5px;
+        .transaction-name {
+            font-weight: bold;
+            color: #1f2937;
         }
 
         .transaction-date {
-            color: #888;
-            font-size: 13px;
-        }
-
-        .amount {
-            font-weight: bold;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
         }
 
         .received {
-            color: #15803d;
+            color: #059669;
+            font-weight: bold;
         }
 
-        .spent {
-            color: #c0392b;
+        .sent {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .view-all {
+            display: inline-block;
+            margin-top: 18px;
+            text-decoration: none;
+            color: #1e5aa8;
+            font-weight: bold;
         }
 
         footer {
-            margin-top: 50px;
-            background: #123c69;
+            background: #123b6d;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 25px 15px;
+        }
+
+        footer p {
             font-size: 13px;
+            opacity: 0.9;
+            margin: 5px 0;
         }
 
-        @media (max-width: 850px) {
-            .actions {
-                grid-template-columns: repeat(2, 1fr);
+        @media (max-width: 950px) {
+            .quick-actions {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        @media (max-width: 600px) {
-            .topbar {
+        @media (max-width: 650px) {
+            header {
                 padding: 16px 5%;
-            }
-
-            .logo {
-                font-size: 21px;
             }
 
             .top-links {
                 gap: 10px;
             }
 
-            .container {
-                margin-top: 25px;
+            .top-links a {
+                font-size: 12px;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .balance {
-                font-size: 28px;
-            }
-
-            .actions {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .action-card {
-                padding: 18px 10px;
-            }
-
-            .transactions {
-                padding: 18px;
+                font-size: 30px;
             }
 
             .transaction {
-                gap: 10px;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .logo {
+                font-size: 20px;
             }
 
-            .transaction h3 {
-                font-size: 14px;
+            .top-links a {
+                font-size: 11px;
             }
         }
     </style>
@@ -279,300 +261,305 @@
 
 <body>
 
-    <header class="topbar">
+<header>
 
-        <div class="logo">
-            NovaBank
+    <div class="logo">
+        NovaBank
+    </div>
+
+    <div class="top-links">
+
+        <a href="notifications.html">
+            🔔 Notifications
+        </a>
+
+        <a href="security.html">
+            🔐 Security Center
+        </a>
+
+        <a href="support.html">
+            💬 Support
+        </a>
+
+        <a href="login.html" class="logout">
+            Logout
+        </a>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <div class="welcome">
+
+        <h1>Welcome, Alex 👋</h1>
+
+        <p>
+            Here's an overview of your NovaBank demo account.
+        </p>
+
+    </div>
+
+
+    <div class="demo-banner">
+
+        ⚠️ DEMO ACCOUNT — This is a fictional banking demonstration.
+        No real money or banking transactions are processed.
+
+    </div>
+
+
+    <div class="balance-card">
+
+        <p>Available Demo Balance</p>
+
+        <div class="balance">
+            ₦2,450,000.00
         </div>
 
-        <div class="top-links">
-
-            <a href="notifications.html"
-               class="notification-link"
-               title="Notifications">
-                🔔
-            </a>
-
-            <a href="security.html"
-               class="security-link"
-               title="Security Center">
-                🔐
-            </a>
-
-            <a href="login.html" class="logout">
-                Logout
-            </a>
-
+        <div class="account-number">
+            Account •••• 4821
         </div>
 
-    </header>
+    </div>
 
 
-    <main class="container">
+    <h2 class="section-title">
+        Quick Actions
+    </h2>
 
-        <section class="welcome">
 
-            <h1>Welcome, Alex 👋</h1>
+    <div class="quick-actions">
+
+
+        <a href="transfer.html" class="action-card">
+
+            <div class="action-icon">
+                💸
+            </div>
+
+            <h3>
+                Transfer
+            </h3>
 
             <p>
-                Here's an overview of your NovaBank demo account.
+                Send demo money
             </p>
 
-        </section>
+        </a>
 
 
-        <div class="demo-banner">
+        <a href="payments.html" class="action-card">
 
-            ⚠️ <strong>Demo Account:</strong>
-            This is a fictional banking interface.
-            No real banking transactions are processed.
+            <div class="action-icon">
+                💳
+            </div>
+
+            <h3>
+                Payments
+            </h3>
+
+            <p>
+                Pay demo bills
+            </p>
+
+        </a>
+
+
+        <a href="transactions.html" class="action-card">
+
+            <div class="action-icon">
+                📜
+            </div>
+
+            <h3>
+                Transactions
+            </h3>
+
+            <p>
+                View transaction history
+            </p>
+
+        </a>
+
+
+        <a href="profile.html" class="action-card">
+
+            <div class="action-icon">
+                👤
+            </div>
+
+            <h3>
+                Profile
+            </h3>
+
+            <p>
+                Manage demo profile
+            </p>
+
+        </a>
+
+
+        <a href="notifications.html" class="action-card">
+
+            <div class="action-icon">
+                🔔
+            </div>
+
+            <h3>
+                Notifications
+            </h3>
+
+            <p>
+                View account alerts
+            </p>
+
+        </a>
+
+
+        <a href="security.html" class="action-card">
+
+            <div class="action-icon">
+                🔐
+            </div>
+
+            <h3>
+                Security Center
+            </h3>
+
+            <p>
+                Manage demo security
+            </p>
+
+        </a>
+
+
+        <a href="support.html" class="action-card">
+
+            <div class="action-icon">
+                💬
+            </div>
+
+            <h3>
+                Help & Support
+            </h3>
+
+            <p>
+                Get demo assistance
+            </p>
+
+        </a>
+
+
+    </div>
+
+
+    <h2 class="section-title">
+        Recent Transactions
+    </h2>
+
+
+    <div class="transactions">
+
+
+        <div class="transaction">
+
+            <div>
+                <div class="transaction-name">
+                    Salary Payment
+                </div>
+
+                <div class="transaction-date">
+                    September 23, 2026
+                </div>
+            </div>
+
+            <div class="received">
+                +₦450,000
+            </div>
 
         </div>
 
 
-        <section class="balance-card">
+        <div class="transaction">
 
-            <div class="balance-label">
-                Available Balance
-            </div>
-
-            <div class="balance">
-                ₦2,450,000.00
-            </div>
-
-            <div class="account-number">
-                Account Number: •••• 4821
-            </div>
-
-        </section>
-
-
-        <h2 class="section-title">
-            Quick Actions
-        </h2>
-
-
-        <section class="actions">
-
-            <a href="transfer.html" class="action-card">
-
-                <div class="action-icon">💸</div>
-
-                <h3>Transfer</h3>
-
-                <p>
-                    Send money to another account.
-                </p>
-
-            </a>
-
-
-            <a href="payments.html" class="action-card">
-
-                <div class="action-icon">💳</div>
-
-                <h3>Payments</h3>
-
-                <p>
-                    Pay bills and services.
-                </p>
-
-            </a>
-
-
-            <a href="transactions.html" class="action-card">
-
-                <div class="action-icon">📜</div>
-
-                <h3>Transactions</h3>
-
-                <p>
-                    View your transaction history.
-                </p>
-
-            </a>
-
-
-            <a href="profile.html" class="action-card">
-
-                <div class="action-icon">👤</div>
-
-                <h3>Profile</h3>
-
-                <p>
-                    Manage your account details.
-                </p>
-
-            </a>
-
-
-            <a href="notifications.html" class="action-card">
-
-                <div class="action-icon">🔔</div>
-
-                <h3>Notifications</h3>
-
-                <p>
-                    View your latest demo alerts.
-                </p>
-
-            </a>
-
-
-            <a href="security.html" class="action-card">
-
-                <div class="action-icon">🔐</div>
-
-                <h3>Security Center</h3>
-
-                <p>
-                    Review your demo security settings.
-                </p>
-
-            </a>
-
-        </section>
-
-
-        <section class="transactions">
-
-            <div class="transactions-header">
-
-                <h2 class="section-title">
-                    Recent Transactions
-                </h2>
-
-                <a href="transactions.html" class="view-all">
-                    View All
-                </a>
-
-            </div>
-
-
-            <div class="transaction">
-
-                <div class="transaction-left">
-
-                    <div class="transaction-icon">
-                        💰
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            Salary Payment
-                        </h3>
-
-                        <div class="transaction-date">
-                            September 23, 2026
-                        </div>
-
-                    </div>
-
+            <div>
+                <div class="transaction-name">
+                    Grocery Store
                 </div>
 
-                <div class="amount received">
-                    +₦450,000
+                <div class="transaction-date">
+                    September 22, 2026
                 </div>
-
             </div>
 
-
-            <div class="transaction">
-
-                <div class="transaction-left">
-
-                    <div class="transaction-icon">
-                        🛒
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            Grocery Store
-                        </h3>
-
-                        <div class="transaction-date">
-                            September 22, 2026
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="amount spent">
-                    -₦28,500
-                </div>
-
+            <div class="sent">
+                -₦28,500
             </div>
 
+        </div>
 
-            <div class="transaction">
 
-                <div class="transaction-left">
+        <div class="transaction">
 
-                    <div class="transaction-icon">
-                        ⚡
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            Electricity Bill
-                        </h3>
-
-                        <div class="transaction-date">
-                            September 20, 2026
-                        </div>
-
-                    </div>
-
+            <div>
+                <div class="transaction-name">
+                    Electricity Bill
                 </div>
 
-                <div class="amount spent">
-                    -₦15,000
+                <div class="transaction-date">
+                    September 20, 2026
                 </div>
-
             </div>
 
-
-            <div class="transaction">
-
-                <div class="transaction-left">
-
-                    <div class="transaction-icon">
-                        ↙️
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            Transfer Received
-                        </h3>
-
-                        <div class="transaction-date">
-                            September 18, 2026
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="amount received">
-                    +₦75,000
-                </div>
-
+            <div class="sent">
+                -₦15,000
             </div>
 
-        </section>
-
-    </main>
+        </div>
 
 
-    <footer>
-        © 2026 NovaBank — Fictional Banking Demonstration Project.
-        No real banking transactions are processed.
-    </footer>
+        <div class="transaction">
+
+            <div>
+                <div class="transaction-name">
+                    Transfer Received
+                </div>
+
+                <div class="transaction-date">
+                    September 18, 2026
+                </div>
+            </div>
+
+            <div class="received">
+                +₦75,000
+            </div>
+
+        </div>
+
+
+        <a href="transactions.html" class="view-all">
+            View All Transactions →
+        </a>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 NovaBank — Fictional Banking Demonstration
+    </p>
+
+    <p>
+        This website does not provide real banking services or process real transactions.
+    </p>
+
+</footer>
 
 </body>
 </html>

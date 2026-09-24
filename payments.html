@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NovaBank | Payments</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6fa;
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            border-bottom: 1px solid #e5e9f0;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #123c78;
+        }
+
+        .logo span {
+            color: #18a673;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #123c78;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 45px 20px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            color: #102a52;
+            margin-bottom: 7px;
+        }
+
+        .page-title p {
+            color: #6b7484;
+        }
+
+        .demo-banner {
+            background: #fff7df;
+            border: 1px solid #f1df9c;
+            color: #735b00;
+            padding: 13px 16px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .balance-card {
+            background: #123c78;
+            color: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(18, 60, 120, 0.18);
+        }
+
+        .balance-card small {
+            display: block;
+            opacity: 0.85;
+            margin-bottom: 7px;
+        }
+
+        .balance-card strong {
+            font-size: 30px;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .payment-card {
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .payment-icon {
+            width: 50px;
+            height: 50px;
+            background: #edf3fb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            margin-bottom: 15px;
+        }
+
+        .payment-card h2 {
+            color: #123c78;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .payment-card p {
+            color: #6b7484;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .payment-form label {
+            display: block;
+            font-weight: bold;
+            color: #26354d;
+            margin-bottom: 7px;
+        }
+
+        .payment-form input,
+        .payment-form select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d7dce5;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            margin-bottom: 16px;
+            background: white;
+        }
+
+        .payment-form input:focus,
+        .payment-form select:focus {
+            border-color: #123c78;
+        }
+
+        .pay-button {
+            width: 100%;
+            padding: 14px;
+            background: #123c78;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .pay-button:hover {
+            background: #0d315f;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 15px;
+            padding: 14px;
+            background: #eaf8f1;
+            color: #176b4b;
+            border-radius: 9px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .info-card {
+            margin-top: 25px;
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .info-card h2 {
+            color: #102a52;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: #6b7484;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .back-dashboard {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #123c78;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #102a52;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        footer p {
+            font-size: 13px;
+            opacity: 0.85;
+            margin: 3px;
+        }
+
+        @media (max-width: 650px) {
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .balance-card strong {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        Nova<span>Bank</span>
+    </div>
+
+    <a href="dashboard.html" class="back-link">
+        ← Dashboard
+    </a>
+
+</header>
+
+
+<main class="container">
+
+    <div class="page-title">
+
+        <h1>Payments</h1>
+
+        <p>
+            Manage bills and service payments using the NovaBank demo.
+        </p>
+
+    </div>
+
+
+    <div class="demo-banner">
+        ⚠️ <strong>Demo Only:</strong>
+        No real payments are processed. Do not enter real financial information.
+    </div>
+
+
+    <div class="balance-card">
+
+        <small>
+            Available Demo Balance
+        </small>
+
+        <strong>
+            ₦2,450,000.00
+        </strong>
+
+    </div>
+
+
+    <div class="payment-grid">
+
+
+        <!-- ELECTRICITY -->
+
+        <div class="payment-card">
+
+            <div class="payment-icon">
+                ⚡
+            </div>
+
+            <h2>
+                Electricity
+            </h2>
+
+            <p>
+                Pay your electricity bill through this fictional demo interface.
+            </p>
+
+            <form class="payment-form">
+
+                <label for="electricity-provider">
+                    Provider
+                </label>
+
+                <select id="electricity-provider" required>
+
+                    <option value="">
+                        Select provider
+                    </option>
+
+                    <option>
+                        Demo Electricity
+                    </option>
+
+                    <option>
+                        Nova Power Demo
+                    </option>
+
+                </select>
+
+
+                <label for="electricity-amount">
+                    Amount
+                </label>
+
+                <input
+                    type="number"
+                    id="electricity-amount"
+                    placeholder="Enter demo amount"
+                    min="1"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="pay-button"
+                >
+                    Pay Electricity
+                </button>
+
+            </form>
+
+            <div class="success-message">
+                ✅ Demo electricity payment completed.
+                No real payment was made.
+            </div>
+
+        </div>
+
+
+        <!-- INTERNET -->
+
+        <div class="payment-card">
+
+            <div class="payment-icon">
+                🌐
+            </div>
+
+            <h2>
+                Internet
+            </h2>
+
+            <p>
+                Pay an internet subscription using this fictional demo service.
+            </p>
+
+            <form class="payment-form">
+
+                <label for="internet-provider">
+                    Provider
+                </label>
+
+                <select id="internet-provider" required>
+
+                    <option value="">
+                        Select provider
+                    </option>
+
+                    <option>
+                        Nova Internet Demo
+                    </option>
+
+                    <option>
+                        Example Broadband
+                    </option>
+
+                </select>
+
+
+                <label for="internet-amount">
+                    Amount
+                </label>
+
+                <input
+                    type="number"
+                    id="internet-amount"
+                    placeholder="Enter demo amount"
+                    min="1"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="pay-button"
+                >
+                    Pay Internet
+                </button>
+
+            </form>
+
+            <div class="success-message">
+                ✅ Demo internet payment completed.
+                No real payment was made.
+            </div>
+
+        </div>
+
+
+        <!-- PHONE -->
+
+        <div class="payment-card">
+
+            <div class="payment-icon">
+                📱
+            </div>
+
+            <h2>
+                Airtime & Data
+            </h2>
+
+            <p>
+                Purchase fictional airtime or data through the demo interface.
+            </p>
+
+            <form class="payment-form">
+
+                <label for="network">
+                    Network
+                </label>
+
+                <select id="network" required>
+
+                    <option value="">
+                        Select network
+                    </option>
+
+                    <option>
+                        Nova Mobile Demo
+                    </option>
+
+                    <option>
+                        Example Telecom
+                    </option>
+
+                </select>
+
+
+                <label for="phone">
+                    Demo Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="0800 000 0000"
+                    required
+                >
+
+
+                <label for="airtime-amount">
+                    Amount
+                </label>
+
+                <input
+                    type="number"
+                    id="airtime-amount"
+                    placeholder="Enter demo amount"
+                    min="1"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="pay-button"
+                >
+                    Continue Demo Payment
+                </button>
+
+            </form>
+
+            <div class="success-message">
+                ✅ Demo airtime/data payment completed.
+                No real payment was made.
+            </div>
+
+        </div>
+
+
+        <!-- TV -->
+
+        <div class="payment-card">
+
+            <div class="payment-icon">
+                📺
+            </div>
+
+            <h2>
+                TV Subscription
+            </h2>
+
+            <p>
+                Renew a fictional TV subscription using the demo interface.
+            </p>
+
+            <form class="payment-form">
+
+                <label for="tv-provider">
+                    Provider
+                </label>
+
+                <select id="tv-provider" required>
+
+                    <option value="">
+                        Select provider
+                    </option>
+
+                    <option>
+                        Nova TV Demo
+                    </option>
+
+                    <option>
+                        Example Satellite
+                    </option>
+
+                </select>
+
+
+                <label for="tv-amount">
+                    Amount
+                </label>
+
+                <input
+                    type="number"
+                    id="tv-amount"
+                    placeholder="Enter demo amount"
+                    min="1"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="pay-button"
+                >
+                    Pay TV Subscription
+                </button>
+
+            </form>
+
+            <div class="success-message">
+                ✅ Demo TV subscription payment completed.
+                No real payment was made.
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>
+            Secure Demo Payments
+        </h2>
+
+        <p>
+            NovaBank is a fictional banking demonstration project.
+            The payment forms above are interactive examples only and
+            are not connected to any bank, payment processor, utility
+            company, telecom provider, or financial account.
+        </p>
+
+    </div>
+
+
+    <a href="dashboard.html" class="back-dashboard">
+        ← Return to Dashboard
+    </a>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 NovaBank. All rights reserved.
+    </p>
+
+    <p>
+        Fictional demonstration project — no real banking transactions are processed.
+    </p>
+
+</footer>
+
+
+<script>
+
+    const paymentForms =
+        document.querySelectorAll(".payment-form");
+
+
+    paymentForms.forEach(function(form) {
+
+        form.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const message =
+                form.nextElementSibling;
+
+            message.style.display = "block";
+
+            form.reset();
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Beneficiaries | NovaBank</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .topbar {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #123c69;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #123c69;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 35px auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #667085;
+        }
+
+        .demo-notice {
+            background: #fff8e6;
+            border: 1px solid #f2d28b;
+            color: #765800;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .summary-card h3 {
+            font-size: 14px;
+            color: #667085;
+            margin-bottom: 10px;
+        }
+
+        .summary-card strong {
+            font-size: 28px;
+            color: #123c69;
+        }
+
+        .section-title {
+            font-size: 23px;
+            margin-bottom: 18px;
+        }
+
+        .beneficiaries {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .beneficiary-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .beneficiary-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #e8eef5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        .beneficiary-name {
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .beneficiary-type {
+            color: #667085;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .details {
+            border-top: 1px solid #eeeeee;
+            padding-top: 15px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .detail-row span:first-child {
+            color: #667085;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        button {
+            border: none;
+            padding: 11px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .primary {
+            background: #123c69;
+            color: white;
+        }
+
+        .secondary {
+            background: #e8eef5;
+            color: #123c69;
+        }
+
+        .danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .add-section {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #123c69;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-button {
+            margin-top: 20px;
+        }
+
+        .message {
+            display: none;
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 8px;
+            background: #dcfce7;
+            color: #166534;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #667085;
+            font-size: 13px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 800px) {
+
+            .beneficiaries {
+                grid-template-columns: 1fr;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                gap: 3px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+
+        <div class="logo">
+            NovaBank
+        </div>
+
+        <a href="dashboard.html" class="back-link">
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+    <main class="container">
+
+        <section class="page-header">
+
+            <h1>👥 Beneficiaries</h1>
+
+            <p>
+                Manage your saved recipients for future demo transfers.
+            </p>
+
+        </section>
+
+
+        <div class="demo-notice">
+
+            <strong>⚠️ Demo Only:</strong>
+
+            All recipients, account numbers and banks displayed on this
+            page are fictional. This feature does not store or process
+            real banking information or real transfers.
+
+        </div>
+
+
+        <section class="summary">
+
+            <div class="summary-card">
+
+                <h3>Saved Beneficiaries</h3>
+
+                <strong>4</strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>Recent Recipient</h3>
+
+                <strong>Alex Brown</strong>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>Demo Transfers</h3>
+
+                <strong>12</strong>
+
+            </div>
+
+        </section>
+
+
+        <h2 class="section-title">
+            Saved Demo Recipients
+        </h2>
+
+
+        <section class="beneficiaries">
+
+
+            <div class="beneficiary-card">
+
+                <div class="beneficiary-top">
+
+                    <div class="avatar">
+                        👤
+                    </div>
+
+                    <div>
+
+                        <div class="beneficiary-name">
+                            Alex Brown
+                        </div>
+
+                        <div class="beneficiary-type">
+                            Personal Recipient
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="details">
+
+                    <div class="detail-row">
+
+                        <span>Bank</span>
+
+                        <strong>NovaBank Demo</strong>
+
+                    </div>
+
+                    <div class="detail-row">
+
+                        <span>Account</span>
+
+                        <strong>•••• 7392</strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        class="primary"
+                        onclick="showMessage('Demo transfer started for Alex Brown. No real transfer will occur.')">
+                        Transfer
+                    </button>
+
+                    <button
+                        class="secondary"
+                        onclick="showMessage('Demo beneficiary details opened.')">
+                        View
+                    </button>
+
+                    <button
+                        class="danger"
+                        onclick="showMessage('Demo beneficiary removed. No real banking information was affected.')">
+                        Remove
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="beneficiary-card">
+
+                <div class="beneficiary-top">
+
+                    <div class="avatar">
+                        👤
+                    </div>
+
+                    <div>
+
+                        <div class="beneficiary-name">
+                            Sarah Williams
+                        </div>
+
+                        <div class="beneficiary-type">
+                            Family Recipient
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="details">
+
+                    <div class="detail-row">
+
+                        <span>Bank</span>
+
+                        <strong>Example Bank</strong>
+
+                    </div>
+
+                    <div class="detail-row">
+
+                        <span>Account</span>
+
+                        <strong>•••• 2846</strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        class="primary"
+                        onclick="showMessage('Demo transfer started for Sarah Williams. No real transfer will occur.')">
+                        Transfer
+                    </button>
+
+                    <button
+                        class="secondary"
+                        onclick="showMessage('Demo beneficiary details opened.')">
+                        View
+                    </button>
+
+                    <button
+                        class="danger"
+                        onclick="showMessage('Demo beneficiary removed. No real banking information was affected.')">
+                        Remove
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="beneficiary-card">
+
+                <div class="beneficiary-top">
+
+                    <div class="avatar">
+                        👤
+                    </div>
+
+                    <div>
+
+                        <div class="beneficiary-name">
+                            Michael Johnson
+                        </div>
+
+                        <div class="beneficiary-type">
+                            Business Recipient
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="details">
+
+                    <div class="detail-row">
+
+                        <span>Bank</span>
+
+                        <strong>Demo Trust Bank</strong>
+
+                    </div>
+
+                    <div class="detail-row">
+
+                        <span>Account</span>
+
+                        <strong>•••• 6158</strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        class="primary"
+                        onclick="showMessage('Demo transfer started for Michael Johnson. No real transfer will occur.')">
+                        Transfer
+                    </button>
+
+                    <button
+                        class="secondary"
+                        onclick="showMessage('Demo beneficiary details opened.')">
+                        View
+                    </button>
+
+                    <button
+                        class="danger"
+                        onclick="showMessage('Demo beneficiary removed. No real banking information was affected.')">
+                        Remove
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="beneficiary-card">
+
+                <div class="beneficiary-top">
+
+                    <div class="avatar">
+                        👤
+                    </div>
+
+                    <div>
+
+                        <div class="beneficiary-name">
+                            Emma Davis
+                        </div>
+
+                        <div class="beneficiary-type">
+                            Personal Recipient
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="details">
+
+                    <div class="detail-row">
+
+                        <span>Bank</span>
+
+                        <strong>NovaBank Demo</strong>
+
+                    </div>
+
+                    <div class="detail-row">
+
+                        <span>Account</span>
+
+                        <strong>•••• 9417</strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        class="primary"
+                        onclick="showMessage('Demo transfer started for Emma Davis. No real transfer will occur.')">
+                        Transfer
+                    </button>
+
+                    <button
+                        class="secondary"
+                        onclick="showMessage('Demo beneficiary details opened.')">
+                        View
+                    </button>
+
+                    <button
+                        class="danger"
+                        onclick="showMessage('Demo beneficiary removed. No real banking information was affected.')">
+                        Remove
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="add-section">
+
+            <h2 class="section-title">
+                ➕ Add New Demo Beneficiary
+            </h2>
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Recipient Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="e.g. John Smith"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="bank">
+                        Bank
+                    </label>
+
+                    <select id="bank">
+
+                        <option value="">
+                            Select demo bank
+                        </option>
+
+                        <option>
+                            NovaBank Demo
+                        </option>
+
+                        <option>
+                            Example Bank
+                        </option>
+
+                        <option>
+                            Demo Trust Bank
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="account">
+                        Demo Account Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="account"
+                        placeholder="e.g. 1234567890"
+                        maxlength="10"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="type">
+                        Recipient Type
+                    </label>
+
+                    <select id="type">
+
+                        <option value="">
+                            Select type
+                        </option>
+
+                        <option>
+                            Personal Recipient
+                        </option>
+
+                        <option>
+                            Family Recipient
+                        </option>
+
+                        <option>
+                            Business Recipient
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label for="note">
+                        Note (Optional)
+                    </label>
+
+                    <input
+                        type="text"
+                        id="note"
+                        placeholder="Add a demo note"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-button">
+
+                <button
+                    class="primary"
+                    onclick="addBeneficiary()">
+
+                    Add Demo Beneficiary
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="message"
+                class="message">
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        © 2026 NovaBank Demo —
+        Fictional demonstration project.
+        No real banking information or transactions are processed.
+
+    </footer>
+
+
+    <script>
+
+        function showMessage(message) {
+
+            const box = document.getElementById("message");
+
+            box.textContent = message;
+
+            box.style.display = "block";
+
+            box.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+
+
+        function addBeneficiary() {
+
+            const name =
+                document.getElementById("name").value.trim();
+
+            const bank =
+                document.getElementById("bank").value;
+
+            const account =
+                document.getElementById("account").value.trim();
+
+            const type =
+                document.getElementById("type").value;
+
+            if (
+                name === "" ||
+                bank === "" ||
+                account === "" ||
+                type === ""
+            ) {
+
+                showMessage(
+                    "Please complete the required demo beneficiary fields."
+                );
+
+                return;
+            }
+
+
+            if (!/^\d{10}$/.test(account)) {
+
+                showMessage(
+                    "Please enter a fictional 10-digit demo account number."
+                );
+
+                return;
+            }
+
+
+            showMessage(
+                "Demo beneficiary added successfully. No real banking information was stored."
+            );
+
+
+            document.getElementById("name").value = "";
+
+            document.getElementById("bank").value = "";
+
+            document.getElementById("account").value = "";
+
+            document.getElementById("type").value = "";
+
+            document.getElementById("note").value = "";
+
+        }
+
+    </script>
+
+</body>
+</html>

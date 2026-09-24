@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Security Center | NovaBank</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        .topbar {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e9f0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #155eef;
+        }
+
+        .top-links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .top-links a {
+            text-decoration: none;
+            color: #155eef;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #667085;
+        }
+
+        .demo-banner {
+            background: #fff4e5;
+            border: 1px solid #ffd28a;
+            color: #8a5300;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+        }
+
+        .stat-card h3 {
+            color: #667085;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card strong {
+            font-size: 27px;
+            color: #155eef;
+        }
+
+        .section {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            margin-bottom: 18px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d7dce5;
+            border-radius: 9px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #155eef;
+        }
+
+        .alert-card {
+            border: 1px solid #e5e9f0;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #fbfcfe;
+        }
+
+        .alert-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .alert-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .alert-card h3 {
+            margin-bottom: 7px;
+            font-size: 17px;
+        }
+
+        .alert-card p {
+            color: #667085;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .high {
+            background: #fee4e2;
+            color: #b42318;
+        }
+
+        .medium {
+            background: #fff4e5;
+            color: #8a5300;
+        }
+
+        .low {
+            background: #e8f1ff;
+            color: #155eef;
+        }
+
+        .reviewed {
+            background: #e7f6ec;
+            color: #087443;
+        }
+
+        .customer {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #475467;
+        }
+
+        .actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            background: #155eef;
+            color: #ffffff;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .danger {
+            background: #d92d20;
+        }
+
+        .secondary {
+            background: #667085;
+        }
+
+        .success {
+            background: #087443;
+        }
+
+        .customer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .customer-card {
+            border: 1px solid #e5e9f0;
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .customer-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .customer-card p {
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #e7f6ec;
+            color: #087443;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .device {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid #e5e9f0;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .device:last-child {
+            margin-bottom: 0;
+        }
+
+        .device h3 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .device p {
+            color: #667085;
+            font-size: 13px;
+        }
+
+        .activity {
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e9f0;
+        }
+
+        .activity:last-child {
+            border-bottom: none;
+        }
+
+        .activity h3 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .activity p {
+            color: #667085;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .empty-message {
+            display: none;
+            text-align: center;
+            padding: 25px;
+            color: #667085;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 15px;
+            color: #667085;
+            font-size: 13px;
+        }
+
+        @media (max-width: 850px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .customer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin-top: 25px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .alert-top {
+                flex-direction: column;
+            }
+
+            .device {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        NovaBank
+    </div>
+
+    <div class="top-links">
+        <a href="admin.html">← Admin Dashboard</a>
+        <a href="dashboard.html">Customer Dashboard</a>
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div class="page-header">
+
+        <h1>🛡️ Admin Security Center</h1>
+
+        <p>
+            Monitor fictional security activity and demo customer security status.
+        </p>
+
+    </div>
+
+
+    <div class="demo-banner">
+
+        ⚠️ ADMIN SECURITY DEMO — FICTIONAL DATA ONLY.
+        This page does not monitor real customers, devices, passwords,
+        OTPs, accounts, or banking systems.
+
+    </div>
+
+
+    <!-- SECURITY STATISTICS -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <h3>Security Alerts</h3>
+
+            <strong id="alertCount">7</strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>High Priority Alerts</h3>
+
+            <strong>2</strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>Demo Accounts Protected</h3>
+
+            <strong>1,185</strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>Demo Devices</h3>
+
+            <strong>324</strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- SECURITY ALERTS -->
+
+    <section class="section">
+
+        <h2>🚨 Security Alerts</h2>
+
+
+        <div class="filters">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search customer or security alert..."
+                onkeyup="filterAlerts()"
+            >
+
+
+            <select
+                id="severityFilter"
+                onchange="filterAlerts()"
+            >
+
+                <option value="all">
+                    All Alert Levels
+                </option>
+
+                <option value="high">
+                    High Priority
+                </option>
+
+                <option value="medium">
+                    Medium Priority
+                </option>
+
+                <option value="low">
+                    Low Priority
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div id="alertList">
+
+
+            <div
+                class="alert-card"
+                data-level="high"
+                data-search="alex johnson suspicious demo login security alert"
+            >
+
+                <div class="alert-top">
+
+                    <div>
+
+                        <h3>🚨 Suspicious Demo Login</h3>
+
+                        <p>
+                            A fictional security alert was generated
+                            after an unusual demo login simulation.
+                        </p>
+
+                    </div>
+
+                    <span class="badge high">
+                        High Priority
+                    </span>
+
+                </div>
+
+
+                <div class="customer">
+
+                    👤 Customer:
+                    <strong>Alex Johnson</strong>
+
+                    &nbsp; | &nbsp;
+
+                    📅 Sep 24, 2026
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        onclick="viewAlert(
+                            'Suspicious Demo Login',
+                            'Alex Johnson',
+                            'High Priority'
+                        )"
+                    >
+                        👁️ View
+                    </button>
+
+
+                    <button
+                        class="success"
+                        onclick="reviewAlert(this)"
+                    >
+                        ✅ Mark Reviewed
+                    </button>
+
+
+                    <button
+                        class="danger"
+                        onclick="lockDemoAccount('Alex Johnson')"
+                    >
+                        🔒 Lock Demo Account
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="alert-card"
+                data-level="medium"
+                data-search="sarah williams password settings security"
+            >
+
+                <div class="alert-top">
+
+                    <div>
+
+                        <h3>🔑 Demo Security Settings Reviewed</h3>
+
+                        <p>
+                            Fictional security settings were reviewed
+                            on a demo customer account.
+                        </p>
+
+                    </div>
+
+                    <span class="badge medium">
+                        Medium Priority
+                    </span>
+
+                </div>
+
+
+                <div class="customer">
+
+                    👤 Customer:
+                    <strong>Sarah Williams</strong>
+
+                    &nbsp; | &nbsp;
+
+                    📅 Sep 24, 2026
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        onclick="viewAlert(
+                            'Demo Security Settings Reviewed',
+                            'Sarah Williams',
+                            'Medium Priority'
+                        )"
+                    >
+                        👁️ View
+                    </button>
+
+
+                    <button
+                        class="success"
+                        onclick="reviewAlert(this)"
+                    >
+                        ✅ Mark Reviewed
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="alert-card"
+                data-level="high"
+                data-search="michael brown demo device security alert"
+            >
+
+                <div class="alert-top">
+
+                    <div>
+
+                        <h3>💻 New Demo Device Detected</h3>
+
+                        <p>
+                            A fictional device session was added to
+                            the demo environment.
+                        </p>
+
+                    </div>
+
+                    <span class="badge high">
+                        High Priority
+                    </span>
+
+                </div>
+
+
+                <div class="customer">
+
+                    👤 Customer:
+                    <strong>Michael Brown</strong>
+
+                    &nbsp; | &nbsp;
+
+                    📅 Sep 23, 2026
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        onclick="viewAlert(
+                            'New Demo Device Detected',
+                            'Michael Brown',
+                            'High Priority'
+                        )"
+                    >
+                        👁️ View
+                    </button>
+
+
+                    <button
+                        class="success"
+                        onclick="reviewAlert(this)"
+                    >
+                        ✅ Mark Reviewed
+                    </button>
+
+
+                    <button
+                        class="danger"
+                        onclick="lockDemoAccount('Michael Brown')"
+                    >
+                        🔒 Lock Demo Account
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="alert-card"
+                data-level="low"
+                data-search="emma davis demo security notification"
+            >
+
+                <div class="alert-top">
+
+                    <div>
+
+                        <h3>ℹ️ Demo Security Notification</h3>
+
+                        <p>
+                            A fictional security notification was
+                            generated for the demo account.
+                        </p>
+
+                    </div>
+
+                    <span class="badge low">
+                        Low Priority
+                    </span>
+
+                </div>
+
+
+                <div class="customer">
+
+                    👤 Customer:
+                    <strong>Emma Davis</strong>
+
+                    &nbsp; | &nbsp;
+
+                    📅 Sep 22, 2026
+
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        onclick="viewAlert(
+                            'Demo Security Notification',
+                            'Emma Davis',
+                            'Low Priority'
+                        )"
+                    >
+                        👁️ View
+                    </button>
+
+
+                    <button
+                        class="success"
+                        onclick="reviewAlert(this)"
+                    >
+                        ✅ Mark Reviewed
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div id="emptyMessage" class="empty-message">
+
+            No matching demo security alerts found.
+
+        </div>
+
+    </section>
+
+
+    <!-- CUSTOMER SECURITY STATUS -->
+
+    <section class="section">
+
+        <h2>👤 Customer Security Status</h2>
+
+
+        <div class="customer-grid">
+
+
+            <div class="customer-card">
+
+                <h3>Alex Johnson</h3>
+
+                <p>
+                    Account: •••• 4821<br>
+                    Security Level: Demo Protected<br>
+                    2FA: Demo Enabled<br>
+                    Recent Login: Sep 24, 2026
+                </p>
+
+                <span class="status">
+                    ✓ Protected Demo Account
+                </span>
+
+            </div>
+
+
+            <div class="customer-card">
+
+                <h3>Sarah Williams</h3>
+
+                <p>
+                    Account: •••• 2846<br>
+                    Security Level: Demo Protected<br>
+                    2FA: Demo Enabled<br>
+                    Recent Login: Sep 23, 2026
+                </p>
+
+                <span class="status">
+                    ✓ Protected Demo Account
+                </span>
+
+            </div>
+
+
+            <div class="customer-card">
+
+                <h3>Michael Brown</h3>
+
+                <p>
+                    Account: •••• 6158<br>
+                    Security Level: Demo Review<br>
+                    2FA: Demo Enabled<br>
+                    Recent Login: Sep 23, 2026
+                </p>
+
+                <span class="status">
+                    ✓ Demo Account Under Review
+                </span>
+
+            </div>
+
+
+            <div class="customer-card">
+
+                <h3>Emma Davis</h3>
+
+                <p>
+                    Account: •••• 9417<br>
+                    Security Level: Demo Protected<br>
+                    2FA: Demo Enabled<br>
+                    Recent Login: Sep 22, 2026
+                </p>
+
+                <span class="status">
+                    ✓ Protected Demo Account
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- DEMO DEVICES -->
+
+    <section class="section">
+
+        <h2>💻 Demo Device Sessions</h2>
+
+
+        <div class="device">
+
+            <div>
+
+                <h3>📱 Alex Johnson — Mobile Demo</h3>
+
+                <p>
+                    Fictional Android device · Demo session ·
+                    Last active Sep 24, 2026
+                </p>
+
+            </div>
+
+
+            <button
+                class="danger"
+                onclick="endDemoSession('Alex Johnson')"
+            >
+                End Demo Session
+            </button>
+
+        </div>
+
+
+        <div class="device">
+
+            <div>
+
+                <h3>💻 Sarah Williams — Desktop Demo</h3>
+
+                <p>
+                    Fictional desktop device · Demo session ·
+                    Last active Sep 23, 2026
+                </p>
+
+            </div>
+
+
+            <button
+                class="danger"
+                onclick="endDemoSession('Sarah Williams')"
+            >
+                End Demo Session
+            </button>
+
+        </div>
+
+
+        <div class="device">
+
+            <div>
+
+                <h3>📱 Michael Brown — Mobile Demo</h3>
+
+                <p>
+                    Fictional Android device · Demo session ·
+                    Last active Sep 23, 2026
+                </p>
+
+            </div>
+
+
+            <button
+                class="danger"
+                onclick="endDemoSession('Michael Brown')"
+            >
+                End Demo Session
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- SECURITY ACTIVITY -->
+
+    <section class="section">
+
+        <h2>🕒 Recent Security Activity</h2>
+
+
+        <div class="activity">
+
+            <h3>🔐 Demo Login Reviewed</h3>
+
+            <p>
+                Admin reviewed a fictional login security event
+                for Alex Johnson.
+                · Sep 24, 2026
+            </p>
+
+        </div>
+
+
+        <div class="activity">
+
+            <h3>💻 Demo Device Added</h3>
+
+            <p>
+                A fictional device session was recorded for
+                Michael Brown.
+                · Sep 23, 2026
+            </p>
+
+        </div>
+
+
+        <div class="activity">
+
+            <h3>🛡️ Security Settings Updated</h3>
+
+            <p>
+                Fictional security preferences were reviewed
+                in the demo environment.
+                · Sep 23, 2026
+            </p>
+
+        </div>
+
+
+        <div class="activity">
+
+            <h3>🚨 Demo Security Alert Created</h3>
+
+            <p>
+                A fictional security alert was added to the
+                admin dashboard.
+                · Sep 22, 2026
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    © 2026 NovaBank — Fictional Demonstration Project.
+    No real banking security systems, accounts, or transactions are connected.
+
+</footer>
+
+
+<script>
+
+    function filterAlerts() {
+
+        const search =
+            document.getElementById("searchInput")
+            .value
+            .toLowerCase();
+
+        const level =
+            document.getElementById("severityFilter")
+            .value;
+
+        const alerts =
+            document.querySelectorAll(".alert-card");
+
+        let visible = 0;
+
+
+        alerts.forEach(function(alert) {
+
+            const alertLevel =
+                alert.getAttribute("data-level");
+
+            const searchText =
+                alert.getAttribute("data-search");
+
+            const searchMatch =
+                searchText.includes(search);
+
+            const levelMatch =
+                level === "all" ||
+                alertLevel === level;
+
+
+            if (searchMatch && levelMatch) {
+
+                alert.style.display = "block";
+
+                visible++;
+
+            } else {
+
+                alert.style.display = "none";
+
+            }
+
+        });
+
+
+        document.getElementById("emptyMessage").style.display =
+            visible === 0 ? "block" : "none";
+
+    }
+
+
+    function viewAlert(title, customer, priority) {
+
+        alert(
+            "DEMO SECURITY ALERT\n\n" +
+            "Alert: " + title + "\n" +
+            "Customer: " + customer + "\n" +
+            "Priority: " + priority + "\n\n" +
+            "This is fictional security information only."
+        );
+
+    }
+
+
+    function reviewAlert(button) {
+
+        button.textContent = "✓ Reviewed";
+
+        button.disabled = true;
+
+        button.classList.remove("success");
+
+        button.classList.add("secondary");
+
+        alert(
+            "Demo security alert marked as reviewed.\n\n" +
+            "No real security event was changed."
+        );
+
+    }
+
+
+    function lockDemoAccount(customer) {
+
+        alert(
+            "Demo account action completed.\n\n" +
+            customer +
+            " has been marked as LOCKED in this fictional demonstration.\n\n" +
+            "No real account was locked."
+        );
+
+    }
+
+
+    function endDemoSession(customer) {
+
+        alert(
+            "Demo session ended successfully.\n\n" +
+            customer +
+            "'s fictional device session has been ended.\n\n" +
+            "No real device or account session was affected."
+        );
+
+    }
+
+</script>
+
+</body>
+</html>

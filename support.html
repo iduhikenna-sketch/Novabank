@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Help & Support | NovaBank</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #123b6d;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #123b6d;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #123b6d, #1e5aa8);
+            color: white;
+            padding: 45px 30px;
+            border-radius: 18px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .demo-notice {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            padding: 15px 18px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 18px;
+            color: #123b6d;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .support-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        .support-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .support-card h3 {
+            margin-bottom: 8px;
+            color: #123b6d;
+        }
+
+        .support-card p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .faq-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+            margin-bottom: 40px;
+        }
+
+        .faq {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 0;
+        }
+
+        .faq:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            color: #123b6d;
+            cursor: pointer;
+            padding: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            display: none;
+            padding-top: 10px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .contact-box,
+        .form-box {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+        }
+
+        .contact-box h2,
+        .form-box h2 {
+            color: #123b6d;
+            margin-bottom: 18px;
+        }
+
+        .contact-item {
+            margin-bottom: 18px;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: #123b6d;
+            margin-bottom: 4px;
+        }
+
+        .contact-item span {
+            color: #6b7280;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #1e5aa8;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #123b6d;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #0d2d52;
+        }
+
+        #successMessage {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #047857;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .hours {
+            background: #eef6ff;
+            border-left: 4px solid #1e5aa8;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        footer {
+            background: #123b6d;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 13px;
+            opacity: 0.9;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 800px) {
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            header {
+                padding: 16px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">NovaBank</div>
+
+    <a href="dashboard.html" class="back-link">
+        ← Back to Dashboard
+    </a>
+</header>
+
+
+<div class="container">
+
+    <section class="hero">
+        <h1>💬 Help & Support</h1>
+        <p>We're here to help you understand and navigate your NovaBank demo account.</p>
+    </section>
+
+
+    <div class="demo-notice">
+        ⚠️ DEMO ONLY — NovaBank is a fictional banking demonstration.
+        Do not submit real banking information, passwords, PINs, OTPs, or financial details.
+    </div>
+
+
+    <h2 class="section-title">How Can We Help?</h2>
+
+    <div class="support-grid">
+
+        <div class="support-card">
+            <div class="support-icon">💬</div>
+            <h3>Contact Support</h3>
+            <p>Get assistance with your fictional NovaBank demo account.</p>
+        </div>
+
+        <div class="support-card">
+            <div class="support-icon">❓</div>
+            <h3>Frequently Asked Questions</h3>
+            <p>Find quick answers to common demo banking questions.</p>
+        </div>
+
+        <div class="support-card">
+            <div class="support-icon">🕐</div>
+            <h3>Support Hours</h3>
+            <p>View the fictional support hours for this demonstration.</p>
+        </div>
+
+    </div>
+
+
+    <section class="faq-section">
+
+        <h2 class="section-title">Frequently Asked Questions</h2>
+
+        <div class="faq">
+
+            <button class="faq-question">
+                How do I access my dashboard?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                Use the demo login page and enter any fictional username and password.
+                The demo will take you to the NovaBank dashboard.
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button class="faq-question">
+                Can I transfer real money?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                No. NovaBank is only a fictional demonstration website.
+                Transfers shown on this website do not move real money.
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button class="faq-question">
+                Can I make real payments?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                No. Payment features are demonstration interfaces only and do not
+                connect to real payment providers.
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button class="faq-question">
+                Is my demo account real?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                No. All account information, balances, transactions and contact
+                details displayed on this website are fictional.
+            </div>
+
+        </div>
+
+
+        <div class="faq">
+
+            <button class="faq-question">
+                What should I do if I have a problem?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                Use the demo support request form below. The form is for demonstration
+                purposes and does not send a real support message.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="contact-section">
+
+        <div class="contact-box">
+
+            <h2>📞 Contact Support</h2>
+
+            <div class="contact-item">
+                <strong>Demo Support Email</strong>
+                <span>support@novabank-demo.test</span>
+            </div>
+
+            <div class="contact-item">
+                <strong>Demo Support Phone</strong>
+                <span>0800 000 0000</span>
+            </div>
+
+            <div class="contact-item">
+                <strong>Support Category</strong>
+                <span>Account, Payments, Transfers, Security & General Help</span>
+            </div>
+
+            <div class="hours">
+                <strong>🕐 Demo Support Hours</strong>
+                <br>
+                Monday – Friday
+                <br>
+                8:00 AM – 6:00 PM
+            </div>
+
+        </div>
+
+
+        <div class="form-box">
+
+            <h2>📨 Send a Demo Support Request</h2>
+
+            <form id="supportForm">
+
+                <label for="name">Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter demo name"
+                    required
+                >
+
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="demo@example.test"
+                    required
+                >
+
+                <label for="category">Support Category</label>
+
+                <select id="category" required>
+
+                    <option value="">Select category</option>
+                    <option>Account Help</option>
+                    <option>Transfer</option>
+                    <option>Payments</option>
+                    <option>Security</option>
+                    <option>General Question</option>
+
+                </select>
+
+
+                <label for="message">Message</label>
+
+                <textarea
+                    id="message"
+                    placeholder="Describe your demo question..."
+                    required
+                ></textarea>
+
+
+                <button type="submit" class="submit-btn">
+                    Send Demo Support Request
+                </button>
+
+                <div id="successMessage">
+                    ✅ Demo support request created successfully.
+                    No real message was sent.
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<footer>
+
+    <p>© 2026 NovaBank — Fictional Banking Demonstration</p>
+
+    <p>
+        This website does not provide real banking services or process real transactions.
+    </p>
+
+</footer>
+
+
+<script>
+
+    // FAQ accordion
+
+    const questions = document.querySelectorAll(".faq-question");
+
+    questions.forEach(function(question) {
+
+        question.addEventListener("click", function() {
+
+            const answer = this.nextElementSibling;
+            const symbol = this.querySelector("span");
+
+            answer.classList.toggle("show");
+
+            if (answer.classList.contains("show")) {
+                symbol.textContent = "−";
+            } else {
+                symbol.textContent = "+";
+            }
+
+        });
+
+    });
+
+
+    // Demo support form
+
+    const supportForm = document.getElementById("supportForm");
+    const successMessage = document.getElementById("successMessage");
+
+    supportForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        successMessage.style.display = "block";
+
+        supportForm.reset();
+
+    });
+
+</script>
+
+</body>
+</html>

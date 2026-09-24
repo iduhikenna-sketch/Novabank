@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Management | NovaBank Admin Demo</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #0b1f3a;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .header-links a {
+            color: white;
+            text-decoration: none;
+            background: #1e3a5f;
+            padding: 10px 14px;
+            border-radius: 7px;
+            font-size: 13px;
+        }
+
+        .header-links a:hover {
+            background: #294d78;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .demo-banner {
+            background: #fff3cd;
+            border: 1px solid #ffe69c;
+            color: #664d03;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .demo-banner strong {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            color: #64748b;
+        }
+
+        .search-section {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .search-section h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: #38bdf8;
+        }
+
+        .customer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .customer-card {
+            background: white;
+            padding: 24px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .customer-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #0b1f3a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .customer-name {
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .customer-type {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .review {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .info-box small {
+            display: block;
+            color: #64748b;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .info-box strong {
+            font-size: 14px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            border: none;
+            background: #0b1f3a;
+            color: white;
+            padding: 10px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .action-btn:hover {
+            opacity: 0.85;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        .warning {
+            background: #b45309;
+        }
+
+        .activity-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-top: 25px;
+        }
+
+        .activity-section h2 {
+            margin-bottom: 18px;
+        }
+
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .activity-item span {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        footer {
+            background: #0b1f3a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 800px) {
+
+            .customer-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            .container {
+                width: 92%;
+            }
+
+            .page-heading h1 {
+                font-size: 26px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .customer-card {
+                padding: 18px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        Nova<span>Bank</span>
+    </div>
+
+    <div class="header-links">
+
+        <a href="admin.html">
+            ← Admin Dashboard
+        </a>
+
+        <a href="dashboard.html">
+            Customer Dashboard
+        </a>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- DEMO NOTICE -->
+
+    <div class="demo-banner">
+
+        <strong>
+            ⚠️ ADMIN CUSTOMER MANAGEMENT — DEMO ONLY
+        </strong>
+
+        All customers, account numbers, balances, contact information
+        and activities shown on this page are completely fictional.
+        No real customer information is stored or managed.
+
+    </div>
+
+
+    <!-- PAGE HEADING -->
+
+    <div class="page-heading">
+
+        <h1>
+            👥 Customer Management
+        </h1>
+
+        <p>
+            View and manage fictional NovaBank demonstration customers.
+        </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-section">
+
+        <h2>
+            🔎 Search Demo Customers
+        </h2>
+
+        <input
+            type="text"
+            id="customerSearch"
+            class="search-box"
+            placeholder="Search by customer name, account or account type..."
+            onkeyup="searchCustomers()"
+        >
+
+    </div>
+
+
+    <!-- CUSTOMERS -->
+
+    <div class="customer-grid" id="customerGrid">
+
+
+        <!-- ALEX JOHNSON -->
+
+        <div class="customer-card customer-item">
+
+            <div class="customer-top">
+
+                <div class="avatar">
+                    AJ
+                </div>
+
+                <div>
+                    <div class="customer-name">
+                        Alex Johnson
+                    </div>
+
+                    <div class="customer-type">
+                        Personal Demo Customer
+                    </div>
+                </div>
+
+            </div>
+
+            <span class="status active">
+                Active Demo
+            </span>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <small>ACCOUNT NUMBER</small>
+                    <strong>•••• 4821</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>ACCOUNT TYPE</small>
+                    <strong>Personal</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>DEMO BALANCE</small>
+                    <strong>₦2,450,000</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>LAST ACTIVITY</small>
+                    <strong>Sep 24, 2026</strong>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    onclick="demoAction('Alex Johnson - View Profile')">
+                    View Profile
+                </button>
+
+                <button
+                    class="action-btn secondary"
+                    onclick="demoAction('Alex Johnson - Account Details')">
+                    Account
+                </button>
+
+                <button
+                    class="action-btn"
+                    onclick="demoAction('Alex Johnson - Send Notification')">
+                    Notify
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- SARAH WILLIAMS -->
+
+        <div class="customer-card customer-item">
+
+            <div class="customer-top">
+
+                <div class="avatar">
+                    SW
+                </div>
+
+                <div>
+                    <div class="customer-name">
+                        Sarah Williams
+                    </div>
+
+                    <div class="customer-type">
+                        Personal Demo Customer
+                    </div>
+                </div>
+
+            </div>
+
+            <span class="status active">
+                Active Demo
+            </span>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <small>ACCOUNT NUMBER</small>
+                    <strong>•••• 2846</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>ACCOUNT TYPE</small>
+                    <strong>Personal</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>DEMO BALANCE</small>
+                    <strong>₦1,280,000</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>LAST ACTIVITY</small>
+                    <strong>Sep 23, 2026</strong>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    onclick="demoAction('Sarah Williams - View Profile')">
+                    View Profile
+                </button>
+
+                <button
+                    class="action-btn secondary"
+                    onclick="demoAction('Sarah Williams - Account Details')">
+                    Account
+                </button>
+
+                <button
+                    class="action-btn"
+                    onclick="demoAction('Sarah Williams - Send Notification')">
+                    Notify
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- MICHAEL BROWN -->
+
+        <div class="customer-card customer-item">
+
+            <div class="customer-top">
+
+                <div class="avatar">
+                    MB
+                </div>
+
+                <div>
+                    <div class="customer-name">
+                        Michael Brown
+                    </div>
+
+                    <div class="customer-type">
+                        Business Demo Customer
+                    </div>
+                </div>
+
+            </div>
+
+            <span class="status review">
+                Review Demo
+            </span>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <small>ACCOUNT NUMBER</small>
+                    <strong>•••• 6158</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>ACCOUNT TYPE</small>
+                    <strong>Business</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>DEMO BALANCE</small>
+                    <strong>₦4,850,000</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>LAST ACTIVITY</small>
+                    <strong>Sep 22, 2026</strong>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    onclick="demoAction('Michael Brown - Review Account')">
+                    Review
+                </button>
+
+                <button
+                    class="action-btn secondary"
+                    onclick="demoAction('Michael Brown - Account Details')">
+                    Account
+                </button>
+
+                <button
+                    class="action-btn warning"
+                    onclick="demoAction('Michael Brown - Demo Account Lock')">
+                    Lock
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- EMMA DAVIS -->
+
+        <div class="customer-card customer-item">
+
+            <div class="customer-top">
+
+                <div class="avatar">
+                    ED
+                </div>
+
+                <div>
+                    <div class="customer-name">
+                        Emma Davis
+                    </div>
+
+                    <div class="customer-type">
+                        Personal Demo Customer
+                    </div>
+                </div>
+
+            </div>
+
+            <span class="status active">
+                Active Demo
+            </span>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+                    <small>ACCOUNT NUMBER</small>
+                    <strong>•••• 9417</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>ACCOUNT TYPE</small>
+                    <strong>Personal</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>DEMO BALANCE</small>
+                    <strong>₦920,000</strong>
+                </div>
+
+                <div class="info-box">
+                    <small>LAST ACTIVITY</small>
+                    <strong>Sep 21, 2026</strong>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    onclick="demoAction('Emma Davis - View Profile')">
+                    View Profile
+                </button>
+
+                <button
+                    class="action-btn secondary"
+                    onclick="demoAction('Emma Davis - Account Details')">
+                    Account
+                </button>
+
+                <button
+                    class="action-btn warning"
+                    onclick="demoAction('Emma Davis - Demo Account Lock')">
+                    Lock
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECENT CUSTOMER ACTIVITY -->
+
+    <div class="activity-section">
+
+        <h2>
+            📋 Recent Customer Activity
+        </h2>
+
+
+        <div class="activity-item">
+
+            <strong>
+                Alex Johnson — Demo Login
+            </strong>
+
+            <span>
+                Successful fictional login activity • Sep 24, 2026
+            </span>
+
+        </div>
+
+
+        <div class="activity-item">
+
+            <strong>
+                Sarah Williams — Profile Viewed
+            </strong>
+
+            <span>
+                Fictional customer profile activity • Sep 23, 2026
+            </span>
+
+        </div>
+
+
+        <div class="activity-item">
+
+            <strong>
+                Michael Brown — Account Review
+            </strong>
+
+            <span>
+                Fictional business account review • Sep 22, 2026
+            </span>
+
+        </div>
+
+
+        <div class="activity-item">
+
+            <strong>
+                Emma Davis — Demo Payment
+            </strong>
+
+            <span>
+                Fictional payment activity • Sep 21, 2026
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    © 2026 NovaBank — Fictional Banking Demonstration Project.
+
+    <br>
+
+    No real customer information, banking credentials,
+    payments or transactions are processed.
+
+</footer>
+
+
+<script>
+
+function demoAction(action) {
+
+    alert(
+        action +
+        "\n\n" +
+        "Demo action completed successfully.\n" +
+        "No real customer information or banking operation was affected."
+    );
+
+}
+
+
+function searchCustomers() {
+
+    const searchValue =
+        document
+        .getElementById("customerSearch")
+        .value
+        .toLowerCase();
+
+    const customers =
+        document.querySelectorAll(".customer-item");
+
+    customers.forEach(function(customer) {
+
+        const customerText =
+            customer.textContent.toLowerCase();
+
+        if (customerText.includes(searchValue)) {
+
+            customer.style.display = "";
+
+        } else {
+
+            customer.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

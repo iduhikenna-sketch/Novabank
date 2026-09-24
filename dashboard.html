@@ -20,7 +20,7 @@
         }
 
         .topbar {
-            background: #ffffff;
+            background: white;
             border-bottom: 1px solid #e5e9f0;
             padding: 18px 25px;
             display: flex;
@@ -40,21 +40,18 @@
 
         .logout {
             text-decoration: none;
-            background: #123c78;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 8px;
+            color: #d13b3b;
             font-weight: bold;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: auto;
-            padding: 35px 20px;
+            padding: 40px 20px;
         }
 
         .welcome {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .welcome h1 {
@@ -77,73 +74,98 @@
         }
 
         .balance-card {
-            background: linear-gradient(135deg, #123c78, #1c5aa6);
+            background: #123c78;
             color: white;
-            padding: 30px;
             border-radius: 18px;
+            padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 15px 35px rgba(18, 60, 120, 0.18);
+            box-shadow: 0 12px 30px rgba(18, 60, 120, 0.2);
         }
 
-        .balance-label {
+        .balance-card p {
+            opacity: 0.85;
+            margin-bottom: 8px;
+        }
+
+        .balance {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .account-number {
             font-size: 14px;
             opacity: 0.85;
         }
 
-        .balance {
-            font-size: 38px;
-            font-weight: bold;
-            margin: 8px 0 15px;
+        .section-title {
+            color: #102a52;
+            margin-bottom: 15px;
         }
 
-        .account {
-            font-size: 14px;
-            letter-spacing: 2px;
-        }
-
-        .quick-actions {
+        .actions {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 18px;
             margin-bottom: 35px;
         }
 
-        .action {
+        .action-card {
             background: white;
             border: 1px solid #e4e8ef;
             border-radius: 14px;
-            padding: 25px 15px;
-            text-align: center;
+            padding: 22px;
             text-decoration: none;
             color: #172033;
-            transition: 0.3s;
+            transition: 0.2s;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
         }
 
-        .action:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+        .action-card:hover {
+            transform: translateY(-3px);
+            border-color: #123c78;
         }
 
         .action-icon {
-            font-size: 30px;
-            margin-bottom: 10px;
+            font-size: 28px;
+            margin-bottom: 12px;
         }
 
-        .action h3 {
-            color: #17345f;
-            font-size: 16px;
+        .action-card h3 {
+            color: #123c78;
+            margin-bottom: 6px;
         }
 
-        .section-title {
-            color: #102a52;
-            margin-bottom: 18px;
+        .action-card p {
+            color: #6b7484;
+            font-size: 13px;
         }
 
         .transactions {
             background: white;
             border: 1px solid #e4e8ef;
-            border-radius: 15px;
+            border-radius: 16px;
             overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .transaction-header {
+            padding: 20px;
+            border-bottom: 1px solid #e7ebf1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .transaction-header h2 {
+            color: #102a52;
+        }
+
+        .view-all {
+            text-decoration: none;
+            color: #123c78;
+            font-weight: bold;
+            font-size: 14px;
         }
 
         .transaction {
@@ -164,35 +186,38 @@
             gap: 13px;
         }
 
-        .transaction-icon {
+        .icon {
             width: 42px;
             height: 42px;
             border-radius: 50%;
-            background: #edf6ff;
+            background: #edf3fb;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 19px;
         }
 
-        .transaction-info strong {
-            display: block;
-            margin-bottom: 3px;
+        .details h3 {
+            font-size: 15px;
+            margin-bottom: 5px;
+            color: #26354d;
         }
 
-        .transaction-info small {
-            color: #7a8494;
+        .details p {
+            font-size: 12px;
+            color: #7a8392;
         }
 
         .amount {
             font-weight: bold;
         }
 
-        .positive {
-            color: #159566;
+        .credit {
+            color: #15945f;
         }
 
-        .negative {
-            color: #d94b4b;
+        .debit {
+            color: #d13b3b;
         }
 
         footer {
@@ -206,42 +231,41 @@
         footer p {
             font-size: 13px;
             opacity: 0.85;
+            margin: 3px;
         }
 
-        @media (max-width: 850px) {
-            .quick-actions {
+        @media (max-width: 800px) {
+
+            .actions {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 550px) {
+
             .topbar {
                 padding: 15px;
             }
 
             .container {
-                padding: 25px 15px;
+                padding: 30px 15px;
             }
 
-            .balance {
-                font-size: 30px;
-            }
-
-            .quick-actions {
+            .actions {
                 grid-template-columns: 1fr 1fr;
                 gap: 12px;
             }
 
-            .action {
-                padding: 20px 10px;
+            .action-card {
+                padding: 18px;
+            }
+
+            .balance {
+                font-size: 29px;
             }
 
             .transaction {
-                padding: 15px;
-            }
-
-            .amount {
-                font-size: 14px;
+                padding: 16px 15px;
             }
         }
     </style>
@@ -266,10 +290,10 @@
 
     <div class="welcome">
 
-        <h1>Welcome back, Alex 👋</h1>
+        <h1>Welcome, Alex 👋</h1>
 
         <p>
-            Here's an overview of your demo account.
+            Here's an overview of your NovaBank demo account.
         </p>
 
     </div>
@@ -277,23 +301,20 @@
 
     <div class="demo-banner">
         ⚠️ <strong>Demo Account:</strong>
-        This is fictional banking data for demonstration purposes.
-        No real money or banking credentials are involved.
+        This is a fictional banking interface. No real banking transactions are processed.
     </div>
 
 
     <div class="balance-card">
 
-        <div class="balance-label">
-            Available Balance
-        </div>
+        <p>Available Balance</p>
 
         <div class="balance">
             ₦2,450,000.00
         </div>
 
-        <div class="account">
-            Account •••• 4821
+        <div class="account-number">
+            Account Number: •••• 4821
         </div>
 
     </div>
@@ -304,92 +325,118 @@
     </h2>
 
 
-    <div class="quick-actions">
+    <div class="actions">
 
-        <a href="#" class="action">
+
+        <!-- TRANSFER -->
+
+        <a href="transfer.html" class="action-card">
 
             <div class="action-icon">
                 💸
             </div>
 
-            <h3>
-                Transfer
-            </h3>
+            <h3>Transfer</h3>
+
+            <p>
+                Send money to another account.
+            </p>
 
         </a>
 
 
-        <a href="#" class="action">
+        <!-- PAYMENTS -->
+
+        <a href="payments.html" class="action-card">
 
             <div class="action-icon">
                 💳
             </div>
 
-            <h3>
-                Payments
-            </h3>
+            <h3>Payments</h3>
+
+            <p>
+                Pay bills and services.
+            </p>
 
         </a>
 
 
-        <a href="#" class="action">
+        <!-- TRANSACTIONS -->
+
+        <a href="transactions.html" class="action-card">
 
             <div class="action-icon">
                 📜
             </div>
 
-            <h3>
-                Transactions
-            </h3>
+            <h3>Transactions</h3>
+
+            <p>
+                View your transaction history.
+            </p>
 
         </a>
 
 
-        <a href="#" class="action">
+        <!-- PROFILE -->
+
+        <a href="profile.html" class="action-card">
 
             <div class="action-icon">
                 👤
             </div>
 
-            <h3>
-                Profile
-            </h3>
+            <h3>Profile</h3>
+
+            <p>
+                Manage your account details.
+            </p>
 
         </a>
+
 
     </div>
 
 
-    <h2 class="section-title">
-        Recent Transactions
-    </h2>
-
-
     <div class="transactions">
+
+        <div class="transaction-header">
+
+            <h2>
+                Recent Transactions
+            </h2>
+
+            <a href="transactions.html" class="view-all">
+                View All
+            </a>
+
+        </div>
+
 
         <div class="transaction">
 
             <div class="transaction-left">
 
-                <div class="transaction-icon">
-                    📥
+                <div class="icon">
+                    💰
                 </div>
 
-                <div class="transaction-info">
+                <div class="details">
 
-                    <strong>
+                    <h3>
                         Salary Payment
-                    </strong>
+                    </h3>
 
-                    <small>
+                    <p>
                         September 23, 2026
-                    </small>
+                    </p>
 
                 </div>
 
             </div>
 
-            <div class="amount positive">
+            <div class="amount credit">
                 +₦450,000
             </div>
 
@@ -400,25 +447,25 @@
 
             <div class="transaction-left">
 
-                <div class="transaction-icon">
+                <div class="icon">
                     🛒
                 </div>
 
-                <div class="transaction-info">
+                <div class="details">
 
-                    <strong>
+                    <h3>
                         Grocery Store
-                    </strong>
+                    </h3>
 
-                    <small>
+                    <p>
                         September 22, 2026
-                    </small>
+                    </p>
 
                 </div>
 
             </div>
 
-            <div class="amount negative">
+            <div class="amount debit">
                 -₦28,500
             </div>
 
@@ -429,25 +476,25 @@
 
             <div class="transaction-left">
 
-                <div class="transaction-icon">
-                    💡
+                <div class="icon">
+                    ⚡
                 </div>
 
-                <div class="transaction-info">
+                <div class="details">
 
-                    <strong>
+                    <h3>
                         Electricity Bill
-                    </strong>
+                    </h3>
 
-                    <small>
+                    <p>
                         September 20, 2026
-                    </small>
+                    </p>
 
                 </div>
 
             </div>
 
-            <div class="amount negative">
+            <div class="amount debit">
                 -₦15,000
             </div>
 
@@ -458,29 +505,30 @@
 
             <div class="transaction-left">
 
-                <div class="transaction-icon">
-                    📥
+                <div class="icon">
+                    ↙️
                 </div>
 
-                <div class="transaction-info">
+                <div class="details">
 
-                    <strong>
+                    <h3>
                         Transfer Received
-                    </strong>
+                    </h3>
 
-                    <small>
+                    <p>
                         September 18, 2026
-                    </small>
+                    </p>
 
                 </div>
 
             </div>
 
-            <div class="amount positive">
+            <div class="amount credit">
                 +₦75,000
             </div>
 
         </div>
+
 
     </div>
 

@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transaction Management | NovaBank Admin Demo</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #0b1f3a;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .header-links a {
+            color: white;
+            text-decoration: none;
+            background: #1e3a5f;
+            padding: 10px 14px;
+            border-radius: 7px;
+            font-size: 13px;
+        }
+
+        .header-links a:hover {
+            background: #294d78;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1250px;
+            margin: 30px auto;
+        }
+
+        .demo-banner {
+            background: #fff3cd;
+            border: 1px solid #ffe69c;
+            color: #664d03;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .demo-banner strong {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            color: #64748b;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .stat-icon {
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h3 {
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .filter-section h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+        }
+
+        .search-box,
+        .filter-select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .search-box:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        .table-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .table-section h2 {
+            margin-bottom: 18px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 950px;
+        }
+
+        th,
+        td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-size: 13px;
+        }
+
+        td {
+            font-size: 13px;
+        }
+
+        .amount-received {
+            color: #15803d;
+            font-weight: bold;
+        }
+
+        .amount-sent {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .review {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .flagged {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .action-btn {
+            border: none;
+            background: #0b1f3a;
+            color: white;
+            padding: 8px 11px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 11px;
+            margin: 2px;
+        }
+
+        .action-btn:hover {
+            opacity: 0.85;
+        }
+
+        .review-btn {
+            background: #b45309;
+        }
+
+        .flag-btn {
+            background: #991b1b;
+        }
+
+        .activity-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .activity-section h2 {
+            margin-bottom: 18px;
+        }
+
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .activity-item span {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        footer {
+            background: #0b1f3a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 92%;
+            }
+
+            .page-heading h1 {
+                font-size: 26px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .table-section {
+                padding: 18px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        Nova<span>Bank</span>
+    </div>
+
+    <div class="header-links">
+
+        <a href="admin.html">
+            ← Admin Dashboard
+        </a>
+
+        <a href="dashboard.html">
+            Customer Dashboard
+        </a>
+
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- DEMO NOTICE -->
+
+    <div class="demo-banner">
+
+        <strong>
+            ⚠️ ADMIN TRANSACTION MANAGEMENT — DEMO ONLY
+        </strong>
+
+        All transactions, customers, amounts, dates and statuses shown
+        on this page are completely fictional. No real money is transferred,
+        processed, deposited or withdrawn.
+
+    </div>
+
+
+    <!-- PAGE HEADING -->
+
+    <div class="page-heading">
+
+        <h1>
+            💳 Transaction Management
+        </h1>
+
+        <p>
+            Monitor and review fictional NovaBank demonstration transactions.
+        </p>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💳
+            </div>
+
+            <h3>
+                8,642
+            </h3>
+
+            <p>
+                Demo Transactions
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💰
+            </div>
+
+            <h3>
+                ₦18.4M
+            </h3>
+
+            <p>
+                Demo Money Received
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                💸
+            </div>
+
+            <h3>
+                ₦11.7M
+            </h3>
+
+            <p>
+                Demo Money Sent
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🚨
+            </div>
+
+            <h3>
+                12
+            </h3>
+
+            <p>
+                Transactions for Demo Review
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- SEARCH AND FILTER -->
+
+    <div class="filter-section">
+
+        <h2>
+            🔎 Search & Filter Demo Transactions
+        </h2>
+
+        <div class="filters">
+
+            <input
+                type="text"
+                id="transactionSearch"
+                class="search-box"
+                placeholder="Search customer, transaction or account..."
+                onkeyup="filterTransactions()"
+            >
+
+
+            <select
+                id="transactionFilter"
+                class="filter-select"
+                onchange="filterTransactions()"
+            >
+
+                <option value="all">
+                    All Transaction Types
+                </option>
+
+                <option value="received">
+                    Money Received
+                </option>
+
+                <option value="sent">
+                    Money Sent
+                </option>
+
+                <option value="review">
+                    Demo Review
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRANSACTION TABLE -->
+
+    <div class="table-section">
+
+        <h2>
+            📋 Recent Demo Transactions
+        </h2>
+
+
+        <div class="table-wrapper">
+
+            <table id="transactionTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Customer
+                        </th>
+
+                        <th>
+                            Account
+                        </th>
+
+                        <th>
+                            Transaction
+                        </th>
+
+                        <th>
+                            Type
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <!-- TRANSACTION 1 -->
+
+                    <tr data-type="received">
+
+                        <td>
+                            Alex Johnson
+                        </td>
+
+                        <td>
+                            •••• 4821
+                        </td>
+
+                        <td>
+                            Salary Payment
+                        </td>
+
+                        <td>
+                            Received
+                        </td>
+
+                        <td class="amount-received">
+                            +₦450,000
+                        </td>
+
+                        <td>
+                            Sep 23, 2026
+                        </td>
+
+                        <td>
+                            <span class="status completed">
+                                Completed Demo
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="action-btn"
+                                onclick="demoAction('View Salary Payment')">
+                                View
+                            </button>
+
+                            <button
+                                class="action-btn"
+                                onclick="demoAction('Review Salary Payment')">
+                                Review
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- TRANSACTION 2 -->
+
+                    <tr data-type="sent">
+
+                        <td>
+                            Alex Johnson
+                        </td>
+
+                        <td>
+                            •••• 4821
+                        </td>
+
+                        <td>
+                            Grocery Store
+                        </td>
+
+                        <td>
+                            Sent
+                        </td>
+
+                        <td class="amount-sent">
+                            -₦28,500
+                        </td>
+
+                        <td>
+                            Sep 22, 2026
+                        </td>
+
+                        <td>
+                            <span class="status completed">
+                                Completed Demo
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="action-btn"
+                                onclick="demoAction('View Grocery Store Payment')">
+                                View
+                            </button>
+
+                            <button
+                                class="action-btn flag-btn"
+                                onclick="demoAction('Flag Grocery Store Payment')">
+                                Flag
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- TRANSACTION 3 -->
+
+                    <tr data-type="sent">
+
+                        <td>
+                            Sarah Williams
+                        </td>
+
+                        <td>
+                            •••• 2846
+                        </td>
+
+                        <td>
+                            Electricity Bill
+                        </td>
+
+                        <td>
+                            Sent
+                        </td>
+
+                        <td class="amount-sent">
+                            -₦15,000
+                        </td>
+
+                        <td>
+                            Sep 20, 2026
+                        </td>
+
+                        <td>
+                            <span class="status completed">
+                                Completed Demo
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="action-btn"
+                                onclick="demoAction('View Electricity Payment')">
+                                View
+                            </button>
+
+                            <button
+                                class="action-btn"
+                                onclick="demoAction('Review Electricity Payment')">
+                                Review
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- TRANSACTION 4 -->
+
+                    <tr data-type="received">
+
+                        <td>
+                            Michael Brown
+                        </td>
+
+                        <td>
+                            •••• 6158
+                        </td>
+
+                        <td>
+                            Business Transfer
+                        </td>
+
+                        <td>
+                            Received
+                        </td>
+
+                        <td class="amount-received">
+                            +₦750,000
+                        </td>
+
+                        <td>
+                            Sep 19, 2026
+                        </td>
+
+                        <td>
+                            <span class="status review">
+                                Review Demo
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="action-btn review-btn"
+                                onclick="demoAction('Review Business Transfer')">
+                                Review
+                            </button>
+
+                            <button
+                                class="action-btn flag-btn"
+                                onclick="demoAction('Flag Business Transfer')">
+                                Flag
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- TRANSACTION 5 -->
+
+                    <tr data-type="sent">
+
+                        <td>
+                            Emma Davis
+                        </td>
+
+                        <td>
+                            •••• 9417
+                        </td>
+
+                        <td>
+                            Mobile Payment
+                        </td>
+
+                        <td>
+                            Sent
+                        </td>
+
+                        <td class="amount-sent">
+                            -₦8,500
+                        </td>
+
+                        <td>
+                            Sep 18, 2026
+                        </td>
+
+                        <td>
+                            <span class="status completed">
+                                Completed Demo
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="action-btn"
+                                onclick="demoAction('View Mobile Payment')">
+                                View
+                            </button>
+
+                            <button
+                                class="action-btn"
+                                onclick="demoAction('Review Mobile Payment')">
+                                Review
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                    <!-- TRANSACTION 6 -->
+
+                    <tr data-type="sent">
+
+                        <td>
+                            Michael Brown
+                        </td>
+
+                        <td>
+                            •••• 6158
+                        </td>
+
+                        <td>
+                            Supplier Payment
+                        </td>
+
+                        <td>
+                            Sent
+                        </td>
+
+                        <td class="amount-sent">
+                            -₦120,000
+                        </td>
+
+                        <td>
+                            Sep 17, 2026
+                        </td>
+
+                        <td>
+                            <span class="status flagged">
+                                Flagged Demo
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="action-btn"
+                                onclick="demoAction('View Supplier Payment')">
+                                View
+                            </button>
+
+                            <button
+                                class="action-btn flag-btn"
+                                onclick="demoAction('Review Flagged Payment')">
+                                Review
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVITY -->
+
+    <div class="activity-section">
+
+        <h2>
+            📋 Recent Transaction Administration
+        </h2>
+
+
+        <div class="activity-item">
+
+            <strong>
+                Demo transaction reviewed
+            </strong>
+
+            <span>
+                Michael Brown — Business Transfer • Sep 24, 2026
+            </span>
+
+        </div>
+
+
+        <div class="activity-item">
+
+            <strong>
+                Demo transaction flagged
+            </strong>
+
+            <span>
+                Michael Brown — Supplier Payment • Sep 23, 2026
+            </span>
+
+        </div>
+
+
+        <div class="activity-item">
+
+            <strong>
+                Demo transaction viewed
+            </strong>
+
+            <span>
+                Alex Johnson — Salary Payment • Sep 23, 2026
+            </span>
+
+        </div>
+
+
+        <div class="activity-item">
+
+            <strong>
+                Demo payment reviewed
+            </strong>
+
+            <span>
+                Sarah Williams — Electricity Bill • Sep 22, 2026
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    © 2026 NovaBank — Fictional Banking Demonstration Project.
+
+    <br>
+
+    No real money, financial transactions, customer information,
+    deposits or withdrawals are processed.
+
+</footer>
+
+
+<script>
+
+
+function demoAction(action) {
+
+    alert(
+        action +
+        "\n\n" +
+        "Demo action completed successfully.\n" +
+        "No real financial transaction was affected."
+    );
+
+}
+
+
+function filterTransactions() {
+
+    const searchValue =
+        document
+        .getElementById("transactionSearch")
+        .value
+        .toLowerCase();
+
+    const filterValue =
+        document
+        .getElementById("transactionFilter")
+        .value;
+
+    const rows =
+        document.querySelectorAll(
+            "#transactionTable tbody tr"
+        );
+
+
+    rows.forEach(function(row) {
+
+        const rowText =
+            row.textContent.toLowerCase();
+
+        const transactionType =
+            row.getAttribute("data-type");
+
+        const matchesSearch =
+            rowText.includes(searchValue);
+
+        let matchesFilter = true;
+
+
+        if (filterValue === "received") {
+
+            matchesFilter =
+                transactionType === "received";
+
+        }
+
+
+        if (filterValue === "sent") {
+
+            matchesFilter =
+                transactionType === "sent";
+
+        }
+
+
+        if (filterValue === "review") {
+
+            matchesFilter =
+                rowText.includes("review demo");
+
+        }
+
+
+        if (matchesSearch && matchesFilter) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Statements | NovaBank</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0b5ed7;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #0b5ed7;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #667085;
+            line-height: 1.6;
+        }
+
+        .demo-notice {
+            background: #fff8e1;
+            border-left: 5px solid #f0ad00;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 25px 0;
+            line-height: 1.6;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .summary-card span {
+            display: block;
+            color: #667085;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .summary-card strong {
+            font-size: 22px;
+        }
+
+        .received {
+            color: #18864b;
+        }
+
+        .spent {
+            color: #c62828;
+        }
+
+        .balance {
+            color: #0b5ed7;
+        }
+
+        .section {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        .statement-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .info-box {
+            background: #f7f9fc;
+            padding: 16px;
+            border-radius: 10px;
+        }
+
+        .info-box span {
+            display: block;
+            color: #667085;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .info-box strong {
+            font-size: 16px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        input,
+        select {
+            padding: 12px;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        button {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            background: #0b5ed7;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .secondary {
+            background: #eef3fb;
+            color: #0b5ed7;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eaecf0;
+        }
+
+        th {
+            background: #f7f9fc;
+            font-size: 13px;
+            color: #667085;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .credit {
+            color: #18864b;
+            font-weight: bold;
+        }
+
+        .debit {
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            background: #e8f5e9;
+            color: #24743a;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .message {
+            display: none;
+            margin-top: 18px;
+            padding: 14px;
+            background: #e8f5e9;
+            color: #246b36;
+            border-radius: 8px;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #667085;
+            font-size: 13px;
+        }
+
+        @media print {
+            header,
+            .demo-notice,
+            .controls,
+            .actions,
+            footer {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .container {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .section,
+            .summary-card {
+                box-shadow: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 16px 5%;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">NovaBank</div>
+    <a href="dashboard.html" class="back">← Dashboard</a>
+</header>
+
+<div class="container">
+
+    <div class="hero">
+        <h1>📄 Account Statement</h1>
+        <p>
+            View your fictional NovaBank demo account statement and transaction activity.
+        </p>
+    </div>
+
+    <div class="demo-notice">
+        <strong>⚠️ Demo Only:</strong>
+        This statement contains fictional information for demonstration purposes.
+        It is not a real bank statement and cannot be used as financial proof.
+        No real banking transactions are processed.
+    </div>
+
+    <div class="section">
+
+        <h2>Statement Information</h2>
+
+        <div class="statement-info">
+
+            <div class="info-box">
+                <span>Account Holder</span>
+                <strong>Alex Johnson</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Account Number</span>
+                <strong>•••• 4821</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Account Type</span>
+                <strong>Personal Demo Account</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Statement Period</span>
+                <strong>September 1–24, 2026</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="summary">
+
+        <div class="summary-card">
+            <span>Opening Demo Balance</span>
+            <strong class="balance">₦1,980,000.00</strong>
+        </div>
+
+        <div class="summary-card">
+            <span>Money Received</span>
+            <strong class="received">+₦525,000.00</strong>
+        </div>
+
+        <div class="summary-card">
+            <span>Money Spent</span>
+            <strong class="spent">-₦55,000.00</strong>
+        </div>
+
+        <div class="summary-card">
+            <span>Closing Demo Balance</span>
+            <strong class="balance">₦2,450,000.00</strong>
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <h2>Statement Transactions</h2>
+
+        <div class="controls">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search transactions..."
+                onkeyup="filterTransactions()"
+            >
+
+            <select id="typeFilter" onchange="filterTransactions()">
+                <option value="all">All Transactions</option>
+                <option value="credit">Money Received</option>
+                <option value="debit">Money Spent</option>
+            </select>
+
+            <button class="secondary" onclick="window.print()">
+                🖨️ Print Statement
+            </button>
+
+        </div>
+
+        <div class="table-container">
+
+            <table id="statementTable">
+
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr data-type="credit">
+                        <td>Sep 23, 2026</td>
+                        <td>Salary Payment</td>
+                        <td>Money Received</td>
+                        <td class="credit">+₦450,000.00</td>
+                        <td><span class="status">Completed</span></td>
+                    </tr>
+
+                    <tr data-type="debit">
+                        <td>Sep 22, 2026</td>
+                        <td>Grocery Store</td>
+                        <td>Money Spent</td>
+                        <td class="debit">-₦28,500.00</td>
+                        <td><span class="status">Completed</span></td>
+                    </tr>
+
+                    <tr data-type="debit">
+                        <td>Sep 20, 2026</td>
+                        <td>Electricity Bill</td>
+                        <td>Money Spent</td>
+                        <td class="debit">-₦15,000.00</td>
+                        <td><span class="status">Completed</span></td>
+                    </tr>
+
+                    <tr data-type="credit">
+                        <td>Sep 18, 2026</td>
+                        <td>Transfer Received</td>
+                        <td>Money Received</td>
+                        <td class="credit">+₦75,000.00</td>
+                        <td><span class="status">Completed</span></td>
+                    </tr>
+
+                    <tr data-type="debit">
+                        <td>Sep 16, 2026</td>
+                        <td>Mobile Payment</td>
+                        <td>Money Spent</td>
+                        <td class="debit">-₦8,500.00</td>
+                        <td><span class="status">Completed</span></td>
+                    </tr>
+
+                    <tr data-type="debit">
+                        <td>Sep 10, 2026</td>
+                        <td>Entertainment</td>
+                        <td>Money Spent</td>
+                        <td class="debit">-₦3,000.00</td>
+                        <td><span class="status">Completed</span></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div id="message" class="message"></div>
+
+    </div>
+
+    <div class="section actions">
+
+        <h2>Statement Actions</h2>
+
+        <div class="controls">
+
+            <button onclick="showMessage('Demo statement generated successfully. No real financial document was created.')">
+                📄 Generate Demo Statement
+            </button>
+
+            <button class="secondary" onclick="showMessage('Demo statement download prepared. No real financial record was downloaded.')">
+                ⬇️ Download Demo Statement
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>
+        © 2026 NovaBank — Fictional demonstration project.
+        No real banking transactions are processed.
+    </p>
+</footer>
+
+<script>
+
+    function filterTransactions() {
+
+        const search =
+            document.getElementById("searchInput").value.toLowerCase();
+
+        const type =
+            document.getElementById("typeFilter").value;
+
+        const rows =
+            document.querySelectorAll("#statementTable tbody tr");
+
+        rows.forEach(function(row) {
+
+            const text =
+                row.textContent.toLowerCase();
+
+            const rowType =
+                row.getAttribute("data-type");
+
+            const matchesSearch =
+                text.includes(search);
+
+            const matchesType =
+                type === "all" || rowType === type;
+
+            if (matchesSearch && matchesType) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+
+        });
+    }
+
+    function showMessage(message) {
+
+        const box =
+            document.getElementById("message");
+
+        box.textContent = message;
+        box.style.display = "block";
+    }
+
+</script>
+
+</body>
+</html>

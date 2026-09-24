@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Goal Details | NovaBank</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .topbar {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #123c69;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #123c69;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 88%;
+            max-width: 1050px;
+            margin: 35px auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #667085;
+        }
+
+        .demo-notice {
+            background: #fff8e6;
+            border: 1px solid #f2d28b;
+            color: #765800;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .goal-summary {
+            background: #123c69;
+            color: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .goal-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .goal-title h2 {
+            font-size: 28px;
+        }
+
+        .goal-icon {
+            font-size: 45px;
+        }
+
+        .main-amount {
+            font-size: 38px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .amount-label {
+            opacity: 0.85;
+            margin-bottom: 22px;
+        }
+
+        .progress-background {
+            width: 100%;
+            height: 14px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 30%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 20px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .detail-card {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .detail-card span {
+            display: block;
+            color: #667085;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .detail-card strong {
+            font-size: 21px;
+            color: #123c69;
+        }
+
+        .section {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .section h2 {
+            margin-bottom: 18px;
+            font-size: 21px;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .history-date {
+            font-size: 13px;
+            color: #667085;
+        }
+
+        .history-amount {
+            color: #16803c;
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 13px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .primary {
+            background: #123c69;
+            color: white;
+        }
+
+        .secondary {
+            background: #e9eef5;
+            color: #123c69;
+        }
+
+        #message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #edf8f0;
+            color: #1c6b35;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #667085;
+            font-size: 13px;
+        }
+
+        @media (max-width: 750px) {
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .goal-title h2 {
+                font-size: 23px;
+            }
+
+            .main-amount {
+                font-size: 30px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .history-item {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+
+        <div class="logo">
+            NovaBank
+        </div>
+
+        <a href="savings.html" class="back-link">
+            ← Savings & Goals
+        </a>
+
+    </header>
+
+
+    <main class="container">
+
+        <section class="page-header">
+
+            <h1>📈 Savings Goal Details</h1>
+
+            <p>
+                Track the progress of your fictional savings goal.
+            </p>
+
+        </section>
+
+
+        <div class="demo-notice">
+
+            <strong>⚠️ Demo Only:</strong>
+
+            This is a fictional NovaBank savings goal.
+            No real money is stored, deposited or transferred.
+
+        </div>
+
+
+        <section class="goal-summary">
+
+            <div class="goal-title">
+
+                <div>
+                    <h2>🚗 New Car</h2>
+                </div>
+
+                <div class="goal-icon">
+                    🚗
+                </div>
+
+            </div>
+
+
+            <div class="main-amount">
+                ₦600,000
+            </div>
+
+            <div class="amount-label">
+                saved toward a target of ₦2,000,000
+            </div>
+
+
+            <div class="progress-background">
+
+                <div class="progress-bar"></div>
+
+            </div>
+
+
+            <div class="progress-info">
+
+                <span>30% completed</span>
+
+                <span>₦1,400,000 remaining</span>
+
+            </div>
+
+        </section>
+
+
+        <section class="details-grid">
+
+
+            <div class="detail-card">
+
+                <span>Target Amount</span>
+
+                <strong>₦2,000,000</strong>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <span>Amount Saved</span>
+
+                <strong>₦600,000</strong>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <span>Target Date</span>
+
+                <strong>Dec 31, 2026</strong>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="section">
+
+            <h2>📜 Savings History</h2>
+
+
+            <div class="history-item">
+
+                <div>
+
+                    <div class="history-name">
+                        Demo Savings Deposit
+                    </div>
+
+                    <div class="history-date">
+                        September 20, 2026
+                    </div>
+
+                </div>
+
+                <div class="history-amount">
+                    +₦200,000
+                </div>
+
+            </div>
+
+
+            <div class="history-item">
+
+                <div>
+
+                    <div class="history-name">
+                        Demo Savings Deposit
+                    </div>
+
+                    <div class="history-date">
+                        September 10, 2026
+                    </div>
+
+                </div>
+
+                <div class="history-amount">
+                    +₦150,000
+                </div>
+
+            </div>
+
+
+            <div class="history-item">
+
+                <div>
+
+                    <div class="history-name">
+                        Demo Savings Deposit
+                    </div>
+
+                    <div class="history-date">
+                        August 28, 2026
+                    </div>
+
+                </div>
+
+                <div class="history-amount">
+                    +₦150,000
+                </div>
+
+            </div>
+
+
+            <div class="history-item">
+
+                <div>
+
+                    <div class="history-name">
+                        Demo Savings Deposit
+                    </div>
+
+                    <div class="history-date">
+                        August 15, 2026
+                    </div>
+
+                </div>
+
+                <div class="history-amount">
+                    +₦100,000
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="section">
+
+            <h2>⚡ Goal Actions</h2>
+
+
+            <div class="actions">
+
+                <button
+                    class="primary"
+                    onclick="addSavings()">
+                    💵 Add Demo Savings
+                </button>
+
+
+                <button
+                    class="secondary"
+                    onclick="editGoal()">
+                    ✏️ Edit Demo Goal
+                </button>
+
+
+                <button
+                    class="secondary"
+                    onclick="deleteGoal()">
+                    🗑️ Delete Demo Goal
+                </button>
+
+            </div>
+
+
+            <div id="message"></div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        © 2026 NovaBank Demo —
+        Fictional demonstration project.
+        No real banking transactions are provided.
+
+    </footer>
+
+
+    <script>
+
+        function showMessage(message) {
+
+            const box = document.getElementById("message");
+
+            box.textContent = message;
+
+            box.style.display = "block";
+
+            setTimeout(function() {
+
+                box.style.display = "none";
+
+            }, 4000);
+
+        }
+
+
+        function addSavings() {
+
+            showMessage(
+                "Demo savings added successfully. No real money was deposited."
+            );
+
+        }
+
+
+        function editGoal() {
+
+            showMessage(
+                "Demo goal editor opened. No real goal information was changed."
+            );
+
+        }
+
+
+        function deleteGoal() {
+
+            showMessage(
+                "Demo goal deletion requested. No real savings goal was deleted."
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>

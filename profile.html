@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NovaBank | Profile</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6fa;
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            border-bottom: 1px solid #e5e9f0;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #123c78;
+        }
+
+        .logo span {
+            color: #18a673;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #123c78;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 45px 20px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            color: #102a52;
+            margin-bottom: 7px;
+        }
+
+        .page-title p {
+            color: #6b7484;
+        }
+
+        .demo-banner {
+            background: #fff7df;
+            border: 1px solid #f1df9c;
+            color: #735b00;
+            padding: 13px 16px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .profile-card {
+            background: white;
+            border: 1px solid #e4e8ef;
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #e7ebf1;
+        }
+
+        .avatar {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: #123c78;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .profile-header h2 {
+            color: #102a52;
+            margin-bottom: 6px;
+        }
+
+        .profile-header p {
+            color: #6b7484;
+            font-size: 14px;
+        }
+
+        .section-title {
+            color: #123c78;
+            margin-bottom: 18px;
+            font-size: 19px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .info-item {
+            background: #f8f9fb;
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .info-item small {
+            display: block;
+            color: #7a8392;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+
+        .info-item strong {
+            color: #26354d;
+            font-size: 15px;
+        }
+
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .setting {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 17px;
+            border: 1px solid #e7ebf1;
+            border-radius: 10px;
+        }
+
+        .setting-info h3 {
+            color: #26354d;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .setting-info p {
+            color: #7a8392;
+            font-size: 13px;
+        }
+
+        .toggle {
+            width: 45px;
+            height: 24px;
+            border-radius: 20px;
+            background: #18a673;
+            position: relative;
+        }
+
+        .toggle::after {
+            content: "";
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            right: 3px;
+            top: 3px;
+        }
+
+        .demo-button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #123c78;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 15px;
+            padding: 14px;
+            background: #eaf8f1;
+            color: #176b4b;
+            border-radius: 9px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .back-dashboard {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #123c78;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #102a52;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        footer p {
+            font-size: 13px;
+            opacity: 0.85;
+            margin: 3px;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .profile-card {
+                padding: 22px 18px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                align-items: flex-start;
+            }
+
+            .avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        Nova<span>Bank</span>
+    </div>
+
+    <a href="dashboard.html" class="back-link">
+        ← Dashboard
+    </a>
+
+</header>
+
+
+<main class="container">
+
+    <div class="page-title">
+
+        <h1>My Profile</h1>
+
+        <p>
+            View your NovaBank demo account information and preferences.
+        </p>
+
+    </div>
+
+
+    <div class="demo-banner">
+        ⚠️ <strong>Demo Only:</strong>
+        All information on this page is fictional demonstration data.
+    </div>
+
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+            <div class="avatar">
+                A
+            </div>
+
+            <div>
+
+                <h2>
+                    Alex Johnson
+                </h2>
+
+                <p>
+                    NovaBank Demo Customer
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <h2 class="section-title">
+            Account Information
+        </h2>
+
+
+        <div class="info-grid">
+
+            <div class="info-item">
+
+                <small>
+                    Full Name
+                </small>
+
+                <strong>
+                    Alex Johnson
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <small>
+                    Account Type
+                </small>
+
+                <strong>
+                    Personal Account
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <small>
+                    Account Number
+                </small>
+
+                <strong>
+                    •••• 4821
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <small>
+                    Account Status
+                </small>
+
+                <strong>
+                    Active Demo Account
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <small>
+                    Email
+                </small>
+
+                <strong>
+                    alex@example.test
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <small>
+                    Phone
+                </small>
+
+                <strong>
+                    0800 000 0000
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-card">
+
+        <h2 class="section-title">
+            Account Preferences
+        </h2>
+
+
+        <div class="settings-list">
+
+
+            <div class="setting">
+
+                <div class="setting-info">
+
+                    <h3>
+                        Transaction Notifications
+                    </h3>
+
+                    <p>
+                        Receive alerts for demo transactions.
+                    </p>
+
+                </div>
+
+                <div class="toggle"></div>
+
+            </div>
+
+
+            <div class="setting">
+
+                <div class="setting-info">
+
+                    <h3>
+                        Security Alerts
+                    </h3>
+
+                    <p>
+                        Get notified about demo account activity.
+                    </p>
+
+                </div>
+
+                <div class="toggle"></div>
+
+            </div>
+
+
+            <div class="setting">
+
+                <div class="setting-info">
+
+                    <h3>
+                        Email Notifications
+                    </h3>
+
+                    <p>
+                        Receive fictional account updates.
+                    </p>
+
+                </div>
+
+                <div class="toggle"></div>
+
+            </div>
+
+
+        </div>
+
+
+        <button
+            class="demo-button"
+            id="saveButton"
+        >
+            Save Demo Preferences
+        </button>
+
+
+        <div
+            class="success-message"
+            id="successMessage"
+        >
+            ✅ Demo preferences saved successfully.
+        </div>
+
+    </div>
+
+
+    <a href="dashboard.html" class="back-dashboard">
+        ← Return to Dashboard
+    </a>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 NovaBank. All rights reserved.
+    </p>
+
+    <p>
+        Fictional demonstration project — no real banking transactions are processed.
+    </p>
+
+</footer>
+
+
+<script>
+
+    document
+        .getElementById("saveButton")
+        .addEventListener("click", function() {
+
+            document
+                .getElementById("successMessage")
+                .style.display = "block";
+
+        });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin System Settings | NovaBank</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        .topbar {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e9f0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #155eef;
+        }
+
+        .top-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .top-links a {
+            text-decoration: none;
+            color: #155eef;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #667085;
+            line-height: 1.6;
+        }
+
+        .demo-banner {
+            background: #fff4e5;
+            border: 1px solid #ffd28a;
+            color: #8a5300;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        .section {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .section-description {
+            color: #667085;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .setting-card {
+            border: 1px solid #e5e9f0;
+            border-radius: 14px;
+            padding: 20px;
+            background: #fbfcfe;
+        }
+
+        .setting-card h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .setting-card p {
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #e5e9f0;
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .setting-help {
+            display: block;
+            color: #667085;
+            font-size: 12px;
+            font-weight: normal;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .toggle {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: #d0d5dd;
+            border-radius: 30px;
+            transition: 0.2s;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 3px;
+            top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+
+        .toggle input:checked + .slider {
+            background: #155eef;
+        }
+
+        .toggle input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d0d5dd;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #ffffff;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #155eef;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        button {
+            border: none;
+            padding: 11px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            background: #155eef;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .secondary {
+            background: #667085;
+        }
+
+        .danger {
+            background: #d92d20;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border: 1px solid #e5e9f0;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 18px;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .system-status {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .status-card {
+            background: #f8fafc;
+            border: 1px solid #e5e9f0;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .status-card h3 {
+            font-size: 14px;
+            color: #667085;
+            margin-bottom: 8px;
+        }
+
+        .status-card strong {
+            color: #087443;
+            font-size: 18px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 15px;
+            color: #667085;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .system-status {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .container {
+                width: 94%;
+                margin-top: 25px;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .setting-row {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        NovaBank
+    </div>
+
+    <div class="top-links">
+        <a href="admin.html">← Admin Dashboard</a>
+        <a href="dashboard.html">Customer Dashboard</a>
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div class="page-header">
+
+        <h1>⚙️ Admin System Settings</h1>
+
+        <p>
+            Configure fictional preferences for the NovaBank demonstration environment.
+        </p>
+
+    </div>
+
+
+    <div class="demo-banner">
+
+        ⚠️ ADMIN SETTINGS DEMO — FICTIONAL CONTROLS ONLY.
+        These settings are visual demonstrations and do not modify
+        a real banking system, customer account, security system,
+        or financial service.
+
+    </div>
+
+
+    <!-- SYSTEM STATUS -->
+
+    <section class="section">
+
+        <h2>🖥️ Demo System Status</h2>
+
+        <p class="section-description">
+            Current status of the fictional NovaBank demonstration environment.
+        </p>
+
+        <div class="system-status">
+
+            <div class="status-card">
+
+                <h3>Demo Banking Environment</h3>
+
+                <strong>✓ Online</strong>
+
+            </div>
+
+
+            <div class="status-card">
+
+                <h3>Demo Database</h3>
+
+                <strong>✓ Connected</strong>
+
+            </div>
+
+
+            <div class="status-card">
+
+                <h3>Security Monitoring</h3>
+
+                <strong>✓ Active</strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GENERAL SETTINGS -->
+
+    <section class="section">
+
+        <h2>🔧 General Settings</h2>
+
+        <p class="section-description">
+            Manage general fictional system preferences.
+        </p>
+
+        <div class="settings-grid">
+
+
+            <div class="setting-card">
+
+                <h3>System Preferences</h3>
+
+                <p>
+                    Configure how the fictional demonstration environment
+                    behaves.
+                </p>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-label">
+
+                        Demo Mode
+
+                        <span class="setting-help">
+                            Keep the system in fictional demonstration mode.
+                        </span>
+
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input type="checkbox" checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-label">
+
+                        Maintenance Mode
+
+                        <span class="setting-help">
+                            Display a fictional maintenance state.
+                        </span>
+
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input type="checkbox">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="setting-card">
+
+                <h3>Display Preferences</h3>
+
+                <p>
+                    Choose fictional display preferences for the admin
+                    demonstration environment.
+                </p>
+
+
+                <div class="form-group">
+
+                    <label for="language">
+                        Demo Language
+                    </label>
+
+                    <select id="language">
+
+                        <option>English</option>
+                        <option>French</option>
+                        <option>Spanish</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="timezone">
+                        Demo Time Zone
+                    </label>
+
+                    <select id="timezone">
+
+                        <option>West Africa Time (WAT)</option>
+                        <option>Greenwich Mean Time (GMT)</option>
+                        <option>Coordinated Universal Time (UTC)</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- NOTIFICATION SETTINGS -->
+
+    <section class="section">
+
+        <h2>🔔 Notification Settings</h2>
+
+        <p class="section-description">
+            Control fictional notification preferences for the demo environment.
+        </p>
+
+
+        <div class="setting-card">
+
+
+            <div class="setting-row">
+
+                <div class="setting-label">
+
+                    Demo Customer Notifications
+
+                    <span class="setting-help">
+                        Allow fictional customer notifications to appear.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-label">
+
+                    Transaction Notifications
+
+                    <span class="setting-help">
+                        Show fictional transaction notification examples.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-label">
+
+                    Security Alerts
+
+                    <span class="setting-help">
+                        Display fictional security alerts.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-label">
+
+                    Promotional Notifications
+
+                    <span class="setting-help">
+                        Display fictional promotional notifications.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input type="checkbox">
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SECURITY SETTINGS -->
+
+    <section class="section">
+
+        <h2>🛡️ Security Settings</h2>
+
+        <p class="section-description">
+            Review fictional administrative security preferences.
+        </p>
+
+
+        <div class="settings-grid">
+
+
+            <div class="setting-card">
+
+                <h3>Security Controls</h3>
+
+                <p>
+                    These controls simulate security settings only.
+                </p>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-label">
+
+                        Demo Two-Factor Authentication
+
+                        <span class="setting-help">
+                            Simulate 2FA protection for demo accounts.
+                        </span>
+
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input type="checkbox" checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-label">
+
+                        Login Security Alerts
+
+                        <span class="setting-help">
+                            Display fictional login security alerts.
+                        </span>
+
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input type="checkbox" checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="setting-card">
+
+                <h3>Session Settings</h3>
+
+                <p>
+                    Configure fictional session preferences.
+                </p>
+
+
+                <div class="form-group">
+
+                    <label for="session">
+                        Demo Session Duration
+                    </label>
+
+                    <select id="session">
+
+                        <option>15 minutes</option>
+                        <option>30 minutes</option>
+                        <option>60 minutes</option>
+                        <option>120 minutes</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-label">
+
+                        Demo Session Alerts
+
+                        <span class="setting-help">
+                            Show fictional session activity alerts.
+                        </span>
+
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input type="checkbox" checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CUSTOMER ACCOUNT SETTINGS -->
+
+    <section class="section">
+
+        <h2>👥 Customer Account Settings</h2>
+
+        <p class="section-description">
+            Manage fictional customer account preferences used by the demo.
+        </p>
+
+
+        <div class="setting-card">
+
+
+            <div class="setting-row">
+
+                <div class="setting-label">
+
+                    Allow Demo Account Creation
+
+                    <span class="setting-help">
+                        Simulate the availability of new fictional accounts.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-label">
+
+                    Allow Demo Account Locking
+
+                    <span class="setting-help">
+                        Enable fictional account lock demonstrations.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div class="setting-label">
+
+                    Customer Profile Editing
+
+                    <span class="setting-help">
+                        Allow fictional customer profile editing demonstrations.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input type="checkbox" checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TRANSACTION SETTINGS -->
+
+    <section class="section">
+
+        <h2>💳 Transaction Settings</h2>
+
+        <p class="section-description">
+            Configure fictional transaction behavior used throughout the demo.
+        </p>
+
+
+        <div class="settings-grid">
+
+
+            <div class="setting-card">
+
+                <h3>Demo Transfers</h3>
+
+                <p>
+                    Control whether fictional transfer demonstrations are available.
+                </p>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-label">
+                        Demo Transfers Enabled
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input type="checkbox" checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="setting-card">
+
+                <h3>Demo Payments</h3>
+
+                <p>
+                    Control fictional payment demonstrations.
+                </p>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-label">
+                        Demo Payments Enabled
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input type="checkbox" checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SYSTEM ACTIONS -->
+
+    <section class="section">
+
+        <h2>🔄 Demo System Actions</h2>
+
+        <p class="section-description">
+            These actions only simulate administrative operations.
+            No real banking data or systems are affected.
+        </p>
+
+
+        <div class="actions">
+
+            <button onclick="saveSettings()">
+                💾 Save Demo Settings
+            </button>
+
+
+            <button class="secondary" onclick="resetSettings()">
+                ↩️ Reset Demo Settings
+            </button>
+
+
+            <button onclick="testNotifications()">
+                🔔 Test Notifications
+            </button>
+
+
+            <button onclick="testSecurity()">
+                🛡️ Test Security
+            </button>
+
+
+            <button class="danger" onclick="demoMaintenance()">
+                🛠️ Demo Maintenance Mode
+            </button>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <strong>
+                ℹ️ Demo Environment
+            </strong>
+
+            <p>
+                NovaBank is currently a fictional banking demonstration.
+                These controls do not connect to real customers, accounts,
+                banks, payment providers, databases, or financial systems.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    © 2026 NovaBank — Fictional Demonstration Project.
+    No real banking services or transactions are provided.
+
+</footer>
+
+
+<script>
+
+    function saveSettings() {
+
+        alert(
+            "DEMO SETTINGS SAVED\n\n" +
+            "Your fictional admin settings have been saved " +
+            "for demonstration purposes only.\n\n" +
+            "No real banking configuration was changed."
+        );
+
+    }
+
+
+    function resetSettings() {
+
+        alert(
+            "DEMO SETTINGS RESET\n\n" +
+            "The fictional settings have been reset " +
+            "for demonstration purposes only.\n\n" +
+            "No real system was affected."
+        );
+
+    }
+
+
+    function testNotifications() {
+
+        alert(
+            "DEMO NOTIFICATION TEST\n\n" +
+            "A fictional notification test was completed successfully.\n\n" +
+            "No real notification was sent."
+        );
+
+    }
+
+
+    function testSecurity() {
+
+        alert(
+            "DEMO SECURITY TEST\n\n" +
+            "The fictional security test completed successfully.\n\n" +
+            "No real security system was changed."
+        );
+
+    }
+
+
+    function demoMaintenance() {
+
+        alert(
+            "DEMO MAINTENANCE MODE\n\n" +
+            "Maintenance mode was simulated successfully.\n\n" +
+            "This is a fictional demonstration. " +
+            "No real banking service was taken offline."
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
